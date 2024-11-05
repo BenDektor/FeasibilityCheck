@@ -41,16 +41,16 @@ position=bottom]{caption}
 \automark*[section]{}
 
 \documenttype{Bachelorarbeit}
-\title{Mustertitel der Musterarbeit}
-\author{Max Musterman}
-\studentid{12345678}
-\department{Musterfakultät}
-\studyprogramme{Bachelor Musterstudiengang}
-\startingdate{1.\,November 2088}
-\closingdate{11.\,Dezember 2089}
-\firstadvisor{Prof. Dr. Paula Strikt}
-\secondadvisor{Prof. Dr. Petra Hart}
-\externaladvisor{Dr. Klara Endlos, ACME Inc.}
+\title{Entwicklung eines automatisierten technischen Feasibility Checks für die Durchführung von Qualifikationen neuer Halbleiter-Produkte}
+\author{Benedikt Schedlbauer}
+\studentid{3322954}
+\department{Mathematik und Informatik}
+\studyprogramme{Bachelor Technische Informatik}
+\startingdate{1.\,Oktober 2024}
+\closingdate{28.\,Februar 2025}
+\firstadvisor{Prof. Dr. Alexander Metzner}
+\secondadvisor{Prof. Dr. Daniel Münch}
+\externaladvisor{Florian Saller, Infineon Technologies AG}
 
 %\externallogo[height=1.5cm]{firmenlogo}
 
@@ -81,20 +81,103 @@ position=bottom]{caption}
 	%\include{Kapitel2}
 	
 	%%% Die folgenden Zeilen dienen nur zur Veranschaulichung des Textlayouts, sie sollten später gelöscht werden!
-	\chapter{Mustereinleitung}
-	\lipsum[1]
+	\chapter{Einleitung}
 
 	Manchmal ist es nicht ganz zu vermeiden, Abkürzungen wie \ac{I2C} zu verwenden. 
 	Diese sollten dann in einem Abkürzungsverzeichnis (siehe in diesem Dokument auf Seite~\pageref{Sec:Abkuerzungen}) zu finden sein, damit sie bei späterer Verwendung wie hier \ac{I2C} auch nachgeschlagen werden können.
 
-	\lipsum[2-4]
-	\section{Musterüberschrift}
-	\lipsum[5-7]
-	\subsection{Musterunterpunkt}
-	\lipsum[8-9]
-	\chapter{Musterhauptteil}
-	\lipsum[1]
+	\section{Motivation}
+	Warum ist der Feasibility Check wichtig? Relevanz für die Halbleiterindustrie.
+	\section{Zielsetzung der Arbeit}
+	Was soll durch die Arbeit erreicht werden?
+	\section{Aufbau der Arbeit}
+	Kurze Übersicht über die Struktur der Arbeit.
+
+	\chapter{Theorethische Grundlagen}
+	\section{Halbleitertechnologie}
+	Grundlagen der Halbleiterprodukte und deren Qualifikationen.
+
+	\section{REALIS}
+
+	Was ist \ac{REALIS} ? \ac{REALIS} ist ...
+
+	\section{Teschnische Feasibility Checks}
+	Was sind technische Feasibility Checks? Bedeutung und Anwendungsfälle.
+
+	\section{Technologien}
+
+	\subsection{Sql mit Oracle Datenbank}
+
+	\subsection{C\# für Backend-Programmierung}
+
+	\subsection{Angular für Frontend-Programmierung}
+
+
+
+	\chapter{Anforderungen / Requirements}
+
+	\section{Funktionale Anforderungen}
+	Welche Funktionen soll das System erfüllen?
+	\section{Nicht-funktionale Anforderungen}
+	Performance, Benutzerfreundlichkeit, Sicherheit etc.
+
+	\section{Stakeholder-Analyse}
+	Wer sind die Stakeholder und welche Erwartungen haben sie?
+
+	\chapter{Systemarchitektur}
+
+	\section{Architekturüberblick}
+	Gesamtsicht auf die Architektur der Lösung (Backend, Frontend, Datenbank).
+
+	\section{Datenbankdesign}
+	Struktur der Oracle-Datenbank, wichtige Tabellen und Beziehungen.
+
+	\section{Backend-Logik}
+	Beschreibung der C\#-Implementierung, inklusive wichtiger Klassen und Methoden.
+
+	\section{Frontend-Design}
+	Überblick über die Angular-Anwendung, Struktur und Benutzeroberfläche.
+
+
+	\chapter{Implementierung}
 	
+	\section{Entwicklungsumgebung}
+	Tools und Technologien, die verwendet wurden (IDE, Frameworks, Datenbank-Tools).
+	\section{Implementierung des Feasibility Checks}
+	Detaillierte Beschreibung des Implementierungsprozesses.
+	\section{Integration}
+	Wie die verschiedenen Teile (Frontend, Backend, Datenbank) miteinander interagieren.
+
+
+
+	\chapter{Test und Evaluation}
+
+	\section{Testmethoden}
+	Welche Testmethoden wurden verwendet (Unit-Tests, Integrationstests, Benutzerakzeptanztests)?
+	\section{Ergebnisse der Tests}
+	Darstellung der Testergebnisse und ihrer Bedeutung.
+
+	\section{Evaluation des Systems}
+	Bewertung der Lösung hinsichtlich der definierten Anforderungen.
+
+	\chapter{Diskussion}
+	\section{Herausforderungen}
+	Welche Herausforderungen gab es während der Entwicklung?
+	\section{Lernerfahrungen}
+	Was hast du aus dem Projekt gelernt?
+
+	\section{Ausblick}
+	Möglichkeiten zur Weiterentwicklung des Systems.
+
+
+	\chapter{Fazit}
+
+	\chapter{Anhang}
+	\section{Code-Snippets}
+	\section{Dokumentation}
+	\section{Weitere Materialien}
+	
+
 	
 	% Literaturverzeichnis in das Inhaltsverzeichnis einfügen
 	\addcontentsline{toc}{chapter}{Literaturverzeichnis}
@@ -115,6 +198,7 @@ position=bottom]{caption}
 	 \acro{OTH}{Ostbayerische Technische Hochschule}
 	 \acro{GCC}{Der Compiler namens gcc}
 	 \acro{I2C}[I²C]{Inter-Integrated Circuit}
+	 \acro{REALIS}{Reliability evaluation and logistic information system}
 	\end{acronym}
 	
 	% Anhang
