@@ -1,13 +1,34 @@
-\chapter{Theorethische Grundlagen}
-\section{Halbleitertechnologie}
-Grundlagen der Halbleiterprodukte und deren Qualifikationen. Test citation: \cite{lienig2023halbleitertechnologie}
+\chapter{Theoretische Grundlagen}\label{Chap:TheoretischeGrundlagen}
+In diesem Abschnitt wird zunächst die Firma Infineon Technologies AG, in der Kooperation diese Arbeit entstanden ist, vorgestellt. Anschließend werden die theoretischen Grundlagen der Halbleitertechnologie geklärt - dem Hauptgeschäftsfeld der Infineon Technologies AG -, um den Nutzen der internen Software-Applikation \ac{REALIS} verständlich zu machen. Der Feasibility Check, der einen spezifischen Teil dieser Applikation behandelt, wird im Folgenden näher erläutert.
 
-\section{REALIS}
+Darüber hinaus werden die verwendeten Programmiersprachen vorgestellt und ihr jeweiliger Einsatz in diesem Projekt beschrieben.
+
+\section{Infineon Technologies AG}
+
+Die Infineon Technologies AG zählt zu den weltweit führenden Herstellern von Halbleitern in den Bereichen Automotive, Power \& Sensor Systems, Green Industrial Power und Connected Secure Systems. Mit rund 58.600 Mitarbeitern ist das Unternehmen global tätig und betreibt insgesamt 84 Standorte \cite{infineon2024unternehmenspraesentation}. Einer dieser Standorte ist Regensburg mit mehr als 3000 Mitarbeitern, wo sowohl Entwicklung als auch Fertigung betrieben wird. Regensburg gilt dabei als Innovationslabor und Hightech-Fabrik \cite{infineon2024regensburg}.
+
+
+\section{Halbleitertechnologie}
+
+Die Halbleitertechnologie ermöglicht es, elektronische Schaltungen vollständig in einem einzigen Herstellungsverfahren zu erzeugen. Dabei entstehen alle elektronischen Bauelemente und elektrischen Verbindungen auf einem monolithischen Halbleiterplättchen, das als integrierter Schaltkreis (\ac{IC}) bezeichnet wird. Diese kleinen, dünnen Plättchen bestehen in der Regel aus Silizium und werden als Chips bezeichnet.
+
+Halbleitermaterialien haben die Fähigkeit, elektrischen Strom zu leiten, weisen jedoch bei Raumtemperatur einen relativ hohen Widerstand auf. Mit steigender Temperatur nimmt ihre Leitfähigkeit exponentiell zu – eine Eigenschaft, die sie von klassischen elektrischen Leitern wie Metallen unterscheidet. Die Leitfähigkeit eines Halbleiters kann durch Dotierung, das gezielte Einbringen von Fremdatomen, erheblich verändert werden.
+
+Zur Herstellung integrierter Schaltkreise wird hochreines, monokristallines Halbleitermaterial benötigt, bei dem alle Atome in einer gleichmäßigen, durchgehenden Struktur angeordnet sind. Da solche Strukturen in der Natur nicht vorkommen, müssen sie technisch durch das „Züchten“ von Kristallblöcken in Stangenform erzeugt werden. Diese Stangen werden in dünne Scheiben, sogenannte Wafer, geschnitten, die als Ausgangsmaterial für die Chip-Produktion dienen. Ein Wafer kann je nach Größe Hunderte bis Zehntausende Chips enthalten, die alle gleichzeitig hergestellt werden können.
+
+Silizium ist das am häufigsten verwendete Material in der Halbleiterindustrie, weil es viele praktische Vorteile bietet. Es hat die perfekte Balance für den Einsatz in verschiedenen elektronischen Anwendungen und funktioniert gut bei normalen Betriebstemperaturen. Silizium bildet ein stabiles und zuverlässiges Isoliermaterial, das in Schaltkreisen vielseitig eingesetzt werden kann. Es leitet Wärme effizient ab, was wichtig ist, um eine Überhitzung zu vermeiden, besonders bei kleinen und leistungsstarken Chips. Außerdem lässt sich Silizium einfach in großen, reinen Kristallen herstellen, die für eine gleichmäßige Leistung in der Chipproduktion entscheidend sind.
+
+Die Fertigung beginnt mit einem Rohwafer, auf dem im \ac{FEOL} alle Dotierungen erfolgen. Im darauf folgenden \ac{BEOL} werden abwechselnd isolierende und metallische Schichten aufgetragen und strukturiert, wodurch Leiterbahnen und Durchkontaktierungen entstehen. Die Strukturen moderner Chips sind dabei im Nano- bis Mikrometerbereich angesiedelt.
+
+Am Ende des Fertigungsprozesses werden die integrierten Schaltkreise (\acp{IC}), die in parallelen Reihen und Spalten auf der Oberfläche des Wafers angeordnet sind, durch senkrecht verlaufende Schnitte voneinander getrennt. Durch diesen Schritt entstehen kleine, rechteckige, dünne Plättchen, die als Chips bekannt sind. Die Wafer, die aus den gezüchteten Kristallstäben mit Innenlochsägen ausgeschnitten werden, sind kreisrunde Scheiben und weisen typischerweise Dicken von knapp unter 1 mm auf. Die Durchmesser moderner Wafer liegen heute bei 200 bis 450 mm.
+
+Mit zunehmender Miniaturisierung der Halbleiterprozesse steigen die Herstellungskosten, da die Technologie komplexer wird. Jedoch sinkt durch die Verkleinerung der benötigte Platz pro Funktionseinheit auf dem Chip, was die höheren Prozesskosten kompensieren kann. Dadurch führt jede neue Chip-Generation dazu, dass mehr Leistung für den gleichen Preis erzielt wird, also eine höhere Funktionalität pro investiertem Geld \cite{lienig2023halbleitertechnologie}.
+\section{REALIS}\label{Sec:REALIS}
 
 Was ist \ac{REALIS} ? \ac{REALIS} ist ...
 
-\section{Teschnische Feasibility Checks}
-Was sind technische Feasibility Checks? Bedeutung und Anwendungsfälle.
+\section{Teschnischer Feasibility Checks}
+Was ist ein technischer Feasibility Checks? Bedeutung und Anwendungsfälle.
 
 \section{Technologien}
 

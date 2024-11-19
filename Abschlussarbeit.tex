@@ -16,6 +16,8 @@ DIV=15,BCOR=10mm, % Seitenlayout wie bei Koma-Script
 %\usepackage{amssymb}
 \usepackage{pifont}				% zusaetzliche Symbole
 
+\usepackage{todonotes}
+
 
 \usepackage[format=hang,			% Einstellung fuer Bildunterschriften
 font={footnotesize},
@@ -44,14 +46,14 @@ position=bottom]{caption}
 \author{Benedikt Schedlbauer}
 \studentid{3322954}
 \department{Mathematik und Informatik}
-\studyprogramme{Bachelor Technische Informatik}
+\studyprogramme{Technische Informatik}
 \startingdate{1.\,Oktober 2024}
 \closingdate{28.\,Februar 2025}
 \firstadvisor{Prof. Dr. Alexander Metzner}
 \secondadvisor{Prof. Dr. Daniel Münch}
 \externaladvisor{Florian Saller, Infineon Technologies AG}
 
-%\externallogo[height=1.5cm]{firmenlogo}
+\externallogo[height=1.5cm]{logo/infineon_logo_color.png}
 
 % Hiermit trägt pdflatex die PDF-Metadaten des erzeugten Dokuments ein:
 \hypersetup{pdftitle={\csname @title\endcsname{}},%
@@ -74,10 +76,7 @@ position=bottom]{caption}
 	\tableofcontents
 	\cleardoublepage		
 	\pagenumbering{arabic}
-		
-	%\include{Kapitel1}	% Die Kapitel als seperate .tex Datei im Ordner abspeichern. Dort dann Befehle wie \chapter{} und \section{} sowie \subsection{} verwenden (Keine neue "documentclass!")
-	%\include{Kapitel2}
-	
+
 	%%% Die folgenden Zeilen dienen nur zur Veranschaulichung des Textlayouts, sie sollten später gelöscht werden!
 	\include{Einleitung}
 
@@ -109,11 +108,11 @@ position=bottom]{caption}
 	\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}\label{Sec:Abkuerzungen}
 	\chapter*{Abkürzungsverzeichnis}
 	\begin{acronym}[OTH R]
-	 \acro{OTH R}{Ostbayerische Technische Hochschule Regensburg}
-	 \acro{OTH}{Ostbayerische Technische Hochschule}
-	 \acro{GCC}{Der Compiler namens gcc}
-	 \acro{I2C}[I²C]{Inter-Integrated Circuit}
 	 \acro{REALIS}{Reliability evaluation and logistic information system}
+	 \acro{IC}{Integrated Circuit}
+	 \acro{FEOL}{Front-end-of-line}
+	 \acro{BEOL}{Back-end-of-line}
+	
 	\end{acronym}
 	
 	% Anhang
