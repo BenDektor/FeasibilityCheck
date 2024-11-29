@@ -11,6 +11,7 @@
 *.bbl
 *.blg
 *.synctex.gz
+/aux
 
 # Ignore temporary files
 *.fls

@@ -26,6 +26,9 @@ margin=1cm,
 aboveskip=5pt,
 position=bottom]{caption}
 
+\usepackage{glossaries}
+\makeglossaries
+
 \usepackage{booktabs} % Hübschere Tabellen
 %\usepackage{tikz}								% Erstellen von Grafiken
 %\usetikzlibrary{positioning,arrows,plotmarks} 	% TikZ-Bibliotheken
@@ -76,6 +79,7 @@ position=bottom]{caption}
 	\cleardoublepage		
 	\pagenumbering{arabic}
 
+	\input{Glossary}
 	%%% Die folgenden Zeilen dienen nur zur Veranschaulichung des Textlayouts, sie sollten später gelöscht werden!
 	\include{chapter/chapter1/Einleitung}
 
@@ -122,9 +126,13 @@ position=bottom]{caption}
 	\listoffigures
 	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
 	
-	\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
-	\listoftables
+	%\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+	%\listoftables
 	
+
+	\printglossaries
+	\addcontentsline{toc}{chapter}{Glossar}
+
 	%\addcontentsline{toc}{chapter}{Listingsverzeichnis} % für Quellcode
 	%\lstlistoflistings 
 	
