@@ -1,0 +1,17 @@
+\section{Technischer Feasibility Check}
+Der automatisierte technische Feasibility Check, bezeichnet eine ''Machbarkeitsprüfung'', die bewertet, ob ein Stresstest an einem \ac{RPT}-Laborstandort durchgeführt werden kann.
+
+Dieser Check ist ein integraler Bestandteil des \ac{REALIS}-Projekt-Lifecycles, wie in Kapitel \ref{Subsec:project-lifecycle} beschrieben. Derzeit wird er manuell von Mitarbeitern des \ac{RPT}-Labors durchgeführt. Dabei tragen sie in der Software-Applikation \ac{REALIS} in einem einfachen Feld ''Yes'' oder ''No'' ein, um die Durchführbarkeit zu bestätigen. Zuvor prüfen sie, ob die im Labor vorhandenen Kapazitäten und Bedingungen ausreichen, um die geforderten Tests für das jeweilige Produkt durchzuführen.
+
+Die Beurteilung basiert auf mehreren Parametern. Um diese besser zu verstehen, wird im folgenden Kapitel erläutert, wie ein Stresstest im Detail abläuft und welche Schritte dabei erforderlich sind.
+
+
+\subsection{Stresstests (Reliability Tests)}
+
+Stresstests, auch als \textit{Reliability Tests} bezeichnet, dienen der Qualifikation eines neuen Produkts und umfassen verschiedene Testarten. Zu den gängigsten gehören Temperaturtests (Hitze- und Kältetests), Drucktests, Feuchtigkeitstests sowie elektrische Tests. Oder auch Kombinationen dieser Testarten.
+
+Jeder Stresstest setzt sich aus mehreren aufeinanderfolgenden Operationen zusammen, die von einem \ac{RPT}-Labor-\gls{operator} mithilfe eines Test-Lots (einer kleinen Stückzahl des Produkts) durchgeführt werden. Typischerweise beginnt ein Test mit einer ''START''-Operation und endet mit einer ''END''-Operation. Dazwischen befinden sich mehrere Stressoperationen, die den jeweiligen Stresstypen des Tests widerspiegeln und die eigentliche Belastungsprüfung darstellen.
+
+Zwischen den Stressoperationen werden Funktionsprüfungen durchgeführt, bei denen der \gls{operator} alle Teile des Test-Lots auf ihre Funktionalität überprüft. So wird sichergestellt, dass das Produkt die vorhergehende Stressoperation unbeschadet überstanden hat.
+
+Darüber hinaus gibt es sogenannte Transfer-Operationen. Diese sind erforderlich, wenn Produkte während eines Tests zwischen verschiedenen \ac{RPT}-Laboren transportiert werden müssen.

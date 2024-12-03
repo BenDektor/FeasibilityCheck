@@ -1,7 +1,7 @@
 \section{REALIS}\label{Sec:REALIS}
 Wird vom Buisness bei Infineon für einen Kunden ein neues Produkt angefordert, oder entwickeln diese selber ein neues Produkt, so muss dieses erst einmal getestet werden, bevor es in Masse produziert werden kann. Mit Produkt meine ich dabei, einen fertigen Chip, der auf einem Wafer gefertigt wurde. Für diese Zuverlässigkeits-Tests wurde bei Infineon eine Software entwickelt mit dem namen \acf{REALIS}. Dieser System umfasst die komplette Planung und Dokumentation der Durchführung und Ergebnisse dieser Tests. Das System ist verbunden mit einer gleichnamigen Datenbank, in denen alle wichtigen Information gespeichert werden. 
 
-\subsection{Project Life Cycle}
+\subsection{Project Lifecycle}\label{Subsec:project-lifecycle}
 Um ein neues Produkt zu testen, wird vom sogenannten \ac{QM} bei Infineon ein neues Projekt in \ac{REALIS} angelegt \todo{oder auch eQTP ?}. Dieses befüllt er mit verschiedenen (Stress)-Tests, basierend auf vorhandenen Templates, die Arbeitsschritte (Operationen), Start- und Enddaten, Parameter der Operationen einzelner Tests und weitere Informationen enthalten. Dieser erste Schritt entspricht der obersten Reihe in Abbildung \ref{fig:realis-project-lifecycle} und bildet den Anfang eines REALIS Projekt-Lebenszyklus. 
 
 Für jeden der folgenden weiteren Schritte wird in \ac{REALIS} der ``State``(Zustand) der Tests eines Projektes verändert und damit der Fortschritt dokumentiert. Dabei steht dieser zu Beginn immer auf  ``NEW`` und wird anschließend nach jedem der folgenden beschriebenen Schritte auf einen neuen``State`` geändert (vgl. Abbildung \ref{fig:realis-project-lifecycle}, rechte Spalte). Welcher neue Zustand einem Test zugewiesen wird, wird meist dadurch entschieden, ob der beschriebene Schritt erfolgreich durchgeführt werden konnte.
@@ -11,7 +11,7 @@ Im zweiten Schritt des Lifecycles übergibt der \ac{QM} das Projekt durch einen 
 In einem \ac{RPT}-Labor validieren anschließend Mitarbeiter manuell die Richtigkeit der angelegten Tests und überprüfen daraufhin, ob sie die angelegten Stresstests des Projektes auch durchführen können. 
 Für die Validation der Tests, werden die Stressparameter auf deren Sinnhaftigkeit überprüft. Die Frage der Durchführbarkeit hängt davon ab, ob in dem zugewiesenen \ac{RPT}-Labor, die benötigten Maschinen für die Tests zur Verfügung stehen, also im geplanten Zeitraum der Tests nicht belegt sind. Ebenfalls müssen die Maschinen die geforderten Stressoperation durchführen können, und müssen dabei die festgelegten Stressparameter erfüllen.
 
-Diese Prüfungen bezeichnen den aktuellen teschnischen Feasibility Check, der in \ac{REALIS} dokumentiert wird.
+Diese Prüfungen bezeichnen den aktuellen technischen Feasibility Check, der in \ac{REALIS} dokumentiert wird.
 Falls für einige Operationen bzw. Tests keine gültigen Maschinen vorhanden sind, werden diese Tests auf anderen \ac{RPT}-Labore verwiesen. Dadurch müssen aber die zu testenden Produkte auch von einem Labor zum anderen geliefert werden, was sehr viel Zeit kosten kann, da diese über alle Standorte von Infineon verteilt sind.
 
 \begin{figure}[!h]
