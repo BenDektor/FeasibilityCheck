@@ -26,9 +26,21 @@ margin=1cm,
 aboveskip=5pt,
 position=bottom]{caption}
 
-\usepackage{glossaries}
+\usepackage[acronym, nonumberlist, nopostdot]{glossaries}
 \makeglossaries
-
+% Args : 1: acronym/name, 2: long name, 3: description
+\newcommand{\newglossaryentrywithacronym}[3]{
+    % Define the glossary entry (detailed description)
+    \newglossaryentry{#1_gls}{
+        name={#1},
+		long={#2},
+        description={(#2) #3},
+    }
+    \newacronym{#1}{#1}{#2}
+    % Add the glossary entry for later use
+    \glsadd{#1_gls}
+}
+\renewcommand{\glsgroupskip}{} % Fix spacing in glossary
 \usepackage{booktabs} % Hübschere Tabellen
 %\usepackage{tikz}								% Erstellen von Grafiken
 %\usetikzlibrary{positioning,arrows,plotmarks} 	% TikZ-Bibliotheken
@@ -76,12 +88,15 @@ position=bottom]{caption}
 	\end{abstract}
 	\cleardoublepage
 	\tableofcontents
-	\cleardoublepage		
-	\pagenumbering{arabic}
+	\cleardoublepage
+	\thispagestyle{empty} % Entfernt die Seitennummer auf der leeren Seite
 
 	\input{Glossary}
-	%%% Die folgenden Zeilen dienen nur zur Veranschaulichung des Textlayouts, sie sollten später gelöscht werden!
+	\pagenumbering{arabic}
+	\setcounter{page}{0} % Setzt den Zähler auf 0 to fix einleitung starting with pagenumber2
+
 	\include{chapter/chapter1/Einleitung}
+
 
 	\include{chapter/chapter2/TheoretischeGrundlagen}
 	\include{chapter/chapter3/Anforderungen}
@@ -109,19 +124,14 @@ position=bottom]{caption}
 	
 	\newpage
 		
-	\thispagestyle{empty}	
-	\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}\label{Sec:Abkuerzungen}
-	\chapter*{Abkürzungsverzeichnis}
-	\begin{acronym}[OTH R]
-	 \acro{REALIS}{Reliability evaluation and logistic information system}
-	 \acro{IC}{Integrated Circuit}
-	 \acro{FEOL}{Front-end-of-line}
-	 \acro{BEOL}{Back-end-of-line}
-	 \acro{QM}{Quality Manager}
-	 \acro{RPT}{Reliability product testing}
-	
-	\end{acronym}
-	
+	\thispagestyle{empty}
+
+	\printglossary[type=\acronymtype, title=Abkürzungsverzeichnis]
+	\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+
+	\printglossary
+	\addcontentsline{toc}{chapter}{Glossar}
+
 	% Anhang
 	\listoffigures
 	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
@@ -130,8 +140,6 @@ position=bottom]{caption}
 	%\listoftables
 	
 
-	\printglossaries
-	\addcontentsline{toc}{chapter}{Glossar}
 
 	%\addcontentsline{toc}{chapter}{Listingsverzeichnis} % für Quellcode
 	%\lstlistoflistings 

@@ -3,8 +3,33 @@
     name=Operator,
     description={RPT-Labor Mitarbeiter, zuständig für Validierung, Durchführung und Dokumentation von Stresstests}
 }
-\newglossaryentry{quality-manager}
+\newglossaryentry{lot}
 {
-    name=Quality Manager,
-    description={Besitzer und Verantwortlicher eines REALIS-Projects, legt dieses an}
+    name=Lot,
+    description={(Los) Kleine Stückzahl von produzierten Chips die Stresstests unterzogen werden}
 }
+\newglossaryentry{board}
+{
+    name=Board,
+    description={Behälter für Chips eines \glspl{lot}}
+}
+\newglossaryentry{substrate}
+{
+    name=Substrate,
+    description={Trägersubstanz für einen Chip eines \glspl{lot}}
+}
+\newglossaryentrywithacronym{QM}{Quality Manager}{
+    Besitzer und Verantwortlicher eines REALIS-Projects, legt dieses an.
+}
+
+\newglossaryentrywithacronym{REALIS}{Reliability Evaluation and Logistic Information System}{
+    Software-Applikation zur Qualifizierung neuer Halbleiter-Produkte
+}
+
+
+% Define acronyms
+
+\newacronym{IC}{IC}{Integrated Circuit}
+\newacronym{FEOL}{FEOL}{Front-End-of-Line}
+\newacronym{BEOL}{BEOL}{Back-End-of-Line}
+\newacronym{RPT}{RPT}{Reliability Product Testing}
