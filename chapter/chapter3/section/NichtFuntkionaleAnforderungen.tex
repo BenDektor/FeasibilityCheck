@@ -1,0 +1,11 @@
+\section{Nicht-funktionale Anforderungen}
+Performance, Benutzerfreundlichkeit, Sicherheit etc.
+
+
+Der Feasibility Check soll persistent sein. Deswegen soll das Ergebnis und die logischen Entscheidungen verknüpft mit dem zugehörigen Stresstest fest in der Datenbank gespeichert werden. Außerdem soll während eines Checks kein anderes System oder anderer User Änderungen an diesem Test vornehmen können.
+
+Um den Programmcode und die Logik des Feasibility Checks gründlich zu testen, soll dieser erst auf der Testversion des Systems eingeführt werden. Nach ausführlichem Testen, kann dieser anschließend auf die produktive Version ausgerollt werden.
+
+Damit der Feasibility Check auch in Zukunft funktioniert, sollen für diesen Unittests erstellt werden, um so zu garantieren, dass dieser bei Änderungen in anderen Teilen des Systems, weiterhin gewünschte Ergebnisse liefert.
+
+Der Feasibility Check hat keine zeitlichen Vorgaben, soll aber aufgrund der wahrscheinlichen längeren Ausführungsdauer für den User im Hintergrund ablaufen.

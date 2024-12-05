@@ -1,0 +1,13 @@
+\section{Funktionale Anforderungen}
+Ein User des Systems soll keinerlei Wissen mehr benötigen, um den technischen Feasibility Check durchzuführen. Dieser soll automatisiert ablaufen und nur vom User im System getriggert bzw. angefordert werden.
+
+Der automatisierte Feasibility Check soll nachvollziehbar sein, deswegen sollen logische Entscheidungen, die das Ergebnis des Checks begründen in der Datenbank gespeichert werden, und dem User verständlich angezeigt werden. Dies soll auch der Fall sein, wenn die bisherige Logik auf unerwartete Probleme stößt.
+
+Die Funktionen des Feasibility Checks sollen im System nacheinander für den User freigeschalten werden können, um so den Prozess der Einführung schrittweise testen zu können und so sicherer zu machen.
+Deswegen soll der Feasibility Check aus mehreren einzelnen ''Checks'' bestehen, abhängig von den Parametern beschrieben in Kapitel \ref{Subsec:ParameterdestechnischenFeasibilityChecks}, die von Systemadministratoren jeweils für den automatisierten technischen Feasibility Check aktiviert oder deaktviert werden können. Sind diese deaktiviert, muss der User die Möglichkeit haben, den Check, wie bisher, manuell durchzuführen.
+
+Da im Rahmen dieser Arbeit nicht alle einzelnen ''Checks'' des gesamten Feasibility Checks umgesetzt werden können, soll das System für weitere technische Checks, flexibel erweiterbar sein.
+
+Ist das Ergebnis des automatisierten technischen Feasibility Checks negativ, aufgrund von Problemen bei der bestehenden Logik oder weil dieser laut der bisherigen Logik einfach negativ ist, so soll der User die Möglichkeit haben, diesen manuell durchzuführen.
+
+
