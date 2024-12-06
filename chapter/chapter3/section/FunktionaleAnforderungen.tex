@@ -1,13 +1,22 @@
 \section{Funktionale Anforderungen}
-Ein User des Systems soll keinerlei Wissen mehr benötigen, um den technischen Feasibility Check durchzuführen. Dieser soll automatisiert ablaufen und nur vom User im System getriggert bzw. angefordert werden.
 
-Der automatisierte Feasibility Check soll nachvollziehbar sein, deswegen sollen logische Entscheidungen, die das Ergebnis des Checks begründen in der Datenbank gespeichert werden, und dem User verständlich angezeigt werden. Dies soll auch der Fall sein, wenn die bisherige Logik auf unerwartete Probleme stößt.
+\setlength{\leftskip}{1em} 
+\textbf{Automatisierung des technischen Feasibility Checks}  \\
+Der Feasibility Check soll vollständig automatisiert ablaufen, sodass Benutzer keine technischen Vorkenntnisse benötigen. Die Ausführung wird ausschließlich durch den Benutzer initiiert oder angefordert.
 
-Die Funktionen des Feasibility Checks sollen im System nacheinander für den User freigeschalten werden können, um so den Prozess der Einführung schrittweise testen zu können und so sicherer zu machen.
-Deswegen soll der Feasibility Check aus mehreren einzelnen ''Checks'' bestehen, abhängig von den Parametern beschrieben in Kapitel \ref{Subsec:ParameterdestechnischenFeasibilityChecks}, die von Systemadministratoren jeweils für den automatisierten technischen Feasibility Check aktiviert oder deaktviert werden können. Sind diese deaktiviert, muss der User die Möglichkeit haben, den Check, wie bisher, manuell durchzuführen.
+\textbf{Nachvollziehbarkeit}  \\
+Um das Ergebnis des automatisierten Feasibility Checks transparent zu gestalten, müssen alle zugrunde liegenden logischen Entscheidungen in der Datenbank gespeichert werden. Diese Informationen sollen für den Benutzer in verständlicher Form dargestellt werden, insbesondere wenn die Logik auf unerwartete Probleme stößt.
 
-Da im Rahmen dieser Arbeit nicht alle einzelnen ''Checks'' des gesamten Feasibility Checks umgesetzt werden können, soll das System für weitere technische Checks, flexibel erweiterbar sein.
+\textbf{Modularer Aufbau}  \\
+Der Feasibility Check besteht aus mehreren separaten ''Checks''. Diese Module, abhängig von den Parametern (siehe Kapitel~\ref{Subsec:ParameterdestechnischenFeasibilityChecks}), sollen von Systemadministratoren individuell aktiviert oder deaktiviert werden können. Ist ein Modul deaktiviert, soll der Benutzer weiterhin die Möglichkeit haben, den Check manuell durchzuführen.
 
-Ist das Ergebnis des automatisierten technischen Feasibility Checks negativ, aufgrund von Problemen bei der bestehenden Logik oder weil dieser laut der bisherigen Logik einfach negativ ist, so soll der User die Möglichkeit haben, diesen manuell durchzuführen.
+\textbf{Flexibilität und Erweiterbarkeit}  \\
+Das System soll so konzipiert sein, dass neue Module bzw. ''Checks'' flexibel hinzugefügt werden können, um zukünftige Anforderungen ohne größeren Aufwand zu erfüllen.
 
-Die Systemarchitektur des Feasibility Checks muss sich an die bestehende Systemarchitektur von \gls{REALIS} anpassen, da sich der Feasibility Check nahtlos in dieses System integrieren lassen soll.
+\textbf{Manuelle Durchführung weiterhin Ermöglichen}  \\
+Falls der automatisierte Feasibility Check zu einem negativen Ergebnis kommt, auch aufgrund von Problemen in der bestehenden Logik, soll der Benutzer die Möglichkeit haben, den Check manuell durchzuführen.
+
+\textbf{Integration in bestehende Architektur}  \\
+Die Systemarchitektur des Feasibility Checks muss vollständig kompatibel mit der bestehenden Architektur von \gls{REALIS} sein, um eine nahtlose Integration zu gewährleisten.
+
+\setlength{\leftskip}{0em} 

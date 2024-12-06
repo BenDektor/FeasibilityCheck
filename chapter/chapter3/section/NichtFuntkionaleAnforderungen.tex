@@ -1,11 +1,26 @@
 \section{Nicht-funktionale Anforderungen}
-Performance, Benutzerfreundlichkeit, Sicherheit etc.
+
+\setlength{\leftskip}{1em} 
+\textbf{Persistenz}  \\
+Ergebnisse und logische Entscheidungen des Feasibility Checks müssen dauerhaft und eindeutig mit dem zugehörigen Stresstest in der Datenbank gespeichert werden.
+
+\textbf{Datenintegrität}  \\
+Während der Ausführung eines Feasibility Checks darf kein anderer Benutzer oder Systemprozess Änderungen an dem betreffenden Test vornehmen können.
+
+\textbf{Test- und Rollout-Strategie}  \\
+Der Feasibility Check soll zuerst in einer Testumgebung eingeführt und gründlich getestet werden. Nach erfolgreicher Validierung erfolgt der Rollout auf die produktive Umgebung.
+
+\textbf{Fehlerrobustheit}  \\
+Der Feasibility Check muss bei unerwarteten Situationen (z. B. unvollständige Parameter, Dateninkonsistenzen) mit klar definierten Fehlermeldungen reagieren und dabei stabil bleiben.
+
+\textbf{Unittests und Wartung}  \\
+Um sicherzustellen, dass der Feasibility Check auch bei zukünftigen Systemänderungen wie erwartet funktioniert, müssen umfassende Unittests implementiert werden.
+
+\textbf{Performance}  \\
+Obwohl keine festen Zeitvorgaben bestehen, soll der Feasibility Check ressourcenschonend im Hintergrund ablaufen, um die Benutzerfreundlichkeit zu erhöhen.
+
+\textbf{Codequalität und Dokumentation}  \\
+Der Quellcode des Feasibility Checks muss klar strukturiert und umfassend dokumentiert sein. Ziel ist es, die Logik für andere Entwickler leicht verständlich zu machen und zukünftige Änderungen oder Erweiterungen zu erleichtern.
 
 
-Der Feasibility Check soll persistent sein. Deswegen soll das Ergebnis und die logischen Entscheidungen verknüpft mit dem zugehörigen Stresstest fest in der Datenbank gespeichert werden. Außerdem soll während eines Checks kein anderes System oder anderer User Änderungen an diesem Test vornehmen können.
-
-Um den Programmcode und die Logik des Feasibility Checks gründlich zu testen, soll dieser erst auf der Testversion des Systems eingeführt werden. Nach ausführlichem Testen, kann dieser anschließend auf die produktive Version ausgerollt werden.
-
-Damit der Feasibility Check auch in Zukunft funktioniert, sollen für diesen Unittests erstellt werden, um so zu garantieren, dass dieser bei Änderungen in anderen Teilen des Systems, weiterhin gewünschte Ergebnisse liefert.
-
-Der Feasibility Check hat keine zeitlichen Vorgaben, soll aber aufgrund der geschätzten längeren Ausführungsdauer für den User im Hintergrund ablaufen.
+\setlength{\leftskip}{0em} % Rückstellung
