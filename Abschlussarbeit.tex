@@ -49,6 +49,10 @@ position=bottom]{caption}
 \usepackage[gen]{eurosym}				% Eurozeichen einfügen
 %\usepackage{chngpage}					
 %\usepackage{lscape}						% Nützlich, falls querformatierte 	Seiten gewünscht sind
+% Style für die Bibliothek festlegen
+\usepackage[style=ieee,backend=biber]{biblatex}
+% Einfügen des Literaturverzeichnisses in das Dokument
+\addbibresource{references.bib}
 %\usepackage{pdflscape}					% Zum exportieren der Landscapes in PDF-Dateien
 \usepackage[headsepline]{scrlayer-scrpage}
 \pagestyle{scrheadings}
@@ -114,13 +118,14 @@ position=bottom]{caption}
 	\include{chapter/chapter9/Anhang}
 	
 	% Literaturverzeichnis in das Inhaltsverzeichnis einfügen
+	\printbibliography
 	\addcontentsline{toc}{chapter}{Literaturverzeichnis}
 	
-	% Style für die Bibliothek festlegen
-  	\bibliographystyle{IEEEtran}
+
+
   	
-  	% Einfügen des Literaturverzeichnisses in das Dokument
-	\bibliography{references}
+
+
 	
 	\newpage
 		

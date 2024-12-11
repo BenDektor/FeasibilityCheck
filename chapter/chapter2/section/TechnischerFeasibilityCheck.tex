@@ -8,23 +8,21 @@ Die Beurteilung basiert auf mehreren Parametern. Um diese besser zu verstehen, w
 
 \subsection{Stresstests (Reliability Tests)}
 
-Stresstests, auch als \textit{Reliability Tests} bezeichnet, sind ein wesentlicher Bestandteil der Qualifikation neuer Produkte. Sie dienen dazu, die Belastbarkeit und Zuverlässigkeit eines Produkts unter definierten Bedingungen zu überprüfen. Die häufigsten Testparameter sind dabei Temperatur (Hitze- und Kälte), Druck, Feuchtigkeit. Zusätzlich gibt es auch mechanische oder elektrische Belastungen, wobei auch Kombinationen dieser Umgebungsbedingungen/Belastungen eingesetzt werden. Beispielsweiße werden Produkte gleichzeitig bestromt und einer bestimmten Temperatur und Feuchtigkeit über einen festgelegten Zeitraum ausgesetzt.
+Stresstests, auch als \textit{Reliability Tests} bezeichnet, sind ein wesentlicher Bestandteil der Qualifikation neuer Produkte. Sie dienen dazu, die Belastbarkeit und Zuverlässigkeit eines Produkts unter definierten Bedingungen zu überprüfen. Die häufigsten Testparameter sind dabei Temperatur (Hitze- und Kälte), Druck, Feuchtigkeit. Zusätzlich gibt es auch mechanische oder elektrische Belastungen, wobei auch Kombinationen dieser Umgebungsbedingungen/Belastungen eingesetzt werden.
 
 Jeder Stresstest setzt sich aus mehreren aufeinanderfolgenden Operationen zusammen, die von einem \gls{RPT}-Labor-\gls{operator} mithilfe eines Test-\glspl{lot} (einer kleinen Stückzahl des Produkts) durchgeführt werden. Üblicherweise beginnt ein Test mit einer ''START''-Operation und endet mit einer ''END''-Operation. Dazwischen erfolgen mehrere Stressoperationen, die den spezifischen Stresstyp des Tests abbilden und die eigentliche Belastungsprüfung darstellen. Nach jeder Stressoperation wird das \gls{lot} einer Funktionsprüfung (weitere Operation) unterzogen, um sicherzustellen, dass alle Chips die vorhergehende Belastung unbeschadet überstanden haben.
 
 Während der Durchführung der Stressoperationen platziert der \gls{operator} das \gls{lot} in eine geeignete Testmaschine und passt die Parameter gemäß den geplanten Vorgaben in \gls{REALIS} an. Dabei kann eine Operation mehrere verschiedene Parameter enthalten, mit vordefinierten Werten. Beispielsweise wird bei Temperaturtests die Zieltemperatur sowie die Testdauer eingestellt, während bei anderen Tests, wie etwa mechanischen Belastungen, die Anzahl der Wiederholungen definiert wird. Die Chips des \glspl{lot} werden dabei häufig auf einem sogenannten \gls{board} montiert, das als Träger fungiert und Leiterbahnen enthält, um die elektrische Verbindung zwischen dem Testsystem und den Chips herzustellen.
 
-Für kleinere Chips kommt oft ein zusätzliches Zwischenelement, das sogenannte \gls{substrate}, zum Einsatz. Das \gls{substrate} fungiert als Trägerelement und enthält ebenfalls Leiterbahnen. Es dient dazu, die Kontakte des Chips zu „vergrößern“ und somit die Handhabung und Verbindung mit dem \gls{board} zu erleichtern.
-
-In Abbildung \ref{fig:testmachine-with-board-substrate} ist ein \gls{RPT}-Labor \gls{operator} zu sehen, der Ein Board mit Substraten, auf denen die kleinen Chips sind, in eine Testmaschine schiebt.
-
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=1\textwidth]{bilder/testmaschine-with-board-substrate.png}
-    \caption{Testmaschine mit Board (große grüne Platte), Substraten (kleine senkrechten eingesteckte Plättchen auf Board) und Chips}
+    \includegraphics[width=0.95\textwidth]{bilder/testmaschine-with-board-substrate.png}
+    \caption{Testmaschine mit Board (große grüne Platte), Substraten (kleine senkrechten eingesteckte Plättchen auf Board) und Chips \cite{RPTLaborIntern}}
     \label{fig:testmachine-with-board-substrate}
 \end{figure}
 
+Für kleinere Chips kommt oft ein zusätzliches Zwischenelement, das sogenannte \gls{substrate}, zum Einsatz. Das \gls{substrate} fungiert als Trägerelement und enthält ebenfalls Leiterbahnen. Es dient dazu, die Kontakte des Chips zu „vergrößern“ und somit die Handhabung und Verbindung mit dem \gls{board} zu erleichtern.
+In Abbildung \ref{fig:testmachine-with-board-substrate} ist ein \gls{RPT}-Labor \gls{operator} zu sehen, der Ein Board mit Substraten, auf denen die kleinen Chips sind, in eine Testmaschine schiebt.
 
 
 In einigen Testverfahren, wie beispielsweise in Regensburg, wird jedoch kein \gls{board} benötigt. Hier werden die Chips in eine Karte (vergleichbar mit einer EC-Karte) integriert, die selbst als \gls{substrate} dient. Die Karte wird in einer Testmaschine wiederholt mechanischen Belastungen, wie Biegungen, ausgesetzt, wie in Abbildung \ref{fig:stresstest-card}. Die Karten werden dabei einzeln in die Maschine eingelegt, was den Einsatz eines \glspl{board} überflüssig macht.
@@ -32,7 +30,7 @@ In einigen Testverfahren, wie beispielsweise in Regensburg, wird jedoch kein \gl
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=1\textwidth]{bilder/stresstest-card1.png}
-    \caption{Biegungs-Stresstest mit Karten}
+    \caption{Biegungs-Stresstest mit Karten \cite{RPTLaborIntern}}
     \label{fig:stresstest-card}
 \end{figure}
 
