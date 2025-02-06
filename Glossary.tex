@@ -3,20 +3,21 @@
     name=Operator,
     description={RPT-Labor Mitarbeiter, zuständig für Validierung, Durchführung und Dokumentation von Stresstests}
 }
-\newglossaryentry{lot}
+\newglossaryentry{los}
 {
-    name=Lot,
-    description={(Los) Kleine Stückzahl von produzierten Chips die Stresstests unterzogen werden}
+    name=Los,
+    plural=Lose,
+    description={Auch als Test lot bzw. Test-Los Kleine Stückzahl von produzierten Chips die Stresstests unterzogen werden.}
 }
 \newglossaryentry{board}
 {
     name=Board,
-    description={Behälter für Chips eines \glspl{lot}}
+    description={Behälter für Chips eines \glspl{los}s}
 }
 \newglossaryentry{substrate}
 {
     name=Substrate,
-    description={Trägersubstanz für einen Chip eines \glspl{lot}}
+    description={Trägersubstanz für einen Chip eines \glspl{los}s}
 }
 \newglossaryentrywithacronym{QM}{Quality Manager}{
     Besitzer und Verantwortlicher eines REALIS-Projects, legt dieses an.
@@ -24,6 +25,16 @@
 
 \newglossaryentrywithacronym{REALIS}{Reliability Evaluation and Logistic Information System}{
     Software-Applikation zur Qualifizierung neuer Halbleiter-Produkte
+}
+\newglossaryentry{ConditionCheck}
+{
+    name=Condition Check,
+    description={Teil des Feasibility Checks, bei dem überprüft wird, ob der geplante Wert in einem sinnvollen Bereich liegt.}
+}
+\newglossaryentry{EquipmentCheck}
+{
+    name=Equipment Check,
+    description={Teil des Feasibility Checks, bei dem überprüft wird, ob der geplante (Stress-)Test durchgeführt werden kann. Also ob für die geforderten Parameter, eine Maschine zur Verfügung steht.}
 }
 
 

@@ -1,18 +1,18 @@
 \section{REALIS}\label{Sec:REALIS}
-Wird bei Infineon von einem Kunden ein neues Produkt angefordert, oder entwickeln diese selber ein neues Produkt, so muss dieses erst einmal getestet und qualifiziert werden, bevor es in Masse produziert werden kann. Mit Produkt ist dabei, ein fertiger Chip, der auf einem Wafer hergestellt wurde, gemeint. Für diese Zuverlässigkeits- bzw. Qualitäts-Tests wurde bei Infineon eine Software entwickelt mit dem Namen \gls{REALIS}. Dieses System umfasst die komplette Planung und Dokumentation der Durchführung und Ergebnisse dieser Tests. Das System ist verbunden mit einer gleichnamigen Datenbank, in denen alle wichtigen Information gespeichert werden.
+Wird bei Infineon von einem Kunden ein neues Produkt angefordert, oder entwickeln diese selber ein neues Produkt, so muss dieses zunächst getestet und qualifiziert werden, bevor es in Masse produziert werden kann. Mit Produkt ist dabei ein fertiger Chip, der auf einem Wafer hergestellt wurde, gemeint. Für diese Zuverlässigkeits- bzw. Qualitäts-Tests wurde bei Infineon eine Software mit dem Namen \gls{REALIS} entwickelt. Dieses System umfasst die komplette Planung und Dokumentation der Durchführung und Ergebnisse dieser Tests. Das System ist verbunden mit einer gleichnamigen Datenbank, in denen alle wichtigen Information gespeichert werden.
 
-\subsection{Project Lifecycle}\label{Subsec:project-lifecycle}
-Um ein neues Produkt zu testen, wird vom sogenannten \gls{QM} bei Infineon ein neues Projekt in \gls{REALIS} angelegt \todo{oder auch eQTP ?}. Dieses befüllt er mit verschiedenen (Stress)-Tests, basierend auf vorhandenen Templates, die Arbeitsschritte (Operationen), Start- und Enddaten, Parameter der Operationen einzelner Tests und weitere Informationen enthalten. Dieser erste Schritt entspricht der obersten Reihe in Abbildung \ref{fig:realis-project-lifecycle} und bildet den Anfang eines REALIS Projekt-Lebenszyklus. 
+\subsection{Projekt-Lebenszyklus}\label{Subsec:project-lifecycle}
+Um ein neues Produkt zu testen, wird vom sogenannten \gls{QM} bei Infineon ein neues Projekt in \gls{REALIS} angelegt. Dieses befüllt er mit verschiedenen (Stress)-Tests, basierend auf vorhandenen Templates, die Arbeitsschritte (Operationen), Start- und Enddaten, Parameter der Operationen einzelner Tests und weitere Informationen enthalten. Dieser erste Schritt entspricht der obersten Reihe in Abbildung \ref{fig:realis-project-lifecycle} und bildet den Anfang eines REALIS Projekt-Lebenszyklus. 
 
-Für jeden der folgenden weiteren Schritte wird in \gls{REALIS} der ``State``(Zustand) der Tests eines Projektes verändert und damit der Fortschritt dokumentiert. Dabei steht dieser zu Beginn immer auf  ``NEW`` und wird anschließend nach jedem der folgenden beschriebenen Schritte auf einen neuen``State`` geändert (vgl. Abbildung \ref{fig:realis-project-lifecycle}, rechte Spalte). Welcher neue Zustand einem Test zugewiesen wird, wird meist dadurch entschieden, ob der beschriebene Schritt erfolgreich durchgeführt werden konnte.
+Für jeden der folgenden weiteren Schritte wird in \gls{REALIS} der ``State``(Status) der Tests eines Projektes verändert und damit der Fortschritt dokumentiert. Dabei steht dieser zu Beginn immer auf  ``NEW`` und wird anschließend nach jedem der folgenden beschriebenen Schritte auf einen neuen``State`` geändert (vgl. Abbildung \ref{fig:realis-project-lifecycle}, rechte Spalte). Welcher neue Zustand einem Test zugewiesen wird, wird dadurch entschieden, ob der beschriebene Schritt erfolgreich durchgeführt werden konnte.
 
 Im zweiten Schritt des Lifecycles weist der \gls{QM} das Projekt, durch einen internen Mechanismus, einem ''State-Change'' des Projekts, einem sogenannten \todo{welchen RPT-Labor} \gls{RPT}-Labor zu. 
 
 In einem \gls{RPT}-Labor validieren anschließend Mitarbeiter manuell die Richtigkeit der angelegten Tests und überprüfen daraufhin, ob sie die angelegten Stresstests des Projektes auch durchführen können. 
-Für die Validierung der Tests, werden die Stressparameter auf deren Sinnhaftigkeit überprüft. Die Frage der Durchführbarkeit hängt davon ab, ob im zugewiesenen \gls{RPT}-Labor Maschinen vorhanden sind, die in der Lage sind, die geforderten Stressoperationen auszuführen und die festgelegten Stressparameter einzuhalten. Zudem müssen diese Maschinen betriebsbereit sein – also weder in Benutzung noch außer Betrieb.
+Für die Validierung der Tests werden die Stressparameter auf deren Sinnhaftigkeit überprüft. Die Frage der Durchführbarkeit hängt davon ab, ob im zugewiesenen \gls{RPT}-Labor Maschinen vorhanden sind, die in der Lage sind, die geforderten Stressoperationen auszuführen und die festgelegten Stressparameter einzuhalten. Zudem müssen diese Maschinen betriebsbereit sein – also weder in Benutzung noch außer Betrieb.
 
-Diese Prüfungen bezeichnen den aktuellen technischen Feasibility Check, der in \gls{REALIS} dokumentiert wird.
-Falls für einige Operationen bzw. Tests keine gültigen Maschinen vorhanden sind, werden diese Tests auf anderen \gls{RPT}-Labore verwiesen. Dadurch müssen aber die zu testenden Produkte auch von einem Labor zum anderen geliefert werden, was sehr viel Zeit kosten kann, da diese weltweit verteilt sind.
+Diese Prüfungen bezeichnen den aktuellen technischen Feasibility Check, dessen Ergebnisse in \gls{REALIS} dokumentiert werden.
+Falls für einige Operationen bzw. Tests keine gültigen Maschinen vorhanden sind, werden diese Tests an andere \gls{RPT}-Labore delegiert. Dadurch müssen die zu testenden Produkte jedoch von einem Labor zum anderen transportiert werden, was aufgrund der weltweiten Verteilung viel Zeit in Anspruch nehmen kann.
 
 \begin{figure}[!h]
     \centering
@@ -21,10 +21,9 @@ Falls für einige Operationen bzw. Tests keine gültigen Maschinen vorhanden sin
     \label{fig:realis-project-lifecycle}
 \end{figure}
 
-Anschließend wird ein Sample, also eine kleine Stückzahl des Produktes zum beauftragten \gls{RPT}-Labor geschickt. Dieses wird in der Fachsprache auch als \textit{Test \gls{lot}}, oder zu Deutsch: \textit{Test-Los} 
-bezeichnet. Die Stückzahl wird dabei in \gls{REALIS} dokumentiert. Die  Daten der Testoperation werden dann final festgelegt und der Test Status wird geändert.
+Anschließend wird ein Sample, also eine kleine Stückzahl des Produktes, zum beauftragten \gls{RPT}-Labor geschickt. Dieses wird in der Fachsprache auch als \textit{Test lot}, oder zu Deutsch: \textit{Test-Los} bzw. nur \gls{los} bezeichnet. Die Stückzahl wird dabei in \gls{REALIS} dokumentiert. Die  Daten der Testoperation werden dann final festgelegt und der Test Status wird geändert.
 
-Daraufhin erfolgt die planmäßige Durchführung der einzelnen Operation der Stresstests. Dabei werden der Fortschritt und die Ergebnisse von Labor-Mitarbeitern, sogeannten \glspl{operator}, in \gls{REALIS} dokumentiert. Treten während der Stresstests Probleme oder Fehler auf, werden diese an den \gls{QM} weitergeleitet, der anschließend über das weitere Vorgehen entscheidet.
+Daraufhin erfolgt die planmäßige Durchführung der einzelnen Operationen der Stresstests. Dabei werden der Fortschritt und die Ergebnisse von Labor-Mitarbeitern, sogeannten \glspl{operator}, in \gls{REALIS} dokumentiert. Treten während der Stresstests Probleme oder Fehler auf, werden diese an den \gls{QM} weitergeleitet, der anschließend über das weitere Vorgehen entscheidet.
 
 Nachdem alle Tests vollständig durchgeführt und dokumentiert worden sind, muss der \gls{QM} die Ergebnisse prüfen und bewerten. Zum Schluss werden die Tests dann archiviert, wobei aus Gewährleistungsgründen die Chips und Testergebnisse 16 Jahre aufbewahrt werden müssen, womit der Project-Lifecycle beendet ist.
 
