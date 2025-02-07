@@ -1,9 +1,18 @@
 \chapter{Test und Evaluation}
 
-\section{Testmethoden}
-Welche Testmethoden wurden verwendet (Unit-Tests, Integrationstests, Benutzerakzeptanztests)?
+Der Feasibility Check wurde bisher kaum von tatsächlichen Endanwendern getestet. Alle durchgeführten Tests beziehen sich ausschließlich auf Unittests der Backend-Logik. Diese Unittests wurden mit großem Aufwand und Sorgfalt entwickelt, um sicherzustellen, dass die bestehende Logik auch in Zukunft stabil bleibt und zukünftige Änderungen keine unerwarteten Fehler verursachen.
+\section{Unittests}
+
+Die Erstellung von Unittests für den Feasibility Check gestaltet sich als anspruchsvoll, da es nicht genügt, der Methode lediglich fehlerhafte Eingaben zu übermitteln. Da die Methode \texttt{FeasibilityCheck()} eine existierende Test-ID erwartet, die in der Datenbank vorhanden sein muss, werden zunächst entsprechende Testdatensätze in einer Testdatenbank angelegt.
+
+Um die Logik des Feasibility Checks umfassend zu prüfen, wurden verschiedene Test-Szenarien entwickelt. Diese Szenarien simulieren unterschiedliche Datenkonstellationen und überprüfen, ob die Methode in den jeweiligen Fällen die erwarteten Ergebnisse liefert.
+
+\textbf{Weitere Aspekte der Unittest-Entwicklung:} \begin{itemize} \item \textbf{Vorbereitung der Testdaten:} Für jeden Unittest werden speziell angelegte Datensätze erstellt, die sowohl typische als auch Grenzfälle abdecken. So können realitätsnahe Szenarien simuliert und potenzielle Schwachstellen identifiziert werden. \item \textbf{Automatisierung:} Die Unittests sind in ein automatisiertes Test-Framework integriert, sodass bei jeder Änderung der Backend-Logik automatisch überprüft wird, ob alle Testfälle weiterhin erfolgreich durchlaufen werden. Dies unterstützt eine kontinuierliche Qualitätssicherung. \item \textbf{Ergebnisvalidierung:} Für jedes Szenario wird kontrolliert, ob die Rückgabewerte und der aggregierte Status des Feasibility Checks korrekt berechnet und in der Datenbank gespeichert werden. Die Tests stellen sicher, dass sowohl erfolgreiche als auch fehlerhafte Überprüfungen korrekt erkannt werden. \item \textbf{Fehlerbehandlung:} Neben der Prüfung korrekter Ergebnisse wird auch das Verhalten bei fehlerhaften oder unvollständigen Daten getestet. Dies umfasst etwa die Reaktion des Systems auf ungültige Eingaben oder auf Situationen, in denen erforderliche Daten fehlen. \end{itemize}
+
 \section{Ergebnisse der Tests}
 Darstellung der Testergebnisse und ihrer Bedeutung.
 
 \section{Evaluation des Systems}
 Bewertung der Lösung hinsichtlich der definierten Anforderungen.
+
+Die implementierten Unittests bilden somit eine solide Grundlage für die Qualitätssicherung des Feasibility Checks. Dennoch bleibt die Integration des gesamten Systems unter realen Betriebsbedingungen ein zukünftiges Ziel. In diesem Zusammenhang sind weitere Testmethoden wie Integrationstests und Usability-Tests vorgesehen, um sowohl die technische Robustheit als auch die Anwenderfreundlichkeit des Systems umfassend zu evaluieren.
