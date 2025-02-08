@@ -1,4 +1,4 @@
-\section{Backend-Logik}
+\section{Backend-Logik}\label{Sec:Backend-Logik}
 
 Die Logik des Feasibility-Check-Algorithmus besteht aus vier zentralen Methoden, die zusammen die Prüfung der Machbarkeit eines Tests realisieren. Zum einen gibt es eine Helfer-Methode, die den eigentlichen Algorithmus aufruft und sicherstellt, dass der Aufrufer der REST-API eine aussagekräftige Rückmeldung erhält. Die Kernkomponente bildet die \texttt{FeasibilityCheck()}-Methode, welche abhängig von der Art der Überprüfung den Condition oder den Equipment Check aufruft. Beide Prüfungen sind als eigenständige Methoden implementiert. Der gesamte Ablauf wird durch vier Aktivitäts- bzw. Flussdiagramme visualisiert. In diesen Diagrammen werden Schleifen durch farblich hervorgehobene Bereiche dargestellt, die jeweils einen gleichfarbigen Kreis als Einstiegspunkt sowie einen zweiten als Ausstiegspunkt enthalten.
 
@@ -11,7 +11,7 @@ Die Ausführung des Algorithmus wird initiiert, sobald der Benutzer im Frontend 
     \label{fig:feasibility-http-call-method}
 \end{figure}
 
-Der Ablauf dieser Helfer-Methode ist in Abbildung \ref{fig:feasibility-http-call-method} dargestellt. Ihre Hauptaufgabe besteht darin, die eigentliche \texttt{FeasibilityCheck()}-Methode (grünes Rechteck in der Graphik \ref{fig:feasibility-http-call-method}) auszuführen und gleichzeitig eine geeignete HTTP-Statusmeldung an das Frontend bzw. den Benutzer zurückzugeben. Zusätzlich wird vor der Verarbeitung die übergebene Test-ID auf Gültigkeit überprüft und der Test-Status auf \texttt{FEASIBILITYREQUESTED} aktualisiert. Falls der FeasibilityCheck für diesen Test bereits zuvor durchgeführt wurde, werden alte Ergebnisse in der Datenbank als ''invalid'' markiert.
+Der Ablauf dieser Helfer-Methode ist in Abbildung \ref{fig:feasibility-http-call-method} dargestellt. Ihre Hauptaufgabe besteht darin, die eigentliche \texttt{FeasibilityCheck()}-Methode (grünes Rechteck in der Graphik \ref{fig:feasibility-http-call-method}) auszuführen und zusätzlich eine geeignete HTTP-Statusmeldung an das Frontend bzw. den Benutzer zurückzugeben. Zusätzlich wird vor der Verarbeitung die übergebene Test-ID auf Gültigkeit überprüft und der Test-Status auf \texttt{FEASIBILITYREQUESTED} aktualisiert. Falls der FeasibilityCheck für diesen Test bereits zuvor durchgeführt wurde, müssen alte Ergebnisse in der Datenbank noch als ''invalid'' markiert.
 
 
 Zur besseren Übersicht wird in Abbildung \ref{fig:feasibility-http-call-method} auch der initiale Button-Klick im Frontend als Aktivität (lila markiert) dargestellt. Die eigentliche Logik beginnt jedoch erst nach dem schwarzen Einstiegspunkt, der den Start des Algorithmus kennzeichnet.
@@ -23,13 +23,12 @@ Zur besseren Übersicht wird in Abbildung \ref{fig:feasibility-http-call-method}
     \label{fig:feasibility-check}
 \end{figure}
 
-Die Kernlogik des Feasibility Checks wird durch die Methode \texttt{FeasibilityCheck()} ausgeführt, die im Flussdiagramm in Abbildung \ref{fig:feasibility-check} detailliert dargestellt ist. Diese Methode erhält von der Helfer-Methode die Test-ID und überprüft die Machbarkeit des Tests anhand der relevanten Parameter und Operationen. Um die Logik des Algorithmus zu vereinfachen, wird ein Enum eingeführt, das den Status einzelner \textit{Teil-Checks} kennzeichnet. Dieser besteht aus vier möglichen Stati mit jeweils spezifischer Bedeutung:
+Die Kernlogik des Feasibility Checks wird durch die Methode \texttt{FeasibilityCheck()} ausgeführt, die im Flussdiagramm in Abbildung \ref{fig:feasibility-check} detailliert dargestellt ist. Diese Methode erhält von der Helfer-Methode die Test-ID und überprüft die \textit{Feasibility} des Tests anhand der relevanten Parameter und Operationen. Um die Logik des Algorithmus zu vereinfachen, wird ein Enum eingeführt, das den Status einzelner \textit{Teil-Checks} kennzeichnet. Dieser besteht aus vier möglichen Stati mit jeweils spezifischer Bedeutung:
 
 \begin{table}[htbp]
     \centering
     \footnotesize
     \renewcommand{\arraystretch}{1.3} % Erhöht den Zeilenabstand
-    \label{tab:feasibility-states}
     \begin{tabular}{p{0.25\linewidth} p{0.7\linewidth}}
         \toprule
         \textbf{Status} & \textbf{Beschreibung} \\
@@ -43,7 +42,8 @@ Die Kernlogik des Feasibility Checks wird durch die Methode \texttt{FeasibilityC
         \texttt{CHECK\_MANUAL} & Eine automatische Überprüfung ist nicht möglich oder der Check ist noch nicht für die automatisierte Überprüfung zugelassen; der Check muss von einem Mitarbeiter manuell durchgeführt werden. \\
         \bottomrule
     \end{tabular}
-    \caption{Stati von Feasibility Teil-Checks, gespeichert als \texttt{FCIR\_STATE} in Feasibility Result}
+    \caption{Stati von Feasibility-Teil-Checks, gespeichert als \texttt{FCIR\_STATE} in Feasibility Result (\texttt{feasibility\_check\_item\_result}))}
+    \label{tab:feasibility-states}
 \end{table}
 
 Jede zu überprüfende Einheit – sei es auf der Ebene des Parameters, der Operation oder des CheckItems – erhält einen entsprechenden Status. Der Algorithmus arbeitet hierarchisch: Zunächst erfolgt die Bewertung auf der untersten Ebene, also bei den Parametern, sofern diese vorhanden sind. Enthält ein Test Operationen, so werden diese Operationen und deren Parameter einzeln bewertet. Für jeden Parameter, der ein prüfbares Ergebnis liefert, wird ein Feasibility-Ergebnis in der Datenbank gespeichert. Enthält ein Test zwar Operationen, diese jedoch keine Parameter, erfolgt die Speicherung ausschließlich auf der Ebene der Operation. Besitzt ein Test gar keine Operationen (und somit auch keine Parameter), wird lediglich ein Gesamtergebnis für den Test abgelegt.

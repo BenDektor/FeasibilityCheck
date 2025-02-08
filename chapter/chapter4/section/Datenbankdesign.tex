@@ -18,7 +18,8 @@ Ein Test besteht aus mehreren aufeinanderfolgenden \textbf{Operationen} (\texttt
 Die Tabelle \texttt{op\_name\_name\_type} bestimmt welche Arten von Operationen es gibt, und legt indirekt über die Tabelle \texttt{ctlg\_op\_loc\_type} fest, welche Operations-Typen auf welchen Standort verfügbar sind. Darüber hinaus definiert die 
 \texttt{op\_data\_param\_type} Tabelle, welcher Parameter bei welcher Operation auf welchem Standort für welchen Produkttypen (\texttt{ctlg\_product\_type}) verfügbar ist. Hierbei sind der Standort und der Produkttyp aber nur optionale Einträge, um generische, standortübergreifende und/oder produktübergreifende Einträge zu realisieren.
 
-Jeder (Stress-)Parameter einer Operation, der einen konkreten Wert definiert (\texttt{OPD\_PLAN}) muss von einer \textbf{Maschine} \texttt{ctlg\_machine} umgesetzt werden (können). Die eng mit der Maschine verknüpften Tabellen, befinden sich in der Abbildung \ref{fig:realis-datenbankdesign} im blau umrandeten Bereich. Eine Maschine ist verknüpft mit einem \textbf{Machinen-Test-Typen} (\texttt{machine\_test\_sub\_type}), der die Maschine einem Test-Typen zuordnet (\texttt{ctlg\_test\_sub\_type}). Außerdem besitzen Maschinen verschiedene \textbf{''Factsheets''} (\texttt{machine\_factsheet}) mit einem \textbf{Parameter} (\texttt{ctlg\_factsheet\_parameter}) und einem Wert (\texttt{MFS\_VALUE}). Dieser Wert korrespondiert mit der PlanValue (\texttt{OPD\_PLAN}) des Operations-Parameters. Hierbei gibt es aber (meist) für jeden Operations-Parameter-Typen zwei zugehörige Maschinen-Factsheet-Parameter(-Typen), die angeben, was jeweils das Minimum und das Maximum der Maschine, bei diesem Parameter ist.
+Jeder (Stress-)Parameter einer Operation, der einen konkreten Wert definiert (\texttt{OPD\_PLAN}) muss von einer \textbf{Maschine} \texttt{ctlg\_machine} umgesetzt werden (können). Die eng mit der Maschine verknüpften Tabellen, befinden sich in der Abbildung \ref{fig:realis-datenbankdesign} im blau umrandeten Bereich. Eine Maschine ist verknüpft mit einem \textbf{Machinen-Test-Typen} (\texttt{machine\_test\_sub\_type}), der die Maschine einem Test-Typen zuordnet (\texttt{ctlg\_test\_sub\_type}). Außerdem besitzen Maschinen verschiedene \textbf{''Factsheets''} (\texttt{machine\_factsheet}) mit einem \textbf{Parameter} (\texttt{ctlg\_factsheet\_parameter}) und einem Wert (\texttt{MFS\_VALUE}). Dieser Wert korrespondiert mit der PlanValue (\texttt{OPD\_PLAN}) des Operations-Parameters. 
+Er gibt dabei ein Minimum oder ein Maximum der Maschine für diesen Parameter an. Deswegen gibt es (meist) für jeden Operations-Parameter-Typen zwei zugehörige Maschinen-Factsheet-Parameter(-Typen), die über den jeweiligen Wert angeben, was das Minimum und Maximum der Maschine, bei diesem Parameter ist.
 
 
 \subsection{Datenbankerweiterung für Feasibility Check}
@@ -39,7 +40,7 @@ Damit dieser Parameter-Wert auf Sinnhaftigkeit überprüft werden kann, werden i
 \setlength{\leftskip}{0em} 
 
 \textbf{\gls{EquipmentCheck}} \\
-Für den \gls{EquipmentCheck} wird ebenfalls die Tabelle \texttt{opd\_data\_param\_type} um zwei Einträge ergänzt:
+Für den \gls{EquipmentCheck} wird ebenfalls die Tabelle \texttt{op\_data\_param\_type} um zwei Einträge ergänzt:
 
 \setlength{\leftskip}{1em} 
 \textbf{\texttt{OPT\_EQ\_MIN\_ID}} - Referenz auf den minimalen Maschinen-Parameter
@@ -54,41 +55,42 @@ Jede Maschine, die einen bestimmten Operations-Parameter unterstützt, besitzt z
 
 
 \textbf{Konfigurierbarkeit des automatisierten Feasibility Checks} \\
-Bevor der automatisierte Feasibility Check vollständig ausgerollt wird, soll dieser umfassend getestet werden können. Dazu wird eine Konfigurationsmöglichkeit in der Datenbank geschaffen. Die Tabelle \textbf{\texttt{ctlg\_feasibility\_config}} ermöglicht die Festlegung, welche Tests bereits durch das neue System geprüft werden sollen und welche weiterhin einer manuellen Überprüfung unterliegen.
+Bevor der automatisierte Feasibility Check vollständig ausgerollt wird, soll dieser umfassend getestet werden können. Dazu wird eine Konfigurationsmöglichkeit in der Datenbank geschaffen. Die Tabelle \textbf{\texttt{ctlg\_feasibility\_config}} ermöglicht die Festlegung, welche Tests bereits durch das neue System geprüft werden sollen und welche weiterhin einer manuellen Überprüfung unterliegen. Die Spalten der Tabelle sind in der Tabelle \ref{tab:config-fields} erklärt.
 
-\setlength{\leftskip}{1em}
-
-\textbf{Automatisierungsstatus} (\texttt{CFCG\_L1\_AUTO\_FLAG}) - legt fest, ob ein Test automatisiert oder manuell durchgeführt wird
-
-\textbf{Standortabhängigkeit} (\texttt{CFCG\_CLOC\_ID}) - Berücksichtigung des jeweiligen (Labor-)Standorts
-
-\textbf{Test-Typ} (\texttt{CFCG\_CTST\_ID}) - Differenzierung nach spezifischen Testarten
-
-\textbf{Check-Typ} (\texttt{CFCG\_CHECK\_ITEM\_TYPE}) - definiert, ob es sich um einen \gls{ConditionCheck} oder einen \gls{EquipmentCheck} handelt
-
-\setlength{\leftskip}{0em} 
+\begin{table}[htbp]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{p{0.3\linewidth} p{0.3\linewidth} p{0.35\linewidth}}
+        \toprule
+        \textbf{Feldname} & \textbf{Kurzbezeichnung} & \textbf{Beschreibung} \\
+        \midrule
+        \texttt{CFCG\_L1\_AUTO\_FLAG} & Automatisierungsstatus & Legt fest, ob ein Test automatisiert oder manuell durchgeführt werden soll. \\
+        \midrule
+        \texttt{CFCG\_CLOC\_ID} & Standort & Berücksichtigt den jeweiligen (Labor-)Standort. \\
+        \midrule
+        \texttt{CFCG\_CTST\_ID} & Test-Typ & Differenzierung nach spezifischen Testarten. \\
+        \midrule
+        \texttt{CFCG\_CHECK\_ITEM\_TYPE} & Check-Item(-Typ) & Definiert, ob es sich um einen \gls{ConditionCheck} oder einen \gls{EquipmentCheck} handelt. \\
+        \bottomrule
+    \end{tabular}
+    \caption{Spalten der Feasibility Check Konfigurations-Tabelle: \texttt{ctlg\_feasibility\_config}}
+    \label{tab:config-fields}
+\end{table}
 
 
 \textbf{Speicherung der Feasibilitiy Check Ergebnisse} \\
-Die Ergebnisse der durchgeführten Feasibility Checks werden in der Tabelle \textbf{\texttt{feasibility\_check\_item\_result}} gespeichert. Diese ist mit dem jeweiligen Test verknüpft und kann – sofern zutreffend – auch mit weiteren Ebenen wie der Operation oder einzelnen Parametern assoziiert werden. Diese Verknüpfungen sind jedoch optional, da in manchen Fällen bereits auf Testebene eine abschließende Bewertung möglich ist oder der Test keine spezifischen Operationen und Parameter umfasst.
+Die (Teil-)Ergebnisse der durchgeführten Feasibility Checks werden in der Tabelle \textbf{\texttt{feasibility\_check\_item\_result}} gespeichert. Diese ist mit dem jeweiligen Test verknüpft und kann – sofern zutreffend – auch mit hierarisch tieferliegende, spezifischere Ebenen wie der Operation oder einzelnen Parametern assoziiert werden. Diese Verknüpfungen sind jedoch optional, da in manchen Fällen bereits auf Testebene eine abschließende Bewertung möglich ist oder der Test keine spezifischen Operationen und Parameter umfasst.
 
-Das Ergebnis eines Checks wird abhängig vom jeweiligen Check-Typ gespeichert. Zusätzlich enthält die Tabelle die folgenden Felder:
+Jeder einzelne Teil-Check wird in Abhängigkeit vom jeweiligen Check-Item-Typ in der Tabelle abgelegt und umfasst unter anderem die Felder \texttt{FCIR\_STATE}, \texttt{FCIR\_DESCRIPTION} und \texttt{FCIR\_VALID}. Dabei dokumentiert \texttt{FCIR\_STATE} den Endstatus des jeweiligen Teil-Checks (siehe Kapitel \ref{Sec:Backend-Logik} und Abbildung \ref{tab:feasibility-states}), \texttt{FCIR\_DESCRIPTION} liefert eine benutzerfreundliche textuelle Begründung und \texttt{FCIR\_VALID} kennzeichnet, ob das Ergebnis aktuell gültig ist. Da ein Test mehrfach einem Feasibility Check unterzogen werden kann, werden bei jeder neuen Durchführung alle vorherigen Ergebnisse als ungültig markiert, verbleiben jedoch als Historie in der Datenbank.
 
-\setlength{\leftskip}{1em}
+Die in der Tabelle \texttt{feasibility\_check\_item\_result} gespeicherten Teil-Ergebnisse bilden somit die Grundlage für die Gesamtbewertung eines Tests. Das finale Feasibility-Ergebnis wird nicht als einzelner Eintrag gespeichert, sondern durch die Aktualisierung des Teststatus repräsentiert. Anhand der aggregierten Teilergebnisse wird dem Test ein neuer Status zugewiesen: Scheitert mindestens einer der automatisierten Teil-Checks oder ist eine automatisierte Durchführung nicht möglich/erlaubt, so erhält der Test den neu eingeführten Status \texttt{MANUALFEASIBILITY}, was signalisiert, dass eine manuelle Überprüfung erforderlich ist. Werden alle Teil-Checks hingegen erfolgreich abgeschlossen, so wird der Test auf den bestehenden Status \texttt{APPLY} gesetzt und damit für den nächsten Schritt im Projektlebenszyklus von REALIS freigegeben. Tritt ein Fehler auf oder bestehen andere Probleme, kann der Test entweder den neuen Status \texttt{FEASIBILITYREQUESTED} erhalten – der unmittelbar nach dem Triggern des Feasibility Checks zugewiesen wird – oder im unwahrscheinlichen Fehlerfall den ursprünglichen Status \texttt{NEW} beibehalten.
 
-\texttt{FCIR\_STATE} – speichert den Status des Checks.
+Wird der Equipment Check erfolgreich abgeschlossen, so werden zusätzlich die Maschinen, die die geforderten Parameter umsetzen können, in der Tabelle \texttt{check\_item\_result\_list} hinterlegt. Diese Tabelle stellt eine Verknüpfung zwischen den identifizierten Maschinen und dem entsprechenden Feasibility Check-Ergebnis her.
 
-\texttt{FCIR\_DESCRIPTION} – dokumentiert die Begründung des Ergebnisses in Textform.
+Durch diese Vorgehensweise wird sichergestellt, dass die detaillierten Teil-Ergebnisse als Grundlage für die finale Testbewertung herangezogen werden, wodurch eine differenzierte und transparente Evaluation der Feasibility Checks möglich wird.
 
-Gültigkeitskennzeichnung – eine zusätzliche "Flag" markiert, ob das Ergebnis aktuell gültig ist.
 
-\setlength{\leftskip}{0em}
-
-Da der Feasibility Check für einen Test mehrfach durchgeführt werden kann, bleiben vorherige Ergebnisse erhalten. Sobald jedoch ein neuer Check erfolgt, werden die vorherigen Ergebnisse als ungültig markiert.
-
-Falls der \gls{EquipmentCheck} erfolgreich ist, müssen zusätzlich die Maschinen gespeichert werden, die für die geforderten Parameter geeignet sind. Diese werden in der Tabelle \textbf{\texttt{check\_item\_result\_list}} hinterlegt, die eine Verknüpfung zwischen den gefundenen Maschinen und dem jeweiligen Feasibility-Check-Ergebnis herstellt.
-
-Außerdem werden zwei neue Stati in der Tabelle \texttt{ctlg\_state\_type} eingeführt. Zum einen ''FEASIBILITYREQUESTED'', dieser wird einem Test direkt nach dem Triggern des Feasibility Checks. Und einen zweiten: ''MANUALFEASIBILITY'' falls, der Test gescheitert ist. Ist der Test erfolgreich, wird er auf den bereits existierenden Status ''APPLY'' (bzw. ''FEASIBLE'') gesetzt. 
 
 
 
