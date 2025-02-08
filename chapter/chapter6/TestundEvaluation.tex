@@ -1,13 +1,32 @@
 \chapter{Test und Evaluation}
 
-Der Feasibility Check wurde bisher kaum von tatsächlichen Endanwendern getestet. Alle durchgeführten Tests beziehen sich ausschließlich auf Unittests der Backend-Logik. Diese Unittests wurden mit großem Aufwand und Sorgfalt entwickelt, um sicherzustellen, dass die bestehende Logik auch in Zukunft stabil bleibt und zukünftige Änderungen keine unerwarteten Fehler verursachen.
+Bisher wurde der Feasibility Check nur wenig von tatsächlichen Endanwendern genutzt; sämtliche bisher durchgeführten Tests beziehen sich ausschließlich auf Unittests der Backend-Logik. Diese Unittests wurden mit großem Aufwand und hoher Sorgfalt entwickelt, um sicherzustellen, dass die bestehende Logik auch in Zukunft stabil bleibt und Änderungen keine unerwarteten Fehler verursachen.
+
 \section{Unittests}
 
-Die Erstellung von Unittests für den Feasibility Check gestaltet sich als anspruchsvoll, da es nicht genügt, der Methode lediglich fehlerhafte Eingaben zu übermitteln. Da die Methode \texttt{FeasibilityCheck()} eine existierende Test-ID erwartet, die in der Datenbank vorhanden sein muss, werden zunächst entsprechende Testdatensätze in einer Testdatenbank angelegt.
+Die Entwicklung der Unittests für den Feasibility Check gestaltete sich als besonders anspruchsvoll. Dies liegt vor allem daran, dass es nicht ausreicht, der Methode \texttt{FeasibilityCheck()} einfache fehlerhafte Eingaben zu übermitteln. Vielmehr erwartet diese Methode eine existierende Test-ID, die in der Datenbank vorhanden ist und im Regelfall mit Operationen sowie zugehörigen Parametern befüllt sein muss. Zusätzlich hängt das Ergebnis des Feasibility Checks von mehreren Faktoren ab, wie etwa der Feasibility-Konfiguration, den einzelnen Condition- und Equipment-Checks, der \texttt{op\_data\_param\_type}-Tabelle sowie den in der Datenbank hinterlegten Maschinen.
 
-Um die Logik des Feasibility Checks umfassend zu prüfen, wurden verschiedene Test-Szenarien entwickelt. Diese Szenarien simulieren unterschiedliche Datenkonstellationen und überprüfen, ob die Methode in den jeweiligen Fällen die erwarteten Ergebnisse liefert.
+Aufgrund dieser Komplexität ist es notwendig, gezielt ''Fake-Daten'' in einer Testdatenbank anzulegen. Aufbauend auf diesen Testdaten wird der Feasibility Check ausgeführt und das Ergebnis hinsichtlich Korrektheit und Vollständigkeit validiert. Nach erfolgreicher Überprüfung erfolgt eine sichere Entfernung der ''Fake-Daten'', um die Integrität der Datenbank zu gewährleisten.
 
-\textbf{Weitere Aspekte der Unittest-Entwicklung:} \begin{itemize} \item \textbf{Vorbereitung der Testdaten:} Für jeden Unittest werden speziell angelegte Datensätze erstellt, die sowohl typische als auch Grenzfälle abdecken. So können realitätsnahe Szenarien simuliert und potenzielle Schwachstellen identifiziert werden. \item \textbf{Automatisierung:} Die Unittests sind in ein automatisiertes Test-Framework integriert, sodass bei jeder Änderung der Backend-Logik automatisch überprüft wird, ob alle Testfälle weiterhin erfolgreich durchlaufen werden. Dies unterstützt eine kontinuierliche Qualitätssicherung. \item \textbf{Ergebnisvalidierung:} Für jedes Szenario wird kontrolliert, ob die Rückgabewerte und der aggregierte Status des Feasibility Checks korrekt berechnet und in der Datenbank gespeichert werden. Die Tests stellen sicher, dass sowohl erfolgreiche als auch fehlerhafte Überprüfungen korrekt erkannt werden. \item \textbf{Fehlerbehandlung:} Neben der Prüfung korrekter Ergebnisse wird auch das Verhalten bei fehlerhaften oder unvollständigen Daten getestet. Dies umfasst etwa die Reaktion des Systems auf ungültige Eingaben oder auf Situationen, in denen erforderliche Daten fehlen. \end{itemize}
+Um diesen Prozess zu vereinfachen, wurde die Klasse \texttt{FeasibilityCheckScenario} eingeführt, die auf einer Projektszenario-Klasse basiert. Dieses Konzept stellt eine Sammlung einfacher Methoden bereit, mit denen entweder ein standardisierter Feasibility-Test oder ein spezifischer Test mit vorgegebenen Inhalten angelegt werden kann. Über public Boolean-Parameter in der \texttt{FeasibilityCheckScenario}-Klasse können verschiedene Szenarien aktiviert werden, die intern zur Erzeugung der entsprechenden Fake-Daten führen. Beispielsweise kann das Szenario \texttt{PlanValueOutOfRange} aktiviert werden, um einen Testfall zu simulieren, bei dem der PlanValue außerhalb des erlaubten Bereichs liegt. Ein weiteres Beispiel ist das Szenario \texttt{WrongMachineDate}, bei dem eine Maschine, die normalerweise für den Test zugelassen wäre, mit einem inkorrekten Datum erstellt wird. Standardmäßig sind alle Szenarien deaktiviert und können je nach Bedarf einzeln oder in Kombination aktiviert werden. Abbildung~\ref{fig:unittests-parameters} veranschaulicht die möglichen Boolean-Parameter, die als Szenarien innerhalb der \texttt{FeasibilityCheckScenario}-Klasse dienen.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=1\textwidth]{bilder/unittests-parameters.png}
+    \caption{Boolean-Parameter der \texttt{FeasibilityCheckScenario}-Klasse}
+    \label{fig:unittests-parameters}
+\end{figure}
+
+Durch diese abstrahierte Vorgehensweise lassen sich die umfangreichen Unittests strukturiert und effizient umsetzen. Zwei Beispiel-Unittests sind in Abbildung~\ref{fig:unittestcases} dargestellt. Hierbei legt die Methode \texttt{CreateDefaultFeasibilityProject()} einen Default-Test an, der jeweils mit einer Operation und einem Parameter befüllt ist, um das Testszenario zu vereinfachen. Anschließend generiert die Methode \texttt{CreateMockData()} in der Datenbank alle erforderlichen ''Fake-Daten'' bzw. passt bestehende Datensätze an, beispielsweise in der Feasibility-Konfigurationstabelle. Die Erstellung dieser ''Fake-Daten'' erfolgt abhängig von den eingestellten Boolean-Parametern, sodass die entsprechenden Szenarien erfüllt werden. Im zweiten Unittest, wie in Abbildung~\ref{fig:unittestcases} gezeigt, wurde beispielsweise das Szenario \texttt{WrongMachineDate} aktiviert. Danach wird über die Methode \texttt{PerformFeasibilityCheck()} der Feasibility Check ausgeführt, wobei das zurückgelieferte Ergebnis abschließend evaluiert wird. Ein automatisierter Cleanup-Mechanismus sorgt schließlich dafür, dass die initial angelegten Fake-Daten sicher wieder aus der Datenbank entfernt werden.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=1\textwidth]{bilder/unittestcases.png}
+    \caption{Unittests für den Feasibility Check}
+    \label{fig:unittestcases}
+\end{figure}
+
+Die Unittests sind in ein automatisiertes Test-Framework integriert, sodass bei jeder Änderung der Backend-Logik automatisch überprüft wird, ob alle Testfälle weiterhin erfolgreich durchlaufen werden. Diese Vorgehensweise unterstützt die kontinuierliche Qualitätssicherung und trägt maßgeblich zur Stabilität und Wartbarkeit des Systems bei.
 
 \section{Ergebnisse der Tests}
 Darstellung der Testergebnisse und ihrer Bedeutung.

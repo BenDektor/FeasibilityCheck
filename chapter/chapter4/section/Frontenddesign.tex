@@ -1,9 +1,7 @@
 \section{Frontend-Design}
-Das Frontend für den Feasibility Check basiert auf der bereits implementierten Weboberfläche des \gls{REALIS}-Systems. Die Funktionalität des Feasibility Checks wird in die bestehende Webanwendung für den \glsentrylong{QM} integriert, sodass das Projekt nicht mehr an das \gls{RPT}-Labor übergeben werden muss, um den Check durchzuführen. Stattdessen ermöglicht das neue, automatisierte System dem \gls{QM}, die Machbarkeit der angelegten Tests eigenständig und ohne Laborunterstützung zu überprüfen.
+Das Frontend für den Feasibility Check basiert auf der bereits implementierten Weboberfläche des \gls{REALIS}-Systems und wurde so erweitert, dass die Funktionalität des Feasibility Checks nahtlos in die bestehende Anwendung für den \glsentrylong{QM} integriert wird. Dadurch entfällt die Notwendigkeit, das Projekt an das \gls{RPT}-Labor zu übergeben, um den Check durchzuführen. Das neue, automatisierte System ermöglicht es dem \gls{QM}, die Machbarkeit der angelegten Tests eigenständig und ohne externe Laborunterstützung zu überprüfen.
 
-Zunächst legt der \glsentrylong{QM} ein neues \gls{REALIS}-Projekt für das zu qualifizierende Produkt an. Dieses Projekt kann mit mehreren unterschiedlichen Tests versehen werden, wobei der Nutzer durch vorgefertigte Templates unterstützt wird, die häufig verwendete Testkonfigurationen und zugehörige Daten enthalten.
-
-Nachdem das Projekt vollständig angelegt wurde, gelangt der Benutzer auf die Weboberfläche, wie in Abbildung \ref{fig:whole-page} dargestellt.
+Zu Beginn legt der \gls{QM} ein neues \gls{REALIS}-Projekt für das zu qualifizierende Produkt an. Dieses Projekt kann mehrere unterschiedliche Tests enthalten, wobei der Nutzer durch vorgefertigte Templates unterstützt wird, die gängige Testkonfigurationen und zugehörige Daten bereitstellen. Nach Abschluss der Projekterstellung gelangt der Benutzer auf die Hauptoberfläche, wie in Abbildung~\ref{fig:whole-page} dargestellt.
 
 \begin{figure}[!htbp] 
     \centering 
@@ -16,7 +14,7 @@ Auf dieser Oberfläche kann der Feasibility Check für die definierten (Stress-)
 
 \subsection{Modal-Page für die Initiierung des Feasibility Checks}
 
-In der Modal-Page können mittels CheckBoxen die einzelnen Tests ausgewählt werden, die den Feasibility Check durchlaufen sollen. Alternativ besteht die Möglichkeit, alle Tests gleichzeitig auszuwählen, indem die oberste CheckBox in der Spaltenüberschriftenleiste aktiviert wird (siehe Mauszeigerposition in Abbildung \ref{fig:submit-page}).
+Innerhalb der Modal-Page kann der Benutzer mittels CheckBoxen die einzelnen Tests auswählen, die den Feasibility Check durchlaufen sollen. Alternativ besteht die Möglichkeit, alle Tests simultan auszuwählen, indem die oberste CheckBox in der Spaltenüberschriftenleiste aktiviert wird (siehe Mauszeigerposition in Abbildung \ref{fig:submit-page}).
 
 \begin{figure}[!htbp] 
     \centering 
@@ -27,7 +25,7 @@ In der Modal-Page können mittels CheckBoxen die einzelnen Tests ausgewählt wer
 
 Nachdem der Benutzer die gewünschten Tests selektiert hat, klickt er auf den ''Submit for Feasibility Check''-Button, der oben links im Popup, neben dem ''Exit''-Button, positioniert ist. Mit diesem Klick wird für jeden ausgewählten Test ein asynchroner HTTP-Call an die Backend-Logik initiiert. Über die REST-API wird dabei die Helfer-Methode \texttt{CheckFeasibility()} aufgerufen, wobei die jeweilige Test-ID als Parameter übermittelt wird.
 
-Die asynchronen HTTP-Calls ermöglichen es dem Benutzer, weiterhin mit der Oberfläche zu interagieren, während die Überprüfungen im Hintergrund durchgeführt werden. Dadurch kann der Benutzer das Popup schließen oder andere Aktionen ausführen, ohne den laufenden Feasibility Check zu unterbrechen. Die rotierenden Ladekreise in der "Feasibility"-Spalte rechts veranschaulichen den Ladevorgang für den Feasibility Check jedes Tests (siehe Abbildung \ref{fig:loading-with-results}). Bis ein Resultat eintrifft vergehen circa 2 bis 15 Sekunden, je nach Feasibility-Konfiguration und Komplexität des Tests.
+Die asynchronen HTTP-Calls erlauben es dem Benutzer, während der Durchführung der Überprüfungen weiterhin mit der Oberfläche zu interagieren. So kann das Popup-Fenster ohne Unterbrechung des laufenden Feasibility Checks geschlossen oder für andere Aktionen genutzt werden. In der „Feasibility“-Spalte rechts wird der Fortschritt des Checks durch rotierende Ladekreise visualisiert (siehe Abbildung \ref{fig:loading-with-results}). Je nach Feasibility-Konfiguration und Komplexität des Tests dauert die Überprüfung etwa zwei bis 15 Sekunden, bis die ersten Ergebnisse vorliegen.
 
 \begin{figure}[!htbp] 
     \centering 
@@ -36,18 +34,14 @@ Die asynchronen HTTP-Calls ermöglichen es dem Benutzer, weiterhin mit der Oberf
     \label{fig:loading-with-results} 
 \end{figure}
 
-Sobald die ersten Überprüfungen abgeschlossen sind, verschwindet der Ladekreis. Anschließend werden drei Icons angezeigt und der Test-Status in der Tabelle aktualisiert.
-
-Ein grüner Haken zusammen mit dem Status ''APPLY'' (bzw. „FEASIBLE“) signalisiert, dass der Feasibility Check erfolgreich war.
-
-Ein rotes Kreuz und der Status ''MANUALFEASIBILITY'' weisen darauf hin, dass entweder ein oder mehrere Kriterien nicht erfüllt wurden oder der Test in der Konfiguration noch nicht für die automatisierte Überprüfung freigeschaltet ist. In beiden Fällen muss der Test manuell von einem Mitarbeiter überprüft werden.
+Sobald einzelne Überprüfungen abgeschlossen sind, wird der entsprechende Ladekreis durch ein Status-Icon ersetzt und der Teststatus in der Übersicht aktualisiert. Ein grüner Haken sowie der Status ''APPLY'' (bzw. ''FEASIBLE'') signalisieren, dass der Feasibility Check erfolgreich abgeschlossen wurde. Erscheint hingegen ein rotes Kreuz und der Status ''MANUALFEASIBILITY'', so weist dies darauf hin, dass ein oder mehrere Kriterien nicht erfüllt wurden oder der Test in der Konfiguration noch nicht für eine automatisierte Überprüfung freigeschaltet ist. In beiden Fällen muss der Test manuell von einem Mitarbeiter überprüft werden.
 
 Tritt ein Fehler im Algorithmus auf, erscheint ein rotes Dreieck mit Ausrufezeichen. In diesem Fall bleibt der Test-Status unverändert oder wird auf ''FEASIBILITY\_REQUEST'' gesetzt, je nachdem wann und welcher Fehler auftritt (dieser Fall ist in der Abbildung \ref{fig:loading-with-results} nicht dargestellt).
 
 
 \subsection{Modal-Page für detaillierte Ergebnisse des Feasibility Checks}
 
-Nachdem der Feasibility Check für einige Tests abgeschlossen ist, können in einer zweiten Modal-Page detaillierte Ergebnisse eingesehen werden. Diese Seite wird geöffnet, wenn der Benutzer den grün umrandeten „Show Feasibility“-Button in der Startoberfläche (siehe Abbildung \ref{fig:whole-page}) betätigt. Abbildung \ref{fig:result-details} zeigt diese Modal-Page.
+Nach Abschluss der Feasibility Checks für einzelne Tests kann der Benutzer über einen separat positionierten, grün umrandeten ''Show Feasibility''-Button in der Startoberfläche (siehe Abbildung~\ref{fig:whole-page}) detaillierte Ergebnisse einsehen. Beim Betätigen dieses Buttons öffnet sich eine zweite Modal-Page, die in Abbildung~\ref{fig:result-details} dargestellt ist.
 
 \begin{figure}[!htbp] 
     \centering 
@@ -56,12 +50,12 @@ Nachdem der Feasibility Check für einige Tests abgeschlossen ist, können in ei
     \label{fig:result-details} 
 \end{figure}
 
-Das Popup-Fenster zeigt eine Tabelle mit allen Tests, ihren Informationen und den zugehörigen Ergebnissen. Der Benutzer kann einzelne Testzeilen aufklappen, um weitere Details zu erhalten. Links in der Tabelle sind Icons zu sehen, die anzeigen, welche Zeilen aufgeklappt werden können und welche aktuell geöffnet sind – dabei kann immer nur eine Zeile gleichzeitig ausgeklappt werden. 
+Diese Seite zeigt in tabellarischer Form alle Tests zusammen mit den zugehörigen Ergebnissen. Über ein Aufklappmechanismus können einzelne Testzeilen erweitert werden, sodass detaillierte Informationen – die gespeicherten \texttt{feasibility\_check\_item\_results} – eingesehen werden können. Bei Tests, die ausschließlich den Status \texttt{CHECK\_OFF} aufweisen, keine zusätzlichen Details angezeigt, da in diesen Fällen keine Feasibility-Resultate abgespeichert wurden.
 
-In der aufgeklappten Ansicht werden in tabellarischen Form die gespeicherten \texttt{feasibility\_check\_item\_results}, des zugehörigen Tests angezeigt. Bei Tests die nur Überprüfungen mit dem Status-Ergebnis \texttt{''CHECK\_OFF''} aufweisen, liefern keine zusätzlichen Details, da in diesem Fall keine Feasibility-Resultate abgespeichert wurden. 
+Innerhalb der Detailansicht wird neben dem Typ des CheckItems (Condition oder Equipment Check) auch der jeweilige Status, wie er in der Backend-Logik mittels Enum definiert ist, dargestellt. Ergänzend dazu liefert eine erläuternde Beschreibung dem Benutzer weiterführende Informationen zu dem jeweiligen Check. Falls vorhanden, werden auch der zugehörige Operationstyp sowie die Parameter-ID angezeigt. Diese detaillierte Darstellung unterstützt den Benutzer dabei, die Ergebnisse des Feasibility Checks nachvollziehen zu können und gegebenenfalls notwendige Anpassungen an den geplanten Tests, den zugehörigen Parameterwerten oder den Einträgen in der Konfigurationstabelle vorzunehmen.
 
-In der Spalte ''Check Item Type'' wird angegeben, ob es sich um einen Condition- oder Equipment Check handelt. In der Spalte ''State'' erscheint der Status, wie er in der Backend-Logik als Enum definiert ist. Zudem wird eine Beschreibung angezeigt, die dem Benutzer detaillierte Informationen zum jeweiligen Check liefert. Falls vorhanden, werden auch der zugehörige Operationstyp und die Parameter-ID dargestellt.
+Diese detaillierte Darstellung unterstützt den Benutzer dabei, die Ergebnisse des Feasibility Checks nachvollziehen zu können und gegebenenfalls notwendige Anpassungen an den geplanten Tests, den zugehörigen Parameterwerten oder den Einträgen in der Konfigurationstabelle vorzunehmen.
 
-Diese Informationen sollen dem Benutzer helfen, die Ergebnisse nachvollziehen zu können. Außerdem ermöglichen sie es, bei unerwünschten Resultaten entsprechend zu reagieren. Entweder können die geplanten Tests und deren Parameter(-Werte) angepasst werden, oder weitere vom Feasibility Check abhängige Konditionen, wie etwa die Konfigurationstabelle können verändert werden.
+Insgesamt trägt das integrierte Frontend-Design wesentlich dazu bei, die Benutzerfreundlichkeit und Transparenz des Feasibility Checks zu erhöhen. Durch die intuitive Bedienung und die asynchrone Verarbeitung der Prüfprozesse wird es dem \gls{QM} ermöglicht, effizient und selbstständig die Machbarkeit der Tests zu evaluieren und bei Bedarf zeitnah entsprechende Maßnahmen zu ergreifen.
 
 
