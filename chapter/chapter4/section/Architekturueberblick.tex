@@ -11,9 +11,9 @@ Die Abbildung 4.1 veranschaulicht die erweiterte REALIS-Architektur zur Realisie
 
 \todo{maybe add opdataparamtype}
 
-In der \textbf{Datenbank} werden neue Tabellen hinzugefügt, die sowohl zur Konfiguration als auch zur Speicherung der Check-Ergebnisse dienen. Hierzu gehören die Tabellen \texttt{CTLG\_FEASIBILITY\_CONFIG}, \texttt{FEASIBILITY\_CHECK\_ITEM\_RESULT} und \texttt{CHECK\_ITEM\_\-RESULT\_\-LIST}.
+In der \textbf{Datenbank} werden neue Tabellen hinzugefügt, die sowohl zur Konfiguration als auch zur Speicherung der Feasibility Check Ergebnisse dienen. Hierzu gehören die Tabellen \texttt{ctlg\_feasibility\_config}, \texttt{feasibility\_check\_item\_result} und \texttt{check\_item\_\-result\_\-list}.
 
-Im \textbf{Backend} wird eine HTTP-GET-Methode mit der Bezeichnung \texttt{CheckFeasibility()} implementiert. Diese Methode ruft die Kernlogik der Funktion \texttt{FeasibilityCheck()} auf, die die eigentliche Datenverarbeitung übernimmt, die Ergebnisse in der Datenbank abspeichert und ein einfaches Ergebnis zurückliefert.
+Im \textbf{Backend} wird eine HTTP-GET-Methode mit der Bezeichnung \texttt{CheckFeasibility()} implementiert. Diese Methode ruft die Kern-Algorithmus, die Funktion \texttt{FeasibilityCheck()} auf, die die eigentliche Datenverarbeitung übernimmt, die Ergebnisse in der Datenbank abspeichert und ein einfaches Ergebnis zurückliefert.
 
 Im \textbf{Frontend} wird im \textit{REALIS-Web Subsystem} eine neue Modal-Page \glqq Submit for Feasibility Check\grqq{} integriert, die es Benutzern ermöglicht, den Feasibility Check zu initiieren. Nach der Überprüfung werden die Ergebnisse übersichtlich dargestellt, und zusätzliche Details können bei Bedarf abgerufen werden. 
 

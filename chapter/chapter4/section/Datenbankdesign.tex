@@ -1,5 +1,5 @@
 \section{Datenbankdesign}
-Um die Erweiterung der Datenbank für den Feasibility Check zu erklären, wird zunächst auf die grundlegende Struktur der REALIS-Datenbank eingegangen. In Abbildung \ref{fig:realis-datenbankdesign} ist ein Ausschnitt der wichtigsten Tabellen und deren Beziehungen dargestellt, einschließlich der vorgenommenen Erweiterungen, die durch orangefarbenden Rechtecke gekennzeichnet sind. Die nachfolgenden Erläuterungen nennen jeweils den zugehörigen Tabellennamen aus der Abbildung in Klammern.
+Um die Erweiterung der Datenbank für den Feasibility Check zu erklären, wird zunächst auf die grundlegende Struktur der REALIS-Datenbank eingegangen. In Abbildung \ref{fig:realis-datenbankdesign} ist ein Ausschnitt der wichtigsten Tabellen und deren Beziehungen dargestellt, einschließlich der vorgenommenen Erweiterungen, die durch orangefarbenden Rechtecke gekennzeichnet sind. Die nachfolgenden Erläuterungen der Tabellen nennen jeweils den zugehörigen Tabellennamen aus der Abbildung in Klammern.
 
 \subsection{REALIS-Datenbank}
 
@@ -16,9 +16,9 @@ Ein Test besteht aus mehreren aufeinanderfolgenden \textbf{Operationen} (\texttt
 \end{figure}
 
 Die Tabelle \texttt{op\_name\_name\_type} bestimmt welche Arten von Operationen es gibt, und legt indirekt über die Tabelle \texttt{ctlg\_op\_loc\_type} fest, welche Operations-Typen auf welchen Standort verfügbar sind. Darüber hinaus definiert die 
-\texttt{op\_data\_param\_type} Tabelle, welcher Parameter bei welcher Operation auf welchem Standort für welchen Produkttypen (\texttt{ctlg\_product\_type}) verfügbar ist. Hierbei sind der Standort und der Produkttyp aber nur optionale Einträge, um generische, standortübergreifende und/oder produktübergreifende Einträge zu realisieren.
+\textbf{\texttt{op\_data\_param\_\-type}} Tabelle, welcher Parameter bei welcher Operation auf welchem Standort für welchen Produkttypen (\texttt{ctlg\_product\_type}) verfügbar ist. Hierbei sind der Standort und der Produkttyp aber nur optionale Einträge, um generische, standortübergreifende und/oder produktübergreifende Einträge zu realisieren.
 
-Jeder (Stress-)Parameter einer Operation, der einen konkreten Wert definiert (\texttt{OPD\_PLAN}) muss von einer \textbf{Maschine} \texttt{ctlg\_machine} umgesetzt werden (können). Die eng mit der Maschine verknüpften Tabellen, befinden sich in der Abbildung \ref{fig:realis-datenbankdesign} im blau umrandeten Bereich. Eine Maschine ist verknüpft mit einem \textbf{Machinen-Test-Typen} (\texttt{machine\_test\_sub\_type}), der die Maschine einem Test-Typen zuordnet (\texttt{ctlg\_test\_sub\_type}). Außerdem besitzen Maschinen verschiedene \textbf{''Factsheets''} (\texttt{machine\_factsheet}) mit einem \textbf{Parameter} (\texttt{ctlg\_factsheet\_parameter}) und einem Wert (\texttt{MFS\_VALUE}). Dieser Wert korrespondiert mit der PlanValue (\texttt{OPD\_PLAN}) des Operations-Parameters. 
+Jeder (Stress-)Parameter einer Operation, der einen konkreten Wert definiert (\texttt{OPD\_\-PLAN}) muss von einer \textbf{Maschine} (\texttt{ctlg\_machine}) umgesetzt werden (können). Die eng mit der Maschine verknüpften Tabellen, befinden sich in der Abbildung \ref{fig:realis-datenbankdesign} im blau umrandeten Bereich. Eine Maschine ist verknüpft mit einem \textbf{Machinen-Test-Typen} (\texttt{machine\_test\_sub\_type}), der die Maschine einem Test-Typen zuordnet (\texttt{ctlg\_test\_sub\_type}). Außerdem besitzen Maschinen verschiedene \textbf{''Factsheets''} (\texttt{machine\_factsheet}) mit einem \textbf{Parameter} (\texttt{ctlg\_factsheet\_parameter}) und einem Wert (\texttt{MFS\_VALUE}). Dieser Wert korrespondiert mit der PlanValue (\texttt{OPD\_PLAN}) des Operations-Parameters. 
 Er gibt dabei ein Minimum oder ein Maximum der Maschine für diesen Parameter an. Deswegen gibt es (meist) für jeden Operations-Parameter-Typen zwei zugehörige Maschinen-Factsheet-Parameter(-Typen), die über den jeweiligen Wert angeben, was das Minimum und Maximum der Maschine, bei diesem Parameter ist.
 
 
@@ -26,11 +26,11 @@ Er gibt dabei ein Minimum oder ein Maximum der Maschine für diesen Parameter an
 
 Für die Durchführung des Feasibility Checks muss die Datenbank erweitert werden. Dabei sollen die in Kapitel \ref{Subsec:ParameterdestechnischenFeasibilityChecks} beschriebenen Parameter und die zugrunde liegende Logik umgesetzt werden. Zusätzlich müssen die Anforderungen aus Kapitel \ref{Chap:Anforderungen} berücksichtigt werden.
 
-Der Feasibility Check bewertet den Parameter-Wert einer (Stress-)Operation in zwei Dimensionen. Die Überprüfung der \textbf{Sinnhaftigkeit} \gls{ConditionCheck} und die Überprüfung der \textbf{Durchführbarkeit} \gls{EquipmentCheck}.
+Der Feasibility Check bewertet den Parameter-Wert einer (Stress-)Operation in zwei Dimensionen. Die Überprüfung der \textbf{Sinnhaftigkeit} (\textbf{\gls{ConditionCheck}}) und die Überprüfung der \textbf{Durchführbarkeit} (\textbf{\gls{EquipmentCheck}}). \todo{auch aus weiteren Checks die wurden aber nicht umgesetzt}
 Dieser Parameter-Wert entspricht in der Datenbank REALIS dem Eintrag \textbf{\texttt{OPD\_PLAN}} in der Tabelle \texttt{op\_data}, die ihn definiert und den Parameter darstellt.
 
 \textbf{\gls{ConditionCheck}} \\
-Damit dieser Parameter-Wert auf Sinnhaftigkeit überprüft werden kann, werden in der generischen Tabelle \texttt{op\_data\_param\_type}, die Operationstyp, Parametertyp,  Standort und Produkttyp miteinander verknüpft, zwei neue Einträge hinzugefügt. Diese zwei Einträge beinhalten Werte, die den ''sinnvollen'' Bereich festlegen.
+Damit dieser Parameter-Wert auf Sinnhaftigkeit überprüft werden kann, werden in der generischen Verknüpfungs-Tabelle \texttt{op\_data\_param\_type} zwei neue Spalten hinzugefügt. Die Einträge definieren dabei den zulässigen bzw. ''sinnvollen'' Wertebereich für einen Parameter basieredn auf den Faktoren: Operationstyp, Parametertyp, Standorttyp und Produktyp.
 
 \setlength{\leftskip}{1em} 
 \textbf{\texttt{OPT\_CD\_MIN}} - definiert die untere Grenze des zulässigen Wertebereichs
@@ -40,7 +40,7 @@ Damit dieser Parameter-Wert auf Sinnhaftigkeit überprüft werden kann, werden i
 \setlength{\leftskip}{0em} 
 
 \textbf{\gls{EquipmentCheck}} \\
-Für den \gls{EquipmentCheck} wird ebenfalls die Tabelle \texttt{op\_data\_param\_type} um zwei Einträge ergänzt:
+Für den \gls{EquipmentCheck} wird ebenfalls die Tabelle \texttt{op\_data\_param\_type} um zwei Attribute ergänzt:
 
 \setlength{\leftskip}{1em} 
 \textbf{\texttt{OPT\_EQ\_MIN\_ID}} - Referenz auf den minimalen Maschinen-Parameter
@@ -49,9 +49,9 @@ Für den \gls{EquipmentCheck} wird ebenfalls die Tabelle \texttt{op\_data\_param
 
 \setlength{\leftskip}{0em} 
 
-Diese Einträge dienen als Fremdschlüssel zu zwei Maschinen-Parametertypen (\texttt{ctlg\_factsheet\_parameter}), wobei einer der beiden dem ''minimalen'' Parameter und der andere dem ''maximalen'' Parameter entspricht. Die tatsächlichen Parameter-Werte stehen dann in der verknüpften \texttt{machine\_factsheet} Tabelle, in dem Feld \texttt{MFS\_VALUE}.
+Diese Spalten dienen als Fremdschlüssel zu zwei Maschinen-Parametertypen (\texttt{ctlg\_factsheet\_parameter}), wobei einer der beiden dem ''minimalen'' Parameter und der andere dem ''maximalen'' Parameter entspricht. Die tatsächlichen Parameter-Werte stehen dann in der verknüpften \texttt{machine\_factsheet} Tabelle, in dem Feld \texttt{MFS\_VALUE}.
 
-Jede Maschine, die einen bestimmten Operations-Parameter unterstützt, besitzt zwei zugehörige FactSheet-Parameter, die in der machine\_factsheet-Tabelle den minimalen und maximalen Wertebereich für diesen Parameter festlegen. Dadurch wird sichergestellt, dass alle relevanten Maschinen mit den entsprechenden Parametern verknüpft sind und dass für jede Maschine die jeweiligen Grenzen des umsetzbaren Wertebereichs definiert werden.
+(Jede Maschine, die einen bestimmten Operations-Parameter unterstützt, besitzt zwei zugehörige FactSheet-Parameter, die in der machine\_factsheet-Tabelle den minimalen und maximalen Wertebereich für diesen Parameter festlegen. Dadurch wird sichergestellt, dass alle relevanten Maschinen mit den entsprechenden Parametern verknüpft sind und dass für jede Maschine die jeweiligen Grenzen des umsetzbaren Wertebereichs definiert werden.)
 
 
 \textbf{Konfigurierbarkeit des automatisierten Feasibility Checks} \\
@@ -78,15 +78,16 @@ Bevor der automatisierte Feasibility Check vollständig ausgerollt wird, soll di
     \label{tab:config-fields}
 \end{table}
 
+Falls für eine bestimmte Kombination kein Eintrag in der Konfigurationstabelle exisitert oder die Automatisierungsstatus-Flag auf \textit{null} gesetzt  ist, so bedeutet dies, dass für diese Verknüpfung kein Feasibility Check erforderlich ist. Diese Regelung ist notwendig, da bestimmte Test-Typen oder Laborstandorte keinen Feasibility Check benötigen. Zudem können bei Einträgen auch die Felder Standort, Test-Typ oder Check-Item(-Typ) auf \textit{null} gesetzt werden, um generische Definitionen zu ermöglichen und die Konfiguration flexibler zu gestalten.
 
 \textbf{Speicherung der Feasibilitiy Check Ergebnisse} \\
 Die (Teil-)Ergebnisse der durchgeführten Feasibility Checks werden in der Tabelle \textbf{\texttt{feasibility\_check\_item\_result}} gespeichert. Diese ist mit dem jeweiligen Test verknüpft und kann – sofern zutreffend – auch mit hierarisch tieferliegende, spezifischere Ebenen wie der Operation oder einzelnen Parametern assoziiert werden. Diese Verknüpfungen sind jedoch optional, da in manchen Fällen bereits auf Testebene eine abschließende Bewertung möglich ist oder der Test keine spezifischen Operationen und Parameter umfasst.
 
-Jeder einzelne Teil-Check wird in Abhängigkeit vom jeweiligen Check-Item-Typ in der Tabelle abgelegt und umfasst unter anderem die Felder \texttt{FCIR\_STATE}, \texttt{FCIR\_DESCRIPTION} und \texttt{FCIR\_VALID}. Dabei dokumentiert \texttt{FCIR\_STATE} den Endstatus des jeweiligen Teil-Checks (siehe Kapitel \ref{Sec:Backend-Logik} und Abbildung \ref{tab:feasibility-states}), \texttt{FCIR\_DESCRIPTION} liefert eine benutzerfreundliche textuelle Begründung und \texttt{FCIR\_VALID} kennzeichnet, ob das Ergebnis aktuell gültig ist. Da ein Test mehrfach einem Feasibility Check unterzogen werden kann, werden bei jeder neuen Durchführung alle vorherigen Ergebnisse als ungültig markiert, verbleiben jedoch als Historie in der Datenbank.
+Jeder einzelne ''Teil-Check'' wird in Abhängigkeit vom jeweiligen Check-Item(-Typ) in der Tabelle abgelegt und umfasst unter anderem die Felder \texttt{FCIR\_STATE}, \texttt{FCIR\_\-DESCRIPTION} und \texttt{FCIR\_VALID}. Dabei dokumentiert \texttt{FCIR\_STATE} den Endstatus des jeweiligen ''Teil-Checks'' (siehe Kapitel \ref{Sec:Backend-Logik} und Abbildung \ref{tab:feasibility-states}), \texttt{FCIR\_DESCRIPTION} liefert eine benutzerfreundliche textuelle Begründung und \texttt{FCIR\_VALID} kennzeichnet, ob das Ergebnis aktuell gültig ist. Da ein Test mehrfach einem Feasibility Check unterzogen werden kann, werden bei jeder neuen Durchführung alle vorherigen Ergebnisse als ungültig markiert, verbleiben jedoch als Historie in der Datenbank.
 
-Die in der Tabelle \texttt{feasibility\_check\_item\_result} gespeicherten Teil-Ergebnisse bilden somit die Grundlage für die Gesamtbewertung eines Tests. Das finale Feasibility-Ergebnis wird nicht als einzelner Eintrag gespeichert, sondern durch die Aktualisierung des Teststatus repräsentiert. Anhand der aggregierten Teilergebnisse wird dem Test ein neuer Status zugewiesen: Scheitert mindestens einer der automatisierten Teil-Checks oder ist eine automatisierte Durchführung nicht möglich/erlaubt, so erhält der Test den neu eingeführten Status \texttt{MANUALFEASIBILITY}, was signalisiert, dass eine manuelle Überprüfung erforderlich ist. Werden alle Teil-Checks hingegen erfolgreich abgeschlossen, so wird der Test auf den bestehenden Status \texttt{APPLY} gesetzt und damit für den nächsten Schritt im Projektlebenszyklus von REALIS freigegeben. Tritt ein Fehler auf oder bestehen andere Probleme, kann der Test entweder den neuen Status \texttt{FEASIBILITYREQUESTED} erhalten – der unmittelbar nach dem Triggern des Feasibility Checks zugewiesen wird – oder im unwahrscheinlichen Fehlerfall den ursprünglichen Status \texttt{NEW} beibehalten.
+Die in der Tabelle \texttt{feasibility\_check\_item\_result} gespeicherten Teil-Ergebnisse bilden somit die Grundlage für die Gesamtbewertung eines Tests. Das finale Feasibility-Ergebnis wird aber nicht als einzelner Eintrag gespeichert, sondern durch die Aktualisierung des Teststatus repräsentiert. Anhand der aggregierten Teilergebnisse wird dem Test ein neuer Status zugewiesen: Scheitert mindestens einer der automatisierten ''Teil-Checks'' oder ist eine automatisierte Durchführung nicht möglich/erlaubt, so erhält der Test den neu eingeführten Status ''\textbf{\texttt{MANUALFEASIBILITY}}'', was signalisiert, dass eine manuelle Überprüfung erforderlich ist. Werden alle ''Teil-Checks'' hingegen erfolgreich abgeschlossen, so wird der Test auf den bestehenden Status ''\textbf{\texttt{APPLY}}'' gesetzt und damit für den nächsten Schritt im Projektlebenszyklus von REALIS freigegeben. Tritt ein Fehler auf oder bestehen andere Probleme, kann der Test entweder den neuen Status ''\textbf{\texttt{FEASIBILITYREQUESTED}}'' erhalten – der unmittelbar nach dem Triggern des Feasibility Checks zugewiesen wird – oder im unwahrscheinlichen Fehlerfall den ursprünglichen Status ''\texttt{NEW}'' beibehalten.
 
-Wird der Equipment Check erfolgreich abgeschlossen, so werden zusätzlich die Maschinen, die die geforderten Parameter umsetzen können, in der Tabelle \texttt{check\_item\_result\_list} hinterlegt. Diese Tabelle stellt eine Verknüpfung zwischen den identifizierten Maschinen und dem entsprechenden Feasibility Check-Ergebnis her.
+Wird der Equipment Check erfolgreich abgeschlossen, so werden zusätzlich die Maschinen, die die geforderten Parameter(-Werte) umsetzen können, in der Tabelle \textbf{\texttt{check\_item\-\_result\_list}} hinterlegt. Diese Tabelle stellt eine Verknüpfung zwischen den identifizierten Maschinen und dem entsprechenden Feasibility Check-Ergebnis her.
 
 Durch diese Vorgehensweise wird sichergestellt, dass die detaillierten Teil-Ergebnisse als Grundlage für die finale Testbewertung herangezogen werden, wodurch eine differenzierte und transparente Evaluation der Feasibility Checks möglich wird.
 
