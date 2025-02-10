@@ -33,6 +33,7 @@ Die Kernlogik des Feasibility Checks wird durch die Methode \textbf{\texttt{Feas
 
 \begin{table}[!htb]
     \centering
+    \caption{Status von Feasibility-Teil-Checks, gespeichert als \texttt{FCIR\_STATE} in Feasibility Result (\texttt{feasibility\_check\_item\_result})}
     \footnotesize
     \renewcommand{\arraystretch}{1.3} % Erhöht den Zeilenabstand
     \begin{tabular}{p{0.25\linewidth} p{0.7\linewidth}}
@@ -48,7 +49,6 @@ Die Kernlogik des Feasibility Checks wird durch die Methode \textbf{\texttt{Feas
         \texttt{CHECK\_MANUAL} & Eine automatische Überprüfung ist nicht möglich oder der Check ist noch nicht für die automatisierte Überprüfung zugelassen; der Check muss von einem Mitarbeiter manuell durchgeführt werden. \\
         \bottomrule
     \end{tabular}
-    \caption{Status von Feasibility-Teil-Checks, gespeichert als \texttt{FCIR\_STATE} in Feasibility Result (\texttt{feasibility\_check\_item\_result})}
     \label{tab:feasibility-states}
 \end{table}
 
@@ -106,6 +106,7 @@ Feasibility-Results mit dem Status \texttt{CHECK\_OFF} werden im Regelfall nicht
 
 \begin{table}[!htb]
     \centering
+    \caption{Feedback auf Test-Ebene}
     \footnotesize
     \renewcommand{\arraystretch}{1.1} % Erhöht den Zeilenabstand
     \setlength{\arrayrulewidth}{0.1pt} % Dünnere Linien
@@ -119,13 +120,13 @@ Feasibility-Results mit dem Status \texttt{CHECK\_OFF} werden im Regelfall nicht
         No Operations found for this test & \texttt{CHECK\_OFF} \\
         \bottomrule
     \end{tabular}
-    \caption{Feedback auf Test-Ebene}
     \label{tab:feedback-test}
 \end{table}
 
 
 \begin{table}[!htb]
     \centering
+    \caption{Feedback auf Operations-Ebene}
     \footnotesize
     \renewcommand{\arraystretch}{1.1}
     \begin{tabular}{p{0.8\linewidth} p{0.15\linewidth}}
@@ -134,13 +135,13 @@ Feasibility-Results mit dem Status \texttt{CHECK\_OFF} werden im Regelfall nicht
         Operation with no Parameters & \texttt{CHECK\_OFF} \\
         \bottomrule
     \end{tabular}
-    \caption{Feedback auf Operations-Ebene}
     \label{tab:feedback-operation}
 \end{table}
 
 
 \begin{table}[!htb]
     \centering
+    \caption{Feedback auf Parameter-Ebene -- Condition Check}
     \footnotesize
     \renewcommand{\arraystretch}{1.1}
     \begin{tabular}{p{0.8\linewidth} p{0.15\linewidth}}
@@ -157,13 +158,13 @@ Feasibility-Results mit dem Status \texttt{CHECK\_OFF} werden im Regelfall nicht
         Check failed: PlanValue=\{\textit{planValue}\}, ConditionMin=\{\textit{ConditionMin}\}, ConditionMax=\{\textit{ConditionMax}\} & \texttt{CHECK\_NOT\_OK} \\
         \bottomrule
     \end{tabular}
-    \caption{Feedback auf Parameter-Ebene -- Condition Check}
     \label{tab:feedback-condition}
 \end{table}
 
 
 \begin{table}[!htb]
     \centering
+    \caption{Feedback auf Parameter-Ebene -- Equipment Check}
     \footnotesize
     \renewcommand{\arraystretch}{1.1}
     \begin{tabular}{p{0.8\linewidth} p{0.15\linewidth}}
@@ -186,7 +187,6 @@ Feasibility-Results mit dem Status \texttt{CHECK\_OFF} werden im Regelfall nicht
         \quad Reason: Current PlanValue=\{\textit{planValue}\} too low: Please set PlanValue higher & \\
         \bottomrule
     \end{tabular}
-    \caption{Feedback auf Parameter-Ebene -- Equipment Check}
     \label{tab:feedback-equipment}
 \end{table}
 

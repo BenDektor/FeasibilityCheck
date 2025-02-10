@@ -1,14 +1,18 @@
 \chapter{Test und Evaluation}
 
-Bisher wurde der Feasibility Check nur wenig von tatsächlichen Endanwendern genutzt; sämtliche bisher durchgeführten Tests beziehen sich ausschließlich auf Unittests der Backend-Logik. Diese Unittests wurden mit großem Aufwand und hoher Sorgfalt entwickelt, um sicherzustellen, dass die bestehende Logik auch in Zukunft stabil bleibt und Änderungen keine unerwarteten Fehler verursachen.
+Bisher ist der Feasibility Check erst in geringem Umfang von tatsächlichen Endanwendern genutzt worden; sämtliche bisher durchgeführten Tests beziehen sich bislang auf Unittests der Backend-Logik. Diese wurden jedoch mit großem Aufwand und hoher Sorgfalt entwickelt, um die langfristige Stabilität der besthehend Logik zu gewährleisten und Regressionen bei zukünftigen Änderungen zu vermeiden.
 
 \section{Unittests}
 
-Die Entwicklung der Unittests für den Feasibility Check gestaltete sich als besonders anspruchsvoll. Dies liegt vor allem daran, dass es nicht ausreicht, der Methode \texttt{FeasibilityCheck()} einfache fehlerhafte Eingaben zu übermitteln. Vielmehr erwartet diese Methode eine existierende Test-ID, die in der Datenbank vorhanden ist und im Regelfall mit Operationen sowie zugehörigen Parametern befüllt sein muss. Zusätzlich hängt das Ergebnis des Feasibility Checks von mehreren Faktoren ab, wie etwa der Feasibility-Konfiguration, den einzelnen Condition- und Equipment-Checks, der \texttt{op\_data\_param\_type}-Tabelle sowie den in der Datenbank hinterlegten Maschinen.
+Die Entwicklung der Unittests für den Feasibility Check gestaltete sich als besonders anspruchsvoll. Anders als bei typischen Unittests reicht eine reine Übergabe fehlerhafter Eingaben an die Methode \texttt{FeasibilityCheck()} nicht aus, um deren Funktionalität umfassend zu testen. Stattdessen ist es sinnvoller der Methode eine valide Test-ID zu übergeben, die auf in der Datenbank hinterlegten Operationen und Parameter referenziert. Darüber hinaus hängt das Ergebnis des Feasibility Checks von mehreren Faktoren ab, wie etwa der Feasibility-Konfiguration, den einzelnen Condition- und Equipment-Checks, der \texttt{op\_data\_param\_type}-Tabelle sowie den in der Datenbank vorhandenen Maschinen.
 
-Aufgrund dieser Komplexität ist es notwendig, gezielt ''Fake-Daten'' in der Datenbank anzulegen. Aufbauend auf diesen Testdaten wird der Feasibility Check ausgeführt und das Ergebnis hinsichtlich Korrektheit und Vollständigkeit validiert. Nach erfolgreicher Überprüfung erfolgt eine sichere Entfernung der ''Fake-Daten'', um die Integrität der Datenbank zu gewährleisten.
+Aufgrund dieser Komplexität ist es notwendig, gezielt ''Dummy-Daten'' in der Datenbank anzulegen. Auf Basis dieser Testdaten wird der Feasibility Check ausgeführt und das Ergebnis auf Korrektheit und Vollständigkeit validiert. Nach erfolgreicher Überprüfung erfolgt eine sichere Entfernung der ''Dummy-Daten'', um die Integrität der Datenbank zu gewährleisten.
 
-Um diesen Prozess zu vereinfachen, wurde die Klasse \texttt{FeasibilityCheckScenario} eingeführt, die auf einer Projektszenario-Klasse basiert. Diese Klasse stellt eine Sammlung einfacher Methoden bereit, die das Anlegen von Unittest erleichtert. Über public Boolean-Parameter in der \texttt{FeasibilityCheckScenario}-Klasse können verschiedene Szenarien aktiviert werden, die intern zur Erzeugung der entsprechenden ''Fake-Daten'' führen. Beispielsweise kann das Szenario \texttt{PlanValueOutOfRange} aktiviert werden, um einen Testfall zu simulieren, bei dem der geplante Parameter-Wert (PlanValue) außerhalb des erlaubten Bereichs liegt. Ein weiteres Beispiel ist das Szenario \texttt{WrongMachineDate}, bei dem eine Maschine, die normalerweise für den Test zugelassen wäre, mit einem inkorrekten Datum erstellt wird. Standardmäßig sind alle Szenarien deaktiviert und können je nach Bedarf einzeln oder in Kombination aktiviert werden. Abbildung~\ref{fig:unittests-parameters} veranschaulicht die möglichen Boolean-Parameter, die als Szenarien innerhalb der \texttt{FeasibilityCheckScenario}-Klasse dienen.
+Um diesen Prozess zu vereinfachen, wurde als strukturelle Grundlage die Klasse \texttt{FeasibilityCheckScenario} eingeführt, die auf der \texttt{ProjektScenario}-Klasse basiert. Letztere ermöglicht es auf einfache Weise Projekte in der REALIS-Datenbank anzulegen und dient somit als Grundlage für verschiedene Testfälle.
+
+Um diesen Prozess zu vereinfachen, dient als strukturelle Grundlage die eigens entwickelte Klasse \texttt{FeasibilityCheckScenario}, welche auf der \texttt{ProjektScenario}-Klasse aufbaut. Während letztere das Anlegen von Projekten in der REALIS-Datenbank vereinfacht, erweitert die \texttt{FeasibilityCheckScenario}-Klasse diese Funktionalität um einen Satz konfigurierbarer Methoden zur effizienten Testfallgenerierung für Feasibility Checks. Über Boolean-Parameter können gezielt Szenarien aktiviert werden, die interne ''Dummy-Daten'' erzeugen (siehe Abbildung~\ref{fig:unittests-parameters }). Beispielsweise simuliert der Boolean-Parameter \texttt{PlanValueOutOfRange} die Überschreitung zulässiger Parameterbereiche, während \texttt{WrongMachineDate} eine Datumsinkonsistenz bei Maschinendaten provoziert.
+
+Standardmäßig sind alle Szenarien deaktiviert und können je nach Bedarf einzeln oder in Kombination aktiviert werden. Abbildung~\ref{fig:unittests-parameters} veranschaulicht die möglichen Boolean-Parameter, die als Szenarien innerhalb der \texttt{FeasibilityCheckScenario}-Klasse dienen.
 
 \begin{figure}[!htb]
     \centering
@@ -29,9 +33,20 @@ Durch diese abstrahierte Vorgehensweise lassen sich die umfangreichen Unittests 
 Die Unittests sind in ein automatisiertes Test-Framework integriert, sodass bei jeder Änderung der Backend-Logik automatisch überprüft wird, ob alle Testfälle weiterhin erfolgreich durchlaufen werden. Diese Vorgehensweise unterstützt die kontinuierliche Qualitätssicherung und trägt maßgeblich zur Stabilität und Wartbarkeit des Systems bei.
 
 \section{Ergebnisse der Tests}
-Darstellung der Testergebnisse und ihrer Bedeutung.
+
+Die umfangreichen Unittests haben wertvolle Einblicke in die Funktionsweise und Stabilität des Feasibility Checks geliefert. Die zentralen Erkenntnisse lassen sich wie folgt zusammenfassen:
+
+\begin{itemize}
+    \item \textbf{Standard-Szenario:} Bei korrekter Konfiguration und gültigen Eingabedaten wird der Feasibility Check ohne Fehlermeldungen abgeschlossen. Dies zeigt, dass die Standardlogik robust implementiert ist.
+    \item \textbf{Spezifische Fehlerszenarien:} Durch die Aktivierung von Szenarien wie \texttt{PlanValueOutOfRange} und \texttt{WrongMachineDate} konnten gezielt Fehlerfälle simuliert werden. Die Tests bestätigten, dass diese Situationen korrekt erkannt und mit den vorgesehenen Fehlermeldungen quittiert werden.
+    \item \textbf{Wiederholbarkeit:} Alle Testfälle lieferten bei wiederholter Durchführung konsistente Ergebnisse, was die Zuverlässigkeit der Testumgebung bestätigt.
+\end{itemize}
+
 
 \section{Evaluation des Systems}
-Bewertung der Lösung hinsichtlich der definierten Anforderungen.
 
-Die implementierten Unittests bilden somit eine solide Grundlage für die Qualitätssicherung des Feasibility Checks. Dennoch bleibt die Integration des gesamten Systems unter realen Betriebsbedingungen ein zukünftiges Ziel. In diesem Zusammenhang sind weitere Testmethoden wie Integrationstests und Usability-Tests vorgesehen, um sowohl die technische Robustheit als auch die Anwenderfreundlichkeit des Systems umfassend zu evaluieren.
+Die Evaluation des Gesamtsystems stellt einen zentralen Bestandteil der Qualitätssicherung dar. Bislang lag der Fokus der Tests primär auf den Backend-Komponenten, wodurch indirekt auch die Datenbank validiert wurde. Die \texttt{FeasibilityCheckScenario}-Klasse bietet hierbei eine fundierte Basis für die zukünftige Implementierung spezifischer Anwendungsfalltests. Das Frontend wurde jedoch noch nicht in die Testprozesse einbezogen.
+
+Um eine vollständige Validierung des Systems – bestehend aus Frontend, Backend und Datenbank – zu gewährleisten, ist die Entwicklung gezielter Unittests für das Frontend unerlässlich. Nur durch eine systematische Überprüfung aller Komponenten kann sichergestellt werden, dass diese fehlerfrei funktionieren und nahtlos miteinander interagieren.
+
+Zusätzlich ist eine praxisorientierte Evaluation durch Endanwender von entscheidender Bedeutung. Durch Tests in realen Nutzungsszenarien können potenzielle Schwachstellen identifiziert und behoben werden. Ein iterativer Testprozess, der sowohl automatisierte als auch manuelle Tests integriert, gewährleistet, dass das System den Anforderungen des produktiven Einsatzes entspricht und kontinuierlich optimiert werden kann.
