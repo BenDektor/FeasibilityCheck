@@ -1,4 +1,4 @@
-\section{Architekturüberblick}
+\section{Architekturüberblick und Integration}
 
 Die Abbildung 4.1 veranschaulicht die erweiterte REALIS-Architektur zur Realisierung des Feasibility Checks. Basierend auf dem bestehenden REALIS-Komponentendiagramm (siehe Abbildung 2.3) werden neue Komponenten hinzugefügt, um die Feasibility-Check-Funktionalität zu integrieren. Im Diagramm sind dabei aus Gründen der Übersichtlichkeit nur die wichtigsten Erweiterungen dargestellt.
 
@@ -18,5 +18,14 @@ Im \textbf{Backend} wird eine HTTP-GET-Methode mit der Bezeichnung \texttt{Check
 Im \textbf{Frontend} wird im \textit{REALIS-Web Subsystem} eine neue Modal-Page \glqq Submit for Feasibility Check\grqq{} integriert, die es Benutzern ermöglicht, den Feasibility Check zu initiieren. Nach der Überprüfung werden die Ergebnisse übersichtlich dargestellt, und zusätzliche Details können bei Bedarf abgerufen werden. 
 
 Durch diese Erweiterungen wird die Feasibility-Check-Funktion nahtlos in die bestehende REALIS-Architektur eingebettet und ermöglicht eine effiziente Interaktion mit den relevanten Benutzern und Systemkomponenten.
+
+Die wichtigsten Interaktionen zwischen Benutzer (\gls{QM}), Frontend, Backend und der Datenbank sind im Sequenzdiagramm in Abbildung \ref{fig:sequence-diagram} dargestellt. Die einzelnen Komponenten werden in den folgenden Kapiteln detaillierter beschrieben. 
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=1\textwidth]{bilder/Sequence-Integration.png}
+    \caption{Sequenz-Diagramm FeasibilityCheck}
+    \label{fig:sequence-diagram}
+\end{figure}
 
 
