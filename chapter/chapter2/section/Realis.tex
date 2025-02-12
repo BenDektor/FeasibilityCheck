@@ -6,7 +6,7 @@ Um ein neues Produkt zu testen, wird vom sogenannten \gls{QM} ein neues Projekt 
 
 Für jeden der folgenden Schritte wird in \gls{REALIS} der ``State``(Status) der Tests eines Projektes verändert und damit der Fortschritt dokumentiert. Dabei steht dieser zu Beginn immer auf  ``NEW`` und wird anschließend nach jedem der im Folgenden beschriebenen Schritte auf einen neuen ``State`` geändert (vgl. Abbildung \ref{fig:realis-project-lifecycle}, rechte Spalte). Welcher neue Zustand einem Test zugewiesen wird, wird dadurch entschieden, ob der beschriebene Schritt erfolgreich durchgeführt werden konnte oder nicht.
 
-Im zweiten Schritt des Lifecycles weist der \gls{QM} das Projekt durch einen internen Mechanismus, einem ''State-Change'' des Projekts, einem sogenannten \gls{RPT}-Labor zu. 
+Im zweiten Schritt des Lebenszyklus weist der \gls{QM} das Projekt durch einen internen Mechanismus, einem ''State-Change'' des Projekts, einem sogenannten \gls{RPT}-Labor zu. 
 
 In einem \gls{RPT}-Labor validieren anschließend Mitarbeiter manuell die Richtigkeit der angelegten Tests und überprüfen daraufhin, ob sie die angelegten Stresstests des Projektes auch durchführen können. 
 Für die Validierung der Tests werden die Stressparameter auf deren Sinnhaftigkeit überprüft. Die Frage der Durchführbarkeit hängt davon ab, ob im zugewiesenen \gls{RPT}-Labor Maschinen vorhanden sind, die in der Lage sind, die geforderten Stressoperationen auszuführen und die festgelegten Stressparameter einzuhalten. Zudem müssen diese Maschinen betriebsbereit sein – also weder in Benutzung noch außer Betrieb.
@@ -42,7 +42,7 @@ Abbildung \ref{fig:realis-komponentendiagramm} zeigt die aktuelle Systemarchitek
 Das Frontend besteht aus zwei Hauptkomponenten (blau dargestellt):
 \begin{enumerate}
     \item \textbf{REALIS-Desktop-Applikation:} \\
-Die ursprüngliche Desktop-Anwendung, die sukzessive durch die Integration von neuen Web-Funktionalitäten modernisiert wird. Diese Web-Module, die mit dem Framework Angular entwickelt werden, sind als Subsystem (\texttt{REALIS-Web}) innerhalb der Desktop-Applikation eingebettet. Dieses System steht sowohl dem \gls{QM} als auch dem \gls{RPT}-Labor-Mitarbeiter zur Verfügung. Langfristig soll der \gls{RPT}-Labor-Mitarbeiter jedoch keinen Zugriff mehr darauf haben.
+Die ursprüngliche Desktop-Anwendung, die sukzessive durch die Integration von neuen Web-Funktionalitäten modernisiert wird. Diese Web-Module, die mit dem Framework Angular entwickelt werden, sind als Subsystem (\texttt{REALIS-Web}) innerhalb der Desktop-Applikation eingebettet. Dieses System steht sowohl dem \gls{QM} als auch dem \gls{RPT}-Labor-Mitarbeiter zur Verfügung.
 
 \item \textbf{REALIS-Web-Operator-System:} \\
 Eine eigenständige Web-Applikation, die speziell für die Anforderungen des \gls{RPT}-Labors entwickelt wird. Diese Anwendung befindet sich noch in der Entwicklung, wird jedoch bereits für einige Aufgaben eingesetzt. Für nicht implementierte Funktionen muss der \gls{RPT}-Mitarbeiter vorübergehend auf die alte Desktop-Applikation ausweichen. Zusätzlich ist geplant, das \texttt{REALIS-Web-Operator-System} als native iOS-App für mobile Apple-Geräte (z. B. iPads, iPhones) bereitzustellen. Die Verwendung von Angular ermöglicht dabei eine plattformübergreifende Entwicklung, die sowohl als Web-App als auch als native App funktioniert.

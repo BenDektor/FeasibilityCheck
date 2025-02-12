@@ -85,11 +85,37 @@ position=bottom]{caption}
 	\maketitle
 	\cleardoublepage
 	\pagenumbering{roman}
+
+	\thispagestyle{empty} % Entfernt die Seitenzahl auf dieser Seite
+	\section*{}
+	\vfill % Füllt den Raum vor dem Text
+	\textbf{\Large Sperrvermerk} % Große, fette Überschrift linksbündig
+	\vspace{1cm} % Abstand zwischen Überschrift und Text
+
+	\noindent % Verhindert Einrückung am Anfang des Absatzes
+	\parbox{0.9\textwidth}{ % 90% der Seitenbreite für bessere Lesbarkeit
+		Die vorliegende Arbeit mit dem Titel \enquote{\textit{Entwicklung eines automatisierten technischen Feasibility Checks für die Durchführung von Qualifikationen neuer Halbleiter-Produkte}} beinhaltet vertrauliche Informationen und Daten des Unternehmens Infineon Technologies AG. Diese Bachelorarbeit darf nur vom Erst- und Zweitprüfer sowie berechtigten Mitgliedern des Prüfungsausschusses eingesehen werden.
+
+		\vspace{0.5cm}
+		
+		Die Bachelorarbeit darf weder vollständig noch auszugsweise ohne ausdrückliche Genehmigung der Firma Infineon Technologies AG und des Verfassers veröffentlicht oder Dritten zugänglich gemacht werden.
+		
+		\vspace{0.5cm}
+		
+		Alle Rechte an der Bachelorarbeit, insbesondere das Recht der Vervielfältigung, Verbreitung und öffentlichen Zugänglichmachung, verbleiben bei der Firma Infineon Technologies AG.
+	}
+
+	\vfill % Füllt den Raum nach dem Text
+	\cleardoublepage
+
 	\begin{abstract}
 	\section*{Kurzzusammenfassung}
 	\begin{quote}
 	\end{quote}
 	\end{abstract}
+
+		
+
 	\cleardoublepage
 	\tableofcontents
 	%\cleardoublepage
