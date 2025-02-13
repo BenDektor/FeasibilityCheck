@@ -25,8 +25,7 @@ Die Ausführung des Algorithmus wird initiiert, sobald der Benutzer im Frontend 
 
 Der Ablauf dieser Helfer-Methode ist in Abbildung \ref{fig:feasibility-http-call-method} dargestellt. Ihre Hauptaufgabe besteht darin, die eigentliche \texttt{FeasibilityCheck()}-Methode (grün markierte Aktivität in der Graphik \ref{fig:feasibility-http-call-method}) auszuführen und zusätzlich eine geeignete HTTP-Statusmeldung an das Frontend bzw. den Benutzer zurückzugeben. Zusätzlich wird vor der Verarbeitung die übergebene Test-ID auf Gültigkeit überprüft und der Test-Status auf ''\texttt{FEASIBILITYREQUESTED}'' aktualisiert. Falls der FeasibilityCheck für diesen Test bereits zuvor durchgeführt wurde, müssen alte Ergebnisse in der Datenbank noch als ''invalid'' markiert werden.
 
-
-Zur besseren Übersicht wird in Abbildung \ref{fig:feasibility-http-call-method} auch der initiale Button-Klick im Frontend als Aktivität (lila markiert) dargestellt. Die eigentliche Logik der Methode beginnt jedoch erst nach dem schwarzen Einstiegspunkt, der den Start des Algorithmus kennzeichnet.
+Um den Ablauf nachvollziehbar zu gestalten, zeigt Abbildung 4.5 auch den initialen Button-Klick im Frontend als Aktivität (lila markiert). Die eigentliche Logik der Methode beginnt jedoch erst nach dem schwarzen Einstiegspunkt, der den Start des Algorithmus kennzeichnet.
 
 Zur Verbesserung der Fehlerrobustheit, wie sie in den Anforderungen definiert ist, stellt die Methode sicher, dass jede unerwartete Situation – beispielsweise ungültige Eingaben oder fehlende Testdaten – mit einem klar definierten HTTP-Status-Code beantwortet wird. So führt eine ungültige Test-ID zu einem \texttt{Bad Request} (400), während eine nicht auffindbare Test-ID mit einem \texttt{Not Found} (404) quittiert wird. Falls während der Verarbeitung interne Fehler auftreten, werden diese durch einen \texttt{Internal Server Error} (500) abgefangen. Dadurch bleibt das System auch bei unerwarteten Dateninkonsistenzen oder unvollständigen Parametern stabil und liefert stets eine eindeutige Rückmeldung an den Benutzer bzw. das aufrufende System.
 
@@ -43,7 +42,7 @@ Die Kernlogik des Feasibility Checks wird durch die Methode \textbf{\texttt{Feas
 
 \begin{table}[!htb]
     \centering
-    \caption{(End-)Status von Feasibility-Teil-Checks, gespeichert als \texttt{FCIR\_STATE} in Feasibility Result (\texttt{feasibility\_check\_item\_result})}
+    \caption{(End-)Status von Feasibility-Teil-Checks, gespeichert als \texttt{FCIR\_STATE} im Feasibility Result (\texttt{feasibility\_check\_item\_result})}
     \footnotesize
     \renewcommand{\arraystretch}{1.3} % Erhöht den Zeilenabstand
     \begin{tabular}{p{0.25\linewidth} p{0.7\linewidth}}
@@ -68,7 +67,7 @@ Obwohl die Ergebnisse der untergeordneten Ebenen zu einem Gesamtstatus aggregier
 
 Basierend auf den Ergebnissen aller CheckItems wird schließlich der finale Test-Status bestimmt. Dieser kann entweder den Wert \textbf{''APPLY''} (''Feasible'', also erfolgreich) oder \textbf{''MANUALFEASIBILITY''} (manuelle Prüfung erforderlich) (blau markierte Aktivitäten in Abb. \ref{fig:feasibility-check}) annehmen.
 
-Für Tests bei denen die relevante Feasibililty-Konfigurationstabelle leer ist oder das CheckItem auf \textit{null} steht, wertet das System die (Teil-)Überprüfung als \texttt{CHECK\_OFF} und somit indirekt als erfolgreich, weil keine Prüfung erforderlich ist.
+Für Tests bei denen die relevante Feasibility-Konfigurationstabelle leer ist oder das CheckItem auf \textit{null} steht, wertet das System die (Teil-)Überprüfung als \texttt{CHECK\_OFF} und somit indirekt als erfolgreich, weil keine Prüfung erforderlich ist.
 
 \textbf{Konkreter Ablauf des Feasibility Check Algorithmus} \\
 Zunächst werden die für den Test hinterlegten Konfigurationen für jedes CheckItem aus der Datenbank abgerufen. Falls kein Eintrag existiert, wird der Check automatisch als erfolgreich gewertet. Ist das zugehörige Flag auf 'N' gesetzt, muss die Überprüfung manuell erfolgen, und der Check ist an dieser Stelle beendet. Nur wenn das Flag auf 'Y' gesetzt ist, wird das entsprechende CheckItem (Condition oder \gls{EquipmentCheck}) tatsächlich geprüft.
@@ -99,7 +98,7 @@ In Sonderfällen, in denen lediglich ein Mindest- oder Höchstwert vorliegt, gen
     \label{fig:equipment-check}
 \end{figure}
 
-Der \gls{EquipmentCheck} ist in Abbildung \ref{fig:equipment-check} dargestellt. Der Prozess beginnt ebenfalls mit dem Abruf von Daten aus der passenden \texttt{op\_data\_param\_type} Tabelle. Falls keine Referenzen für den minimalen und maximalen Maschinen-Parameter (\texttt{ctlg\_\-factsheet\_\-parameter}) hinterlegt sind, ist die Überprüfung für diesen (Operations-)\-Parameter, nicht erforderlich und ist somit beendet. Andernfalls muss sichergestellt werden, dass ein PlanValue gesetzt ist. Erst danach startet der eigentliche Durchführbarkeits-Check.
+Der \gls{EquipmentCheck} ist in Abbildung \ref{fig:equipment-check} dargestellt. Der Prozess beginnt ebenfalls mit dem Abruf von Daten aus der passenden \texttt{op\_data\_param\_type} Tabelle. Falls keine Referenzen für den minimalen und maximalen Maschinen-Parameter (\texttt{ctlg\_\-factsheet\_\-parameter}) hinterlegt sind, ist die Überprüfung für diesen (Operations-)\linebreak Parameter, nicht erforderlich und ist somit beendet. Andernfalls muss sichergestellt werden, dass ein PlanValue gesetzt ist. Erst danach startet der eigentliche Durchführ\-barkeits-Check.
 
 Als Erstes werden aus der Datenbank alle Maschinen abgerufen, die als ''valide'' gelten, also weder defekt noch in Wartung sind und zudem den gleichen Test-Typen aufweisen wie der zu prüfende Test. Die Zuordnung der Maschinen zu einem spezifischen Test-Typen erfolgt dabei indirekt über die Verknüpfungstabelle \texttt{machine\_\-test\_\-sub\_type}, welche die Maschinen mit dem jeweiligen \texttt{ctlg\_test\_sub\_type} verknüpft.
 
@@ -203,6 +202,6 @@ Feasibility-Results mit dem Status \texttt{CHECK\_OFF} werden im Regelfall nicht
 
 
 
-Die dargestellten Rückmeldungen ermöglichen es dem Benutzer, gezielt auf vom Feasibility Check-Alorithmus erkannte Probleme zu reagieren. So kann er beispielsweise den PlanValue anpassen, wenn darauf hingewiesen wird, dass der aktuelle Wert zu hoch oder zu niedrig ist, wie in Tabelle~\ref{tab:feedback-equipment} unten dargestellt. Diese detaillierten Informationen unterstützten den Benutzer bei der Identifikation und Behebung von Konfigurationsproblemen. 
+Die dargestellten Rückmeldungen ermöglichen es dem Benutzer, gezielt auf vom Feasibility Check-Alorithmus erkannte Probleme zu reagieren. So kann er beispielsweise den PlanValue anpassen, wenn darauf hingewiesen wird, dass der aktuelle Wert zu hoch oder zu niedrig ist, wie in Tabelle~\ref{tab:feedback-equipment} unten dargestellt. Diese detaillierten Informationen unterstützen den Benutzer bei der Identifikation und Behebung von Konfigurationsproblemen. 
 
 Dadurch erfüllt das Feedback eine zentrale funktionale Anforderung (siehe Kapitel \ref{Sec:funktionale-anforderungen}) an den automatisierten Feasibility Check: die Nachvollziehbarkeit der Ergebnisse. Anstelle einer einfachen „Ja/Nein“-Bewertung erhält der Benutzer eine transparente Begründung der Entscheidung, wodurch unerwartete Probleme besser analysiert und die Test-Parameter gezielt optimiert werden können.
