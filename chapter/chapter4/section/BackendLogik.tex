@@ -35,7 +35,7 @@ Zur Verbesserung der Fehlerrobustheit, wie sie in den Anforderungen definiert is
 \begin{figure}[!htbp]
     \centering
     \makebox[\textwidth]{\includegraphics[width=0.85\paperwidth]{bilder/flowchart-feasibilitycheck-modiefied-for-thesis-6-2.png}}
-    \caption{Flussdiagramm des Feasibility Check}
+    \caption{Flussdiagramm des Feasibility Checks}
     \label{fig:feasibility-check}
 \end{figure}
 
@@ -75,6 +75,7 @@ Zunächst werden die für den Test hinterlegten Konfigurationen für jedes Check
 
 Anschließend wird kontrolliert, ob der Test mindestens eine Operation enthält. Falls dies der Fall ist, wird jede Operation einzeln überprüft, um festzustellen, ob sie keinen, einen oder mehrere Parameter besitzt. Für jeden dieser Parameter wird dann der entsprechende \gls{ConditionCheck} oder \gls{EquipmentCheck} durchgeführt. Welche der beiden Prüfungen erfolgt, hängt vom jeweiligen CheckItem ab. Die genaue Funktionsweise dieser Methoden wird in den folgenden Kapiteln erläutert.
 
+Durch diese Struktur ist das System nicht nur auf die aktuellen CheckItem-Typen beschränkt, sondern kann zukünftig um weitere Prüfmethoden erweitert werden. Neue Checks lassen sich problemlos integrieren, ohne den bestehenden Ablauf grundlegend ändern zu müssen. Dies gewährleistet die in den Anforderungen definierte Flexibilität und modulare Erweiterbarkeit des Systems (siehe Kapitel \ref{Sec:funktionale-anforderungen}).
 
 \subsection{Condition Check}
 \begin{figure}[!htb]
