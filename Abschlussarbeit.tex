@@ -107,23 +107,18 @@ position=bottom]{caption}
 
 	\vfill % Füllt den Raum nach dem Text
 	\cleardoublepage
-
-	\begin{abstract}
-	\section*{Kurzzusammenfassung}
-	\begin{quote}
-	\end{quote}
-	\end{abstract}
-
 		
 
 	\cleardoublepage
 	\tableofcontents
-	%\cleardoublepage
-	%\thispagestyle{empty} % Entfernt die Seitennummer auf der leeren Seite
+	%\thispagestyle{plain} % Entfernt die Seitennummer auf der leeren Seite
 
 	\input{Glossary}
+	\cleardoublepage
+
 	\pagenumbering{arabic}
-	\setcounter{page}{0} % Setzt den Zähler auf 0 to fix einleitung starting with pagenumber2
+
+	%\setcounter{page}{0} % Setzt den Zähler auf 0 to fix einleitung starting with pagenumber2
 
 	\include{chapter/chapter1/Einleitung}
 

@@ -79,7 +79,7 @@ Durch diese Struktur ist das System nicht nur auf die aktuellen CheckItem-Typen 
 \subsection{Condition Check}
 \begin{figure}[!htb]
     \centering
-    \makebox[\textwidth]{\includegraphics[width=0.80\paperwidth]{bilder/flowchart-condition-check-6-2.png}}
+    \makebox[\textwidth]{\includegraphics[width=1\textwidth]{bilder/flowchart-condition-check-6-2.png}}
     \caption{Flussdiagramm des \gls{ConditionCheck}s}
     \label{fig:condition-check}
 \end{figure}
@@ -93,7 +93,7 @@ In Sonderfällen, in denen lediglich ein Mindest- oder Höchstwert vorliegt, gen
 
 \begin{figure}[!htbp]
     \centering
-    \makebox[\textwidth]{\includegraphics[width=0.85\paperwidth]{bilder/flowchart-equipment-check-6-2.png}}
+    \makebox[\textwidth]{\includegraphics[width=1\textwidth]{bilder/flowchart-equipment-check-6-2.png}}
     \caption{Flussdiagramm des \gls{EquipmentCheck}s}
     \label{fig:equipment-check}
 \end{figure}
@@ -104,7 +104,7 @@ Als Erstes werden aus der Datenbank alle Maschinen abgerufen, die als ''valide''
 
 Anschließend werden die verbleibenden Maschinen einzeln durchlaufen (siehe lila markierter Bereich in Abbildung \ref{fig:equipment-check}). Zuerst wird analysiert, ob die Maschine im geplanten Zeitraum der Operation zur Verfügung steht. Danach erfolgt die Überprüfung, ob die Maschine den Parameter grundsätzlich umsetzen kann. Dazu wird geprüft, ob die Maschine über die gleichen \texttt{ctlg\_factsheet\_parameter} verfügt, die in der Verknüpfungstabelle definiert sind. Falls dies der Fall ist, werden die minimalen und maximalen Werte über den zugehörigen Eintrag im Maschinen-Factsheet (\texttt{MFS\_VALUE}) ausgelesen. Anschließend wird kontrolliert, ob der geplante Wert (\textit{PlanValue}) des Parameters innerhalb dieser Grenzen liegt. Ist dies der Fall, gilt die Maschine als geeignet, den geplanten Wert umzusetzen. 
 
-Wird mindestens eine Maschine gefunden, wird der \gls{EquipmentCheck} für diesen Parameter als erfolgreich betrachtet. Zudem werden alle Maschinen, die den Parameter mit dem geplanten Wert umsetzen können, in einer Liste als \texttt{check\_item\_result\_\-list} erfasst und mit dem zugehörigen \texttt{feasibility\_check\_item\_result} in der Datenbank abgespeichert.
+Wird mindestens eine Maschine gefunden, wird der \gls{EquipmentCheck} für diesen Parameter als erfolgreich betrachtet. Zudem werden alle Maschinen, die den Parameter mit dem geplanten Wert umsetzen können, in einer Liste als \texttt{check\_item\_\-result\_\-list} erfasst und mit dem zugehörigen \texttt{feasibility\_check\_item\_result} in der Datenbank abgespeichert.
 
 
 \subsection{Benutzer Feedback}\label{Subsec:user-feedback}

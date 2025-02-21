@@ -15,8 +15,8 @@ Ein Test besteht aus mehreren aufeinanderfolgenden \textbf{Operationen} (\texttt
     \label{fig:realis-datenbankdesign}
 \end{figure}
 
-Die Tabelle \texttt{ctlg\_op\_name\_type} bestimmt welche Arten von Operationen es gibt, und legt indirekt über die Tabelle \texttt{ctlg\_op\_loc\_type} fest, welche Operations-Typen auf welchen Standort verfügbar sind. Darüber hinaus definiert die 
-\textbf{\texttt{op\_data\_param\_\-type}} Tabelle, welcher Parameter bei welcher Operation auf welchem Standort für welche Produkttypen (\texttt{ctlg\_product\_type}) verfügbar ist. Hierbei sind der Standort und der Produkttyp aber nur optionale Einträge, um generische, standortübergreifende und/oder produktübergreifende Einträge zu ermöglichen.
+Die Tabelle \texttt{ctlg\_op\_name\_type} bestimmt welche Arten von Operationen es gibt, und legt indirekt über die Tabelle \texttt{ctlg\_op\_loc\_type} fest, welche Operations-Typen in welchen \gls{RPT}-Laboren verfügbar sind. Darüber hinaus definiert die 
+\textbf{\texttt{op\_data\_\-param\_type}} Tabelle, welcher Parameter bei welcher Operation in welchem Labor für welche Produkttypen (\texttt{ctlg\_product\_type}) verfügbar ist. Hierbei sind das Labor und der Produkttyp aber nur optionale Einträge, um generische, laborübergreifende und/oder produktübergreifende Einträge zu ermöglichen.
 
 Jeder (Stress-)Parameter einer Operation, der einen konkreten Wert definiert (\texttt{OPD\_\-PLAN}), muss von einer \textbf{Maschine} (\texttt{ctlg\_machine}) umgesetzt werden können. Die eng mit der Maschine verknüpften Tabellen, befinden sich in der Abbildung \ref{fig:realis-datenbankdesign} im blau umrandeten Bereich. Eine Maschine ist verknüpft mit einem \textbf{Maschinen-Test-Typen} (\texttt{machine\_test\_sub\_type}), der die Maschine einem Test-Typen (\texttt{ctlg\_\-test\_\-sub\_type}) zuordnet. Des Weiteren besitzen Maschinen verschiedene \textbf{''Fact\-sheets''} (\texttt{machine\_factsheet}) mit einem \textbf{Parameter} (\texttt{ctlg\_\-factsheet\_\-para\-meter}) und einem Wert (\texttt{MFS\_VALUE}). Dieser Wert korrespondiert mit der PlanValue (\texttt{OPD\_\-PLAN}) des Operations-Parameters. 
 Er gibt dabei ein Minimum oder ein Maximum der Maschine für diesen Parameter an. Deswegen gibt es (meist) für jeden Operations-Parameter-Typ zwei zugehörige Maschinen-Factsheet-Parameter(-Typen), die anhand ihres jeweiligen Wertes das Minimum und Maximum der Maschine für diesen Parameter festlegen.
@@ -32,7 +32,7 @@ Der Feasibility Check bewertet den Parameter-Wert einer (Stress-)Operation in zw
 Dieser Parameter-Wert entspricht in der Datenbank REALIS dem Eintrag \textbf{\texttt{OPD\_PLAN}} in der Tabelle \texttt{op\_data}, die ihn definiert und den Parameter darstellt.
 
 \textbf{\gls{ConditionCheck}} \\
-Damit dieser Parameter-Wert auf Sinnhaftigkeit überprüft werden kann, fügt man in der generischen Verknüpfungs-Tabelle \texttt{op\_data\_param\_type} zwei neue Spalten hinzu. Die Einträge definieren dabei den zulässigen bzw. ''sinnvollen'' Wertebereich für einen Parameter basierend auf den Faktoren: Operationstyp, Parametertyp, Standorttyp und Produkttyp.
+Damit dieser Parameter-Wert auf Sinnhaftigkeit überprüft werden kann, fügt man in der generischen Verknüpfungs-Tabelle \texttt{op\_data\_param\_type} zwei neue Spalten hinzu. Die Einträge definieren dabei den zulässigen bzw. ''sinnvollen'' Wertebereich für einen Parameter basierend auf den Faktoren: Operationstyp, Parametertyp, Labor und Produkttyp.
 
 \setlength{\leftskip}{1em} 
 \textbf{\texttt{OPT\_CD\_MIN}} - definiert die untere Grenze des zulässigen Wertebereichs
@@ -55,7 +55,9 @@ Die neuen Spalten dienen als Fremdschlüssel zu zwei Maschinen-Parametertypen (\
 
 
 \textbf{Konfigurierbarkeit des automatisierten Feasibility Checks} \\
-Bevor der automatisierte Feasibility Check vollständig ausgerollt wird, soll dieser umfassend getestet werden können. Dazu wird eine Konfigurationsmöglichkeit in der Datenbank geschaffen. Die Tabelle \textbf{\texttt{ctlg\_feasibility\_config}} ermöglicht die Festlegung, welche Tests bereits durch das neue System geprüft werden sollen und welche weiterhin einer manuellen Überprüfung unterliegen. Die Spalten der Datenbanktabelle sind in Tabelle \ref{tab:config-fields} erklärt.
+Die Konfigurierbarkeit des automatisierten Feasibility Checks legt fest, welche Tests automatisch geprüft werden und welche weiterhin manuell überprüft werden müssen. Manche Tests eignen sich nicht für eine automatische Prüfung, andere benötigen gar keinen Feasibility Check.
+
+ Dazu wird eine Konfigurationsmöglichkeit in der Datenbank geschaffen. Die Tabelle \textbf{\texttt{ctlg\_feasibility\_config}} ermöglicht die Festlegung, welche Tests automatisiert, manuell oder nicht geprüft werden müssen. Ein weiterer Vorteil dieser Konfiguration ist, dass der automatisierte Feasibility Check vor dem vollständigen Rollout getestet werden kann, indem er gezielt für bestimmte Tests aktiviert wird. Die Spalten der Datenbanktabelle sind in Tabelle \ref{tab:config-fields} erklärt.
 
 \begin{table}[htbp]
     \centering
@@ -69,7 +71,7 @@ Bevor der automatisierte Feasibility Check vollständig ausgerollt wird, soll di
         \midrule
         \texttt{CFCG\_L1\_AUTO\_FLAG} & Automatisierungsstatus & Legt fest, ob ein Test automatisiert oder manuell durchgeführt werden soll. \\
         \midrule
-        \texttt{CFCG\_CLOC\_ID} & Standort & Berücksichtigt den jeweiligen (Labor-)Standort. \\
+        \texttt{CFCG\_CLOC\_ID} & Labor(-Standort) & Berücksichtigt das jeweilige Labor. \\
         \midrule
         \texttt{CFCG\_CTST\_ID} & Test-Typ & Differenzierung nach spezifischen Testarten. \\
         \midrule
@@ -79,7 +81,7 @@ Bevor der automatisierte Feasibility Check vollständig ausgerollt wird, soll di
     \label{tab:config-fields}
 \end{table}
 
-Falls für eine bestimmte Kombination kein Eintrag in der Konfigurations-Tabelle existiert oder das Automatisierungsstatus-Flag auf \textit{null} gesetzt ist, impliziert dies, dass für diese Verknüpfung kein Feasibility Check erforderlich ist. Diese Regelung ist notwendig, da bestimmte Test-Typen oder Laborstandorte keinen Feasibility Check benötigen. Zudem können bei Einträgen auch die Felder Standort, Test-Typ oder Check-Item(-Typ) auf \textit{null} gesetzt werden, um generische Definitionen zu ermöglichen und die Konfiguration flexibler zu gestalten.
+Falls für eine bestimmte Kombination kein Eintrag in der Konfigurations-Tabelle existiert oder das Automatisierungsstatus-Flag auf \textit{null} gesetzt ist, impliziert dies, dass für diese Verknüpfung kein Feasibility Check erforderlich ist. Diese Regelung ist notwendig, da bestimmte Test-Typen oder Laborstandorte keinen Feasibility Check benötigen. Zudem können bei Einträgen auch die Felder Labor(-Standort), Test-Typ oder Check-Item(-Typ) auf \textit{null} gesetzt werden, um generische Definitionen zu ermöglichen und die Konfiguration flexibler zu gestalten.
 
 \textbf{Speicherung der Feasibilitiy Check Ergebnisse} \\
 Die (Teil-)Ergebnisse der durchgeführten Feasibility Checks werden in der Tabelle \textbf{\texttt{feasibility\_check\_item\_result}} gespeichert. Diese ist mit dem jeweiligen Test verknüpft und kann – sofern zutreffend – auch mit hierarchisch tieferliegenden, spezifischeren Ebenen wie der Operation oder einzelnen Parametern assoziiert werden. Diese Verknüpfungen sind jedoch optional, da in manchen Fällen bereits auf Test\-ebene eine abschließende Bewertung möglich ist oder der Test keine spezifischen Operationen und Parameter umfasst.
