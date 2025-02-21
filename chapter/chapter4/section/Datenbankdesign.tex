@@ -51,11 +51,11 @@ Für den \gls{EquipmentCheck} wird ebenfalls die Tabelle \texttt{op\_data\_param
 
 \setlength{\leftskip}{0em} 
 
-Die neuen Spalten dienen als Fremdschlüssel zu zwei Maschinen-Parametertypen (\texttt{ctlg\_factsheet\_parameter}) und ermöglichen die Zuordnung der passenden Maschinen zu den jeweiligen Operations-Parametern. Die tatsächlichen Maschinen-\\Parameter-Werte stehen in der verknüpften \texttt{machine\_factsheet}-Tabelle im Feld \texttt{MFS\-\_VALUE}. Dadurch lassen sich die Grenzen des umsetzbaren Wertebereichs aller Maschinen für einen spezifischen Operations-Parameter erfassen – eine Funktionalität, die im bisherigen Datenbankmodell von REALIS noch nicht gegeben war.
+Die neuen Spalten dienen als Fremdschlüssel zu zwei Maschinen-Parametertypen (\texttt{ctlg\_factsheet\_parameter}) und ermöglichen die Zuordnung der passenden\linebreak Maschinen zu den jeweiligen Operations-Parametern. Die tatsächlichen Maschinen-\\Parameter-Werte stehen in der verknüpften \texttt{machine\_factsheet}-Tabelle im Feld\linebreak \texttt{MFS\-\_VALUE}. Dadurch lassen sich die Grenzen des umsetzbaren Wertebereichs aller Maschinen für einen spezifischen Operations-Parameter erfassen – eine Funktionalität, die im bisherigen Datenbankmodell von REALIS noch nicht gegeben war.
 
 
 \textbf{Konfigurierbarkeit des automatisierten Feasibility Checks} \\
-Die Konfigurierbarkeit des automatisierten Feasibility Checks legt fest, welche Tests automatisch geprüft werden und welche weiterhin manuell überprüft werden müssen. Manche Tests eignen sich nicht für eine automatische Prüfung, andere benötigen gar keinen Feasibility Check.
+Die Konfigurierbarkeit des automatisierten Feasibility Checks legt fest, welche Tests automatisch geprüft werden und welche weiterhin manuell überprüft werden müssen. Manche Tests eignen sich nicht für eine automatische Prüfung, andere benötigen keinen Feasibility Check.
 
  Dazu wird eine Konfigurationsmöglichkeit in der Datenbank geschaffen. Die Tabelle \textbf{\texttt{ctlg\_feasibility\_config}} ermöglicht die Festlegung, welche Tests automatisiert, manuell oder nicht geprüft werden müssen. Ein weiterer Vorteil dieser Konfiguration ist, dass der automatisierte Feasibility Check vor dem vollständigen Rollout getestet werden kann, indem er gezielt für bestimmte Tests aktiviert wird. Die Spalten der Datenbanktabelle sind in Tabelle \ref{tab:config-fields} erklärt.
 
@@ -92,7 +92,7 @@ Die in der Tabelle \texttt{feasibility\_check\_item\_result} gespeicherten Teil-
 
 Wird der Equipment Check erfolgreich abgeschlossen, so werden zusätzlich die Maschinen, die die geforderten Parameter(-Werte) umsetzen können, in der Tabelle \textbf{\texttt{check\_item\-\_result\_list}} hinterlegt. Diese Tabelle stellt eine Verknüpfung zwischen den identifizierten Maschinen und dem entsprechenden Feasibility Check-Ergebnis her.
 
-Durch diese Vorgehensweise wird sichergestellt, dass die detaillierten Teil-Ergebnisse als Grundlage für die finale Testbewertung herangezogen werden, wodurch eine differenzierte und transparente Evaluation der Feasibility Checks möglich ist.
+Durch diese Vorgehensweise wird sichergestellt, dass die detaillierten Teil-Ergeb\-nisse als Grundlage für die finale Testbewertung herangezogen werden, wodurch eine differenzierte und transparente Evaluation der Feasibility Checks möglich ist.
 
 
 

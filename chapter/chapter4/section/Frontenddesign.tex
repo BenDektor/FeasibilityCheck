@@ -14,7 +14,7 @@ Auf dieser Oberfläche kann der Feasibility Check für die definierten (Stress-)
 
 \subsection{Modal-Page für die Initiierung des Feasibility Checks}
 
-Innerhalb der Modal-Page kann der Benutzer mittels CheckBoxen die einzelnen Tests auswählen, die den Feasibility Check durchlaufen sollen. Alternativ besteht die Möglichkeit, alle Tests simultan auszuwählen, indem die oberste CheckBox in der Spaltenüberschriftenleiste aktiviert wird (siehe Mauszeigerposition in Abbildung \ref{fig:submit-page}).
+Innerhalb der Modal-Page kann der Benutzer mittels Checkboxen die einzelnen Tests auswählen, die den Feasibility Check durchlaufen sollen. Alternativ besteht die Möglichkeit, alle Tests simultan auszuwählen, indem die oberste Checkbox in der Spaltenüberschriftenleiste aktiviert wird (siehe Mauszeigerposition in Abbildung \ref{fig:submit-page}).
 
 \begin{figure}[!htbp] 
     \centering 
@@ -23,7 +23,7 @@ Innerhalb der Modal-Page kann der Benutzer mittels CheckBoxen die einzelnen Test
     \label{fig:submit-page} 
 \end{figure}
 
-Nachdem der Benutzer die gewünschten Tests selektiert hat, klickt er auf den \linebreak ''Submit for Feasibility Check''-Button, der oben rechts im Popup, links neben dem ''Exit''-Button, positioniert ist. Mit diesem Klick wird für jeden ausgewählten Test ein asynchroner HTTP-Call an die Backend-Logik initiiert. Über die REST-API wird dabei die Helfer-Methode aufgerufen, wobei die jeweilige Test-ID als Parameter übermittelt wird.
+Nachdem der Benutzer die gewünschten Tests selektiert hat, klickt er auf den \linebreak ''Submit for Feasibility Check''-Button, der oben rechts im Popup, links neben dem ''Exit''-Button, positioniert ist. Mit diesem Klick wird für jeden ausgewählten Test ein asynchroner HTTP-Request an die Backend-Logik initiiert. Über die REST-API wird dabei die Helfer-Methode aufgerufen, wobei die jeweilige Test-ID als Parameter übermittelt wird.
 
 Die asynchronen HTTP-Calls erlauben es dem Benutzer, während der Durchführung der Überprüfungen weiterhin mit der Oberfläche zu interagieren. Dies erfüllt die Anforderung, dass der Feasibility Check ressourcenschonend im Hintergrund ablaufen soll, um die Benutzerfreundlichkeit nicht zu beeinträchtigen. So kann das Popup-Fenster geschlossen oder für andere Aktionen genutzt werden, ohne den laufenden Feasibility Check zu unterbrechen. In der „Feasibility“-Spalte rechts wird der Fortschritt des Checks durch rotierende Ladekreise visualisiert (siehe Abbildung \ref{fig:loading-with-results}). Je nach Feasibility-Konfiguration und Komplexität des Tests dauert die Überprüfung etwa zwei bis 15 Sekunden, bis die ersten Ergebnisse vorliegen.
 
@@ -34,14 +34,14 @@ Die asynchronen HTTP-Calls erlauben es dem Benutzer, während der Durchführung 
     \label{fig:loading-with-results} 
 \end{figure}
 
-Sobald einzelne Überprüfungen abgeschlossen sind, wird der entsprechende Ladekreis durch ein Status-Icon ersetzt und der Teststatus in der Übersicht aktualisiert (siehe Abb. \ref{fig:loading-with-results}). Ein grüner Haken sowie der Status ''APPLY'' signalisieren, dass der Feasibility Check erfolgreich abgeschlossen wurde. Erscheint hingegen ein rotes Kreuz und der Status ''MANUALFEASIBILITY'', so weist dies darauf hin, dass ein oder mehrere Kriterien nicht erfüllt wurden oder der Test in der Konfiguration noch nicht für eine automatisierte Überprüfung freigeschaltet ist. In beiden Fällen muss der Test manuell von einem Mitarbeiter überprüft werden.
+Sobald einzelne Überprüfungen abgeschlossen sind, wird der entsprechende Ladekreis durch ein Status-Icon ersetzt und der Teststatus in der Übersicht aktualisiert (siehe Abb. \ref{fig:loading-with-results}). Ein grüner Haken sowie der Status \texttt{''APPLY''} signalisieren, dass der Feasibility Check erfolgreich abgeschlossen wurde. Erscheint hingegen ein rotes Kreuz und der Status \texttt{''MANUALFEASIBILITY''}, so weist dies darauf hin, dass ein oder mehrere Kriterien nicht erfüllt wurden oder der Test in der Konfiguration noch nicht für eine automatisierte Überprüfung freigeschaltet ist. In beiden Fällen muss der Test manuell von einem Mitarbeiter kontrolliert werden.
 
-Tritt ein Fehler im Algorithmus auf, erscheint ein rotes Dreieck mit Ausrufezeichen. In diesem Fall bleibt der Test-Status unverändert oder wird auf ''FEASIBILITY\-REQUEST'' gesetzt, je nachdem wann und welcher Fehler auftritt (dieser Fall ist in der Abbildung \ref{fig:loading-with-results} nicht dargestellt).
+Tritt ein Fehler im Algorithmus auf, erscheint ein rotes Dreieck mit Ausrufezeichen. In diesem Fall bleibt der Test-Status unverändert oder wird auf \texttt{''FEASIBILITY\-REQUEST''} gesetzt, je nachdem wann und welcher Fehler auftritt (dieser Fall ist in der Abbildung \ref{fig:loading-with-results} nicht dargestellt).
 
 
 \subsection{Modal-Page für detaillierte Ergebnisse des Feasibility Checks}
 
-Nach Abschluss der Feasibility Checks für einzelne Tests kann der Benutzer über einen separat positionierten, grün umrandeten ''Show Feasibility''-Button in der Start\-oberfläche (siehe Abbildung~\ref{fig:whole-page}) detaillierte Ergebnisse einsehen. Beim Betätigen dieses Buttons öffnet sich eine zweite Modal-Page, die in Abbildung~\ref{fig:result-details} dargestellt ist.
+Nach Abschluss der Feasibility Checks für einzelne Tests kann der Benutzer über einen separat positionierten, grün umrandeten ''Show Feasibility''-Button in der\linebreak Startoberfläche (siehe Abbildung~\ref{fig:whole-page}) detaillierte Ergebnisse einsehen. Beim Betätigen dieses Buttons öffnet sich eine zweite Modal-Page, die in Abbildung~\ref{fig:result-details} dargestellt ist.
 
 \begin{figure}[!htbp] 
     \centering 
