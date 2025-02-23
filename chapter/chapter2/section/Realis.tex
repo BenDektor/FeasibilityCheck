@@ -9,7 +9,7 @@ Für jeden der folgenden Schritte wird in \gls{REALIS} der ``State``(Status) der
 Im zweiten Schritt des Lebenszyklus weist der \gls{QM} das Projekt durch einen internen Mechanismus, einem ''State-Change'' des Projekts, einem sogenannten \gls{RPT}-Labor zu. 
 
 In dem festgelegten \gls{RPT}-Labor validieren im Anschluss Mitarbeiter manuell die Richtigkeit der angelegten Tests und überprüfen daraufhin, ob sie die angelegten Stresstests des Projektes auch durchführen können. 
-Für die Validierung der Tests werden die Stressparameter auf deren Sinnhaftigkeit überprüft. Die Frage der Durchführbarkeit hängt davon ab, ob im zugewiesenen \gls{RPT}-Labor Maschinen vorhanden sind, die in der Lage sind, die geforderten Stressoperationen auszuführen und die festgelegten Stressparameter einzuhalten. Zudem müssen diese Maschinen betriebsbereit sein – also weder in Benutzung noch außer Betrieb.
+Für die Validierung der Tests werden die Stressparameter auf deren Sinnhaftigkeit überprüft. Die Frage der Durchführbarkeit hängt davon ab, ob im zugewiesenen \gls{RPT}-Labor Maschinen vorhanden sind, die in der Lage sind, die geforderten Stressoperationen auszuführen und die festgelegten Stressparameter einzuhalten. Zudem müssen diese Maschinen verfügbar sein – also weder in Benutzung noch außer Betrieb.
 
 Diese Prüfungen bezeichnen den aktuellen technischen Feasibility Check, dessen Ergebnisse in \gls{REALIS} dokumentiert werden.
 Falls für einige Operationen bzw. Tests keine gültigen Maschinen vorhanden sind, werden diese Tests an andere \gls{RPT}-Labore delegiert. Dadurch müssen die zu testenden Produkte jedoch von einem Labor zum anderen transportiert werden, was aufgrund der weltweiten Verteilung viel Zeit in Anspruch nehmen kann.
@@ -17,7 +17,7 @@ Falls für einige Operationen bzw. Tests keine gültigen Maschinen vorhanden sin
 \begin{figure}[!h]
     \centering
     \includegraphics[width=1\textwidth]{bilder/realis-project-lifecycle.png}
-    \caption{REALIS Project Lifecycle \cite{REALISWikiIntern}}
+    \caption{REALIS Projekt-Lebenszyklus \cite{REALISWikiIntern}}
     \label{fig:realis-project-lifecycle}
 \end{figure}
 
@@ -34,7 +34,7 @@ Abbildung \ref{fig:realis-komponentendiagramm} zeigt die aktuelle Systemarchitek
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=1\textwidth]{bilder/REALIS-Komponentendiagramm.png}
+    \includegraphics[width=1\textwidth]{bilder/REALIS-Komponentendiagramm2.png}
     \caption{REALIS Komponentendiagramm}
     \label{fig:realis-komponentendiagramm}
 \end{figure}
@@ -42,17 +42,19 @@ Abbildung \ref{fig:realis-komponentendiagramm} zeigt die aktuelle Systemarchitek
 Das Frontend besteht aus zwei Hauptkomponenten (blau dargestellt):
 \begin{enumerate}
     \item \textbf{REALIS-Desktop-Applikation:} \\
-Die ursprüngliche Desktop-Anwendung, die sukzessive durch die Integration von neuen Web-Funktionalitäten modernisiert wird. Diese Web-Module, die mit dem Framework Angular entwickelt werden, sind als Subsystem (\texttt{REALIS-Web}) innerhalb der Desktop-Applikation eingebettet. Dieses System steht sowohl dem \gls{QM} als auch dem \gls{RPT}-Labor-Mitarbeiter zur Verfügung.
+Die ursprüngliche Desktop-Anwendung, die sukzessive durch die Integration von neuen Web-Funktionalitäten modernisiert wird.\\
+Diese Web-Module, die mit dem Framework Angular entwickelt werden, sind als Subsystem (\texttt{REALIS-Web}) innerhalb der Desktop-Applikation eingebettet. Dieses System steht sowohl dem \gls{QM} als auch dem \gls{RPT}-Labor-Mitarbeiter zur Verfügung.
 
 \item \textbf{REALIS-Web-Operator-System:} \\
-Eine eigenständige Web-Applikation, die speziell für die Anforderungen des \gls{RPT}-Labors entwickelt wird. Diese Anwendung befindet sich noch in der Entwicklung, wird jedoch bereits für einige Aufgaben eingesetzt. Für nicht implementierte Funktionen muss der \gls{RPT}-Mitarbeiter vorübergehend auf die alte Desktop-Applikation ausweichen. Zusätzlich ist geplant, das \texttt{REALIS-Web-Operator-System} als native iOS-App für mobile Apple-Geräte (z. B. iPads, iPhones) bereitzustellen. Die Verwendung von Angular ermöglicht dabei eine plattformübergreifende Entwicklung, die sowohl als Web-App als auch als native App funktioniert.
+Eine eigenständige Web-Applikation, die speziell für die Anforderungen des \gls{RPT}-Labors konzipiert wird. \\
+Diese Anwendung befindet sich noch in der Entwicklung, wird jedoch bereits für einige Aufgaben eingesetzt. Für nicht implementierte Funktionen muss der \gls{RPT}-Mitarbeiter vorübergehend auf die alte Desktop-Applikation ausweichen. Zusätzlich ist geplant, das \texttt{REALIS-Web-Operator-System} als native iOS-App für mobile Apple-Geräte (z. B. iPads, iPhones) bereitzustellen. Die Verwendung des Angular Frameworks ermöglicht dabei eine plattformübergreifende Programmierung, die sowohl als Web-App als auch als native App funktioniert.
 \end{enumerate}
 
 Das Diagramm \ref{fig:realis-komponentendiagramm} verdeutlicht die Trennung zwischen Backend und Frontend sowie die unterschiedlichen Nutzerrollen (\gls{QM} und \gls{RPT}-Employee), die spezifische Zugriffsrechte auf die jeweiligen Systeme haben.
 
 
 \subsection{Weitere Funktionen und Statistiken}
-Neben der Möglichkeit, Qualitätstests (Reliability-Tests) anzulegen, bietet \gls{REALIS} eine Vielzahl zusätzlicher Funktionen, die dazu beitragen, Prozesse effizienter zu gestalten und Engpässe zu vermeiden. So unterstützt das System beispielsweise die Planung individueller Laborkapazitäten, wodurch unnötige Investitionen vermieden und vorhandene Ressourcen optimal genutzt werden können. Darüber hinaus ermöglicht \gls{REALIS} die Referenzierung bereits durchgeführter Testergebnisse, um redundante Tests zu vermeiden und Zeit sowie Kosten zu sparen.
+Neben der Möglichkeit Qualitätstests (Reliability-Tests) anzulegen, bietet \gls{REALIS} eine Vielzahl zusätzlicher Funktionen, die dazu beitragen, Prozesse effizienter zu gestalten und Engpässe zu vermeiden. So unterstützt das System beispielsweise bei der Planung individueller Laborkapazitäten, wodurch unnötige Investitionen vermieden und vorhandene Ressourcen optimal genutzt werden können. Darüber hinaus ermöglicht \gls{REALIS} die Referenzierung bereits durchgeführter Testergebnisse, um redundante Tests zu vermeiden und Zeit sowie Kosten zu sparen.
 
 Nach Abschluss eines Tests können in \gls{REALIS} automatisch benötigte Ergebnisberichte generiert werden – sowohl für den Kunden als auch für das \gls{RPT}-Labor. Dies erleichtert die Dokumentation und erhöht die Effizienz im Testmanagement.
 

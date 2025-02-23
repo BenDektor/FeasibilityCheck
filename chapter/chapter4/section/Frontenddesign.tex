@@ -25,7 +25,7 @@ Innerhalb der Modal-Page kann der Benutzer mittels Checkboxen die einzelnen Test
 
 Nachdem der Benutzer die gewünschten Tests selektiert hat, klickt er auf den \linebreak ''Submit for Feasibility Check''-Button, der oben rechts im Popup, links neben dem ''Exit''-Button, positioniert ist. Mit diesem Klick wird für jeden ausgewählten Test ein asynchroner HTTP-Request an die Backend-Logik initiiert. Über die REST-API wird dabei die Helfer-Methode aufgerufen, wobei die jeweilige Test-ID als Parameter übermittelt wird.
 
-Die asynchronen HTTP-Calls erlauben es dem Benutzer, während der Durchführung der Überprüfungen weiterhin mit der Oberfläche zu interagieren. Dies erfüllt die Anforderung, dass der Feasibility Check ressourcenschonend im Hintergrund ablaufen soll, um die Benutzerfreundlichkeit nicht zu beeinträchtigen. So kann das Popup-Fenster geschlossen oder für andere Aktionen genutzt werden, ohne den laufenden Feasibility Check zu unterbrechen. In der „Feasibility“-Spalte rechts wird der Fortschritt des Checks durch rotierende Ladekreise visualisiert (siehe Abbildung \ref{fig:loading-with-results}). Je nach Feasibility-Konfiguration und Komplexität des Tests dauert die Überprüfung etwa zwei bis 15 Sekunden, bis die ersten Ergebnisse vorliegen.
+Die asynchronen HTTP-Calls erlauben es dem Benutzer, während der Durchführung der Überprüfungen weiterhin mit der Oberfläche zu interagieren. Dies erfüllt die Anforderung, dass der Feasibility Check ressourcenschonend im Hintergrund ablaufen soll, um die Benutzerfreundlichkeit nicht zu beeinträchtigen. So kann das Popup-Fenster geschlossen oder für andere Aktionen genutzt werden, ohne den laufenden Feasibility Check zu unterbrechen. In der „Feasibility“-Spalte rechts wird der Fortschritt des Checks durch rotierende Ladekreise visualisiert (siehe Abbildung \ref{fig:loading-with-results}). Je nach Feasibility-Konfiguration und Komplexität des Tests dauert es etwa zwei bis 15 Sekunden bis die ersten Ergebnisse vorliegen.
 
 \begin{figure}[!htbp] 
     \centering 
@@ -36,7 +36,7 @@ Die asynchronen HTTP-Calls erlauben es dem Benutzer, während der Durchführung 
 
 Sobald einzelne Überprüfungen abgeschlossen sind, wird der entsprechende Ladekreis durch ein Status-Icon ersetzt und der Teststatus in der Übersicht aktualisiert (siehe Abb. \ref{fig:loading-with-results}). Ein grüner Haken sowie der Status \texttt{''APPLY''} signalisieren, dass der Feasibility Check erfolgreich abgeschlossen wurde. Erscheint hingegen ein rotes Kreuz und der Status \texttt{''MANUALFEASIBILITY''}, so weist dies darauf hin, dass ein oder mehrere Kriterien nicht erfüllt wurden oder der Test in der Konfiguration noch nicht für eine automatisierte Überprüfung freigeschaltet ist. In beiden Fällen muss der Test manuell von einem Mitarbeiter kontrolliert werden.
 
-Tritt ein Fehler im Algorithmus auf, erscheint ein rotes Dreieck mit Ausrufezeichen. In diesem Fall bleibt der Test-Status unverändert oder wird auf \texttt{''FEASIBILITY\-REQUEST''} gesetzt, je nachdem wann und welcher Fehler auftritt (dieser Fall ist in der Abbildung \ref{fig:loading-with-results} nicht dargestellt).
+Tritt ein Fehler im Algorithmus auf, erscheint ein rotes Dreieck mit Ausrufezeichen. In diesem Fall bleibt der Test-Status unverändert oder wird auf \texttt{''FEASIBILITY\-REQUEST''} gesetzt, abhängig von Fehlerart und -zeitpunkt (dieser Fall ist in der Abbildung \ref{fig:loading-with-results} nicht dargestellt).
 
 
 \subsection{Modal-Page für detaillierte Ergebnisse des Feasibility Checks}
@@ -50,7 +50,7 @@ Nach Abschluss der Feasibility Checks für einzelne Tests kann der Benutzer übe
     \label{fig:result-details} 
 \end{figure}
 
-Diese Seite zeigt in tabellarischer Form alle Tests zusammen mit den zugehörigen Ergebnissen. Über einen Aufklappmechanismus können einzelne Testzeilen erweitert werden, sodass detaillierte Informationen – die gespeicherten \texttt{feasibility\_check\_item\_results} – eingesehen werden können. Bei Tests, die ausschließlich den Status \texttt{CHECK\_OFF} aufweisen, können keine zusätzlichen Details angezeigt werden, da in diesen Fällen in der Regel keine Feasibility-Resultate abgespeichert sind.
+Dieses Fenster zeigt in tabellarischer Form alle Tests zusammen mit den zugehörigen Ergebnissen. Über einen Aufklappmechanismus können einzelne Testzeilen erweitert werden, sodass detaillierte Informationen – die gespeicherten \texttt{feasibility\_check\_item\_results} – eingesehen werden können. Bei Tests, deren ''Teil-Checks'' ausschließlich den Status \texttt{CHECK\_OFF} aufweisen, können keine zusätzlichen Details angezeigt werden, da in diesen Fällen in der Regel (falls nicht extra im Source Code aktiviert) keine Feasibility-Resultate abgespeichert sind.
 
 Innerhalb der Detailansicht wird neben dem Typ des CheckItems (Condition oder Equipment Check) auch der jeweilige (End-)Status, wie er in der Backend-Logik definiert ist, dargestellt (siehe Tabelle \ref{tab:feasibility-states}). Ergänzend dazu wird das Nutzer-Feedback, welches in Kapitel \ref{Subsec:user-feedback} beschrieben wurde, angezeigt und liefert weiterführende Informationen zu dem jeweiligen Check. Falls vorhanden, werden auch der zugehörige Operationstyp sowie die Parameter-ID angezeigt.
 
