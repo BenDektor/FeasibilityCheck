@@ -1,5 +1,5 @@
 \section{REALIS}\label{Sec:REALIS}
-Wird bei Infineon von einem Kunden ein neues Produkt angefordert oder entwickelt Infineon selbst ein neues Produkt, so muss dieses zunächst getestet und qualifiziert werden, bevor es in Masse produziert werden kann. Mit Produkt ist dabei ein fertiger Chip, der auf einem Wafer hergestellt wurde, gemeint. Für diese Zuverlässigkeits- bzw. Qualitäts-Tests wurde bei Infineon eine Software mit dem Namen \gls{REALIS} entwickelt. Dieses System umfasst die komplette Planung und Dokumentation der Durchführung und Ergebnisse dieser Tests. Das System beinhaltet eine gleichnamige Datenbank, in der alle wichtigen Informationen gespeichert werden.
+Wird bei Infineon von einem Kunden ein neues Produkt angefordert oder entwickelt Infineon selbst ein neues Produkt, so muss dieses zunächst getestet und qualifiziert werden, bevor es in Masse produziert werden kann. Mit Produkt ist dabei ein fertiger Chip, der auf einem Wafer hergestellt wurde, gemeint. Für diese Zuverlässigkeits- bzw. Qualitäts-Tests wurde bei Infineon eine Software mit dem Namen \gls{REALIS} entwickelt. Dieses System umfasst die komplette Planung und Dokumentation der Durchführung und Ergebnisse dieser Tests. Das System beinhaltet eine gleichnamige Datenbank, in der alle wichtigen Informationen gespeichert werden \cite{REALISWikiIntern}.
 
 \subsection{Projekt-Lebenszyklus}\label{Subsec:project-lifecycle}
 Um ein neues Produkt zu testen, wird vom sogenannten \gls{QM} ein neues Projekt in \gls{REALIS} angelegt. Dieses befüllt er mit verschiedenen (Stress-)Tests, basierend auf vorhandenen Templates, die Arbeitsschritte (Operationen), Start- und Enddaten, Parameter der Operationen einzelner Tests und weitere Informationen enthalten. Dieser erste Schritt entspricht der obersten Zeile in Abbildung \ref{fig:realis-project-lifecycle} und bildet den Anfang eines REALIS Projekt-Lebenszyklus. 
@@ -12,7 +12,7 @@ In dem festgelegten \gls{RPT}-Labor validieren im Anschluss Mitarbeiter manuell 
 Für die Validierung der Tests werden die Stressparameter auf deren Sinnhaftigkeit überprüft. Die Frage der Durchführbarkeit hängt davon ab, ob im zugewiesenen \gls{RPT}-Labor Maschinen vorhanden sind, die in der Lage sind, die geforderten Stressoperationen auszuführen und die festgelegten Stressparameter einzuhalten. Zudem müssen diese Maschinen verfügbar sein – also weder in Benutzung noch außer Betrieb.
 
 Diese Prüfungen bezeichnen den aktuellen technischen Feasibility Check, dessen Ergebnisse in \gls{REALIS} dokumentiert werden.
-Falls für einige Operationen bzw. Tests keine gültigen Maschinen vorhanden sind, werden diese Tests an andere \gls{RPT}-Labore delegiert. Dadurch müssen die zu testenden Produkte jedoch von einem Labor zum anderen transportiert werden, was aufgrund der weltweiten Verteilung viel Zeit in Anspruch nehmen kann.
+Falls für einige Operationen bzw. Tests keine gültigen Maschinen vorhanden sind, werden diese Tests an andere \gls{RPT}-Labore delegiert. Dadurch müssen die zu testenden Produkte jedoch von einem Labor zum anderen transportiert werden, was aufgrund der weltweiten Verteilung viel Zeit in Anspruch nehmen kann \cite{REALISWikiIntern}.
 
 \begin{figure}[!h]
     \centering
@@ -25,12 +25,12 @@ Anschließend wird ein ''Sample'', also eine kleine Stückzahl des Produktes, zu
 
 Daraufhin erfolgt die planmäßige Durchführung der einzelnen Operationen der\linebreak Stresstests. Dabei werden der Fortschritt und die Ergebnisse von Labor-Mitarbeitern, sogenannten \glspl{operator}, in \gls{REALIS} dokumentiert. Treten während der Stresstests Probleme oder Fehler auf, werden diese an den \gls{QM} weitergeleitet, der über das weitere Vorgehen entscheidet.
 
-Nachdem alle Tests vollständig durchgeführt und dokumentiert worden sind, muss der \gls{QM} die Ergebnisse prüfen und bewerten. Zum Schluss werden die Tests dann archiviert, wobei aus Gewährleistungsgründen die Chips und Testergebnisse 16 Jahre aufbewahrt werden müssen. Damit ist der Projekt-Lebenszyklus abgeschlossen.
+Nachdem alle Tests vollständig durchgeführt und dokumentiert worden sind, muss der \gls{QM} die Ergebnisse prüfen und bewerten. Zum Schluss werden die Tests dann archiviert, wobei aus Gewährleistungsgründen die Chips und Testergebnisse 16 Jahre aufbewahrt werden müssen. Damit ist der Projekt-Lebenszyklus abgeschlossen \cite{REALISWikiIntern}.
 
 \subsection{Architektur und Technologie}
 Das ursprüngliche Frontend von REALIS war eine Windows-Desktop-Applikation, die sowohl vom \gls{RPT}-Labor-Mitarbeiter als auch vom \gls{QM} genutzt wurde. Im Zuge einer Modernisierung wird das System schrittweise zu einer Web-Applikation migriert. Zeitgleich erfolgt eine Aufteilung in zwei separate Anwendungen, eine für den \gls{QM} und eine für den \gls{operator}, mit dem Ziel, die Geschäftsprozesse zu vereinfachen und die Nutzerfreundlichkeit zu verbessern.
 
-Abbildung \ref{fig:realis-komponentendiagramm} zeigt die aktuelle Systemarchitektur in Form eines Komponentendiagramms. Im Backend (grün dargestellt) kommuniziert der \texttt{REALIS-Server} über eine \texttt{DataAccess}-Schnittstelle direkt mit der zentralen \texttt{REALIS-Datenbank}, welche auf Oracle basiert. Der \texttt{REALIS-Server} stellt die Geschäftslogik (Business-Layer) bereit und wird über eine \texttt{REST-API} von den Frontends genutzt.
+Abbildung \ref{fig:realis-komponentendiagramm} zeigt die aktuelle Systemarchitektur in Form eines Komponentendiagramms. Im Backend (grün dargestellt) kommuniziert der \texttt{REALIS-Server} über eine \texttt{DataAccess}-Schnittstelle direkt mit der zentralen \texttt{REALIS-Database}, welche auf Oracle basiert. Der \texttt{REALIS-Server} stellt die Geschäftslogik (Business-Layer) bereit und wird über eine \texttt{REST-API} von den Frontends genutzt.
 
 \begin{figure}[!h]
     \centering
@@ -39,7 +39,7 @@ Abbildung \ref{fig:realis-komponentendiagramm} zeigt die aktuelle Systemarchitek
     \label{fig:realis-komponentendiagramm}
 \end{figure}
 
-Das Frontend besteht aus zwei Hauptkomponenten (blau dargestellt):
+Das Frontend besteht aus zwei Hauptkomponenten (in Abb. \ref{fig:realis-komponentendiagramm} blau hinterlegt):
 \begin{enumerate}
     \item \textbf{REALIS-Desktop-Applikation:} \\
 Die ursprüngliche Desktop-Anwendung, die sukzessive durch die Integration von neuen Web-Funktionalitäten modernisiert wird.\\

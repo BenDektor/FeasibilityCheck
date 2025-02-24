@@ -10,7 +10,7 @@ Ein Test besteht aus mehreren aufeinanderfolgenden \textbf{Operationen} (\texttt
 
 \begin{figure}[!htbp]
     \centering
-    \makebox[\textwidth]{\includegraphics[width=0.98\paperwidth]{bilder/Datenbankdiagramm2.png}}
+    \makebox[\textwidth]{\includegraphics[width=0.98\paperwidth]{bilder/Datenbankdiagramm3.png}}
     \caption{REALIS Datenbankdesign}
     \label{fig:realis-datenbankdesign}
 \end{figure}
@@ -32,7 +32,7 @@ Der Feasibility Check bewertet den Parameter-Wert einer (Stress-)Operation in zw
 Dieser Parameter-Wert entspricht in der Datenbank REALIS dem Eintrag \textbf{\texttt{OPD\_PLAN}} in der Tabelle \texttt{op\_data}, die ihn definiert und den Parameter darstellt.
 
 \textbf{\gls{ConditionCheck}} \\
-Damit dieser Parameter-Wert auf Sinnhaftigkeit überprüft werden kann, fügt man in der generischen Verknüpfungs-Tabelle \texttt{op\_data\_param\_type} zwei neue Spalten hinzu. Die Einträge definieren dabei den zulässigen bzw. ''sinnvollen'' Wertebereich für einen Parameter basierend auf den Faktoren: Operationstyp, Parametertyp, Labor und Produkttyp.
+Damit dieser Parameter-Wert auf Sinnhaftigkeit überprüft werden kann, werden in der generischen Verknüpfungs-Tabelle \texttt{op\_data\_param\_type} zwei neue Spalten hinzugefügt. Die Einträge definieren dabei den zulässigen bzw. ''sinnvollen'' Wertebereich für einen Parameter basierend auf den Faktoren: Operationstyp, Parametertyp, Labor und Produkttyp.
 
 \setlength{\leftskip}{1em} 
 \textbf{\texttt{OPT\_CD\_MIN}} - definiert die untere Grenze des zulässigen Wertebereichs
@@ -75,18 +75,18 @@ Die Konfigurierbarkeit des automatisierten Feasibility Checks legt fest, welche 
         \midrule
         \texttt{CFCG\_CTST\_ID} & Test-Typ & Differenzierung nach spezifischen Testarten. \\
         \midrule
-        \texttt{CFCG\_CHECK\_ITEM\_TYPE} & Check-Item(-Typ) & Definiert, ob es sich um einen \gls{ConditionCheck} oder einen \gls{EquipmentCheck} handelt. \\
+        \texttt{CFCG\_CHECK\_ITEM\_TYPE} & CheckItem(-Typ) & Definiert, ob es sich um einen \gls{ConditionCheck} oder einen \gls{EquipmentCheck} handelt. \\
         \bottomrule
     \end{tabular}}
     \label{tab:config-fields}
 \end{table}
 
-Falls für eine bestimmte Kombination kein Eintrag in der Konfigurations-Tabelle existiert oder das Automatisierungsstatus-Flag auf \textit{null} gesetzt ist, impliziert dies, dass für diese Verknüpfung kein Feasibility Check erforderlich ist. Diese Regelung ist notwendig, da bestimmte Test-Typen oder Laborstandorte keinen Feasibility Check benötigen. Zudem können bei Einträgen auch die Felder Labor(-Standort), Test-Typ oder Check-Item(-Typ) auf \textit{null} gesetzt werden, um generische Definitionen zu ermöglichen und die Konfiguration flexibler zu gestalten.
+Falls für eine bestimmte Kombination kein Eintrag in der Konfigurations-Tabelle existiert oder das Automatisierungsstatus-Flag auf \textit{null} gesetzt ist, impliziert dies, dass für diese Verknüpfung kein Feasibility Check erforderlich ist. Diese Regelung ist notwendig, da bestimmte Test-Typen oder Laborstandorte keinen Feasibility Check benötigen. Zudem können bei Einträgen auch die Felder Labor(-Standort), Test-Typ oder CheckItem(-Typ) auf \textit{null} gesetzt werden, um generische Definitionen zu ermöglichen und die Konfiguration flexibler zu gestalten.
 
 \textbf{Speicherung der Feasibilitiy Check Ergebnisse} \\
 Die (Teil-)Ergebnisse der durchgeführten Feasibility Checks werden in der Tabelle \textbf{\texttt{feasibility\_check\_item\_result}} gespeichert. Diese ist mit dem jeweiligen Test verknüpft und kann – sofern zutreffend – auch mit hierarchisch tieferliegenden, spezifischeren Ebenen wie der Operation oder einzelnen Parametern assoziiert werden. Diese Verknüpfungen sind jedoch optional, da in manchen Fällen bereits auf Test\-ebene eine abschließende Bewertung möglich ist oder der Test keine spezifischen Operationen und Parameter umfasst.
 
-Jeder einzelne ''Teil-Check'' wird in Abhängigkeit vom jeweiligen Check-Item(-Typ) in der Tabelle abgelegt und umfasst unter anderem die Felder \texttt{FCIR\_STATE}, \texttt{FCIR\_\-DESCRIPTION} und \texttt{FCIR\_VALID}. Dabei dokumentiert \texttt{FCIR\_STATE} den Endstatus des jeweiligen ''Teil-Checks'' (siehe Kapitel \ref{Sec:Backend-Logik} und Abbildung \ref{tab:feasibility-states}), \texttt{FCIR\_DESCRIPTION} liefert eine benutzerfreundliche textuelle Begründung und \texttt{FCIR\_VALID} kennzeichnet, ob das Ergebnis aktuell gültig ist. Da ein Test mehrfach einem Feasibility Check unterzogen werden kann, werden bei jeder neuen Durchführung alle vorherigen Ergebnisse als ungültig markiert, verbleiben jedoch als Historie in der Datenbank.
+Jeder einzelne ''Teil-Check'' wird in Abhängigkeit vom jeweiligen CheckItem(-Typ) in der Tabelle abgelegt und umfasst unter anderem die Felder \texttt{FCIR\_STATE}, \texttt{FCIR\_\-DESCRIPTION} und \texttt{FCIR\_VALID}. Dabei dokumentiert \texttt{FCIR\_STATE} den Endstatus des jeweiligen ''Teil-Checks'' (siehe Kapitel \ref{Sec:Backend-Logik} und Abbildung \ref{tab:feasibility-states}), \texttt{FCIR\_DESCRIPTION} liefert eine benutzerfreundliche textuelle Begründung und \texttt{FCIR\_VALID} kennzeichnet, ob das Ergebnis aktuell gültig ist. Da ein Test mehrfach einem Feasibility Check unterzogen werden kann, werden bei jeder neuen Durchführung alle vorherigen Ergebnisse als ungültig markiert, verbleiben jedoch als Historie in der Datenbank.
 
 Die in der Tabelle \texttt{feasibility\_check\_item\_result} gespeicherten Teil-Ergebnisse bilden somit die Grundlage für die Gesamtbewertung eines Tests. Das finale Feasi\-bility-Ergebnis wird aber nicht als einzelner Eintrag gespeichert, sondern durch die Aktualisierung des Teststatus repräsentiert. Anhand der aggregierten Teilergebnisse wird dem Test ein neuer Status zugewiesen: Scheitert mindestens einer der automatisierten ''Teil-Checks'' oder ist eine automatisierte Durchführung nicht möglich bzw. erlaubt, so erhält der Test den neu eingeführten Status ''\textbf{\texttt{MANUALFEASIBILITY}}'', welcher signalisiert, dass eine manuelle Überprüfung erforderlich ist. Werden alle ''Teil-Checks'' hingegen erfolgreich abgeschlossen, so wird der Test auf den bestehenden Status ''\textbf{\texttt{APPLY}}'' gesetzt und damit für den nächsten Schritt im Projekt-Lebenszyklus von REALIS freigegeben. Tritt ein Fehler auf oder bestehen andere Probleme, behält der Test den Status ''\textbf{\texttt{FEASIBILITYREQUESTED}}'', der unmittelbar nach dem Triggern des Feasibility Checks zugewiesen wird.
 
