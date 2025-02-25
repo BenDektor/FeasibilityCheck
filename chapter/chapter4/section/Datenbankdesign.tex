@@ -57,7 +57,7 @@ Die neuen Spalten dienen als Fremdschlüssel zu zwei Maschinen-Parametertypen (\
 \textbf{Konfigurierbarkeit des automatisierten Feasibility Checks} \\
 Die Konfigurierbarkeit des automatisierten Feasibility Checks legt fest, welche Tests automatisch geprüft werden und welche weiterhin manuell überprüft werden müssen, da manche Tests sich nicht für eine automatische eignen oder andere gar keine Feasibility Check Überprüfung benötigen.
 
- Dazu wird eine Konfigurationsmöglichkeit in der Datenbank geschaffen. Die Tabelle \textbf{\texttt{ctlg\_feasibility\_config}} ermöglicht die Festlegung, welche Tests automatisiert, manuell oder nicht geprüft werden müssen, abhängig von Labor(-Standort) und Test-Typ. Ein weiterer Vorteil dieser Konfiguration ist, dass der automatisierte Feasibility Check vor dem vollständigen ''Rollout'' getestet werden kann, indem er gezielt für bestimmte Tests aktiviert wird. Die Spalten der Datenbanktabelle sind in Tabelle \ref{tab:config-fields} erklärt.
+ Dazu wird eine Konfigurationsmöglichkeit in der Datenbank geschaffen. Die Tabelle \textbf{\texttt{ctlg\_feasibility\_config}} ermöglicht die Festlegung, welche Tests automatisiert, manuell oder nicht geprüft werden müssen, abhängig von Labor(-Standort), Test-Typ und CheckItem(-Typ). Ein weiterer Vorteil dieser Konfiguration ist, dass der automatisierte Feasibility Check vor dem vollständigen ''Rollout'' getestet werden kann, indem er gezielt für bestimmte Tests aktiviert wird. Die Spalten der Datenbanktabelle sind in Tabelle \ref{tab:config-fields} erklärt.
 
 \begin{table}[htbp]
     \centering
